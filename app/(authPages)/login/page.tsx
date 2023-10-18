@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Form from "./form";
 
 export default function Page() {

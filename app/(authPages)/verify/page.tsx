@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getModel } from "@/utils/getModel";
 import { SendEmailButton } from "./buttons";
 import Pocketbase from "pocketbase";
