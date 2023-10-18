@@ -10,15 +10,14 @@ export default async function Page({
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   let isVerified = "null" as "null" | "true" | "false";
   if (searchParams.token) {
-    pb.collection("users")
-      .confirmVerification(searchParams.token)
-      .then(() => {
-        isVerified = "true";
-      })
-      .catch((er) => {
-        isVerified = "false";
-      });
+    try {
+      await pb.collection("users").confirmVerification(searchParams.token);
+      isVerified = "true";
+    } catch (e) {
+      isVerified = "false";
+    }
   }
+  console.log(searchParams.token, isVerified);
 
   return (
     <div className="flex min-h-excludeMobNav w-full flex-col items-center justify-center gap-5 bg-palette-background pb-5 md:min-h-excludeNav">
