@@ -5,7 +5,8 @@ import { Register } from "./buttons";
 
 import { RegisterAction } from "@/actions/auth/register";
 
-import { useFormState } from "react-dom";
+// @ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
 
 import { useToast } from "@/utils/useToast";
 import { GithubOauthButton, GoogleOauthButton } from "../oauth/buttons";

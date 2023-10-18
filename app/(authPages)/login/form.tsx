@@ -2,8 +2,8 @@
 
 import { CONSTRAINTS } from "@/utils/constraints";
 import { Login } from "./buttons";
-
-import { useFormState } from "react-dom";
+// @ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
 
 import { LoginAction } from "@/actions/auth/login";
 import { useToast } from "@/utils/useToast";
