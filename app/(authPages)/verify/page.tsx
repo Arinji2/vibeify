@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import { getModel } from "@/utils/getModel";
 import { SendEmailButton } from "./buttons";
-import Pocketbase from "pocketbase";
+import Pocketbase, { getTokenPayload } from "pocketbase";
 export default async function Page({
   searchParams,
 }: {
@@ -18,7 +18,6 @@ export default async function Page({
       isVerified = "false";
     }
   }
-  console.log(searchParams.token, isVerified);
 
   return (
     <div className="flex min-h-excludeMobNav w-full flex-col items-center justify-center gap-5 bg-palette-background pb-5 md:min-h-excludeNav">
@@ -47,7 +46,11 @@ export default async function Page({
           </h2>
         </div>
       </div>
-      <SendEmailButton isVerified={isVerified} email={model!.email} />
+      <SendEmailButton
+        token={searchParams.token!}
+        isVerified={isVerified}
+        email={model!.email}
+      />
     </div>
   );
 }

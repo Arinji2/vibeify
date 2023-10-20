@@ -10,23 +10,37 @@ import { toast } from "react-toastify";
 export function SendEmailButton({
   isVerified,
   email,
+  token,
 }: {
   isVerified: "null" | "true" | "false";
   email: string;
+  token: string;
 }) {
   const [pending, setPending] = useState(false);
   const router = useRouter();
   React.useEffect(() => {
     if (isVerified === "null") return;
     if (isVerified === "true") {
-      toast.success("Email verified!");
-      router.push("/login");
+      fetch("/api/verifyCookie", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      }).then((res) => {
+        if (res.status === 200) {
+          toast.success("Email Verified");
+          router.push("/dashboard");
+        } else {
+          toast.error("Something went wrong");
+        }
+      });
     }
     if (isVerified === "false") {
       toast.error("Invalid token!");
       router.push("/verify");
     }
-  }, [isVerified, router]);
+  }, [isVerified, router, token]);
   return (
     <button
       disabled={pending}
