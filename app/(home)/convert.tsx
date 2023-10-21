@@ -28,7 +28,7 @@ export default function Convert() {
                     width={185}
                     height={3}
                     alt="Arrow"
-                    className="ml-7 rotate-[100deg] object-contain md:absolute md:right-20  md:ml-0 md:rotate-[123deg] xl:static  xl:mr-3 xl:-rotate-[19deg] "
+                    className="ml-7 rotate-[107deg] object-contain md:absolute md:right-20  md:ml-0 md:rotate-[123deg] xl:static  xl:mr-3 xl:-rotate-[19deg] "
                   />
 
                   <Image

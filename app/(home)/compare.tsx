@@ -31,7 +31,7 @@ export default function Compare() {
                     2 Songs missing in Playlist 1 from Playlist 2
                   </h4>
                 </div>
-                <div className="h-[5px] w-[50%] bg-palette-text md:h-[90%] md:w-[10px]"></div>
+                <div className="h-[5px] w-[50%] bg-palette-text md:h-[100px] shrink-0 md:w-[5px]"></div>
                 <div className="flex h-[50%] w-full flex-col items-center justify-center gap-5 xl:h-full ">
                   <h4 className="text-[30px] font-medium text-palette-text md:text-[60px]">
                     Playlist 2

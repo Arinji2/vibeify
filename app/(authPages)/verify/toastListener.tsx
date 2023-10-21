@@ -27,6 +27,7 @@ export default function ToastListener({
         toast.error("Invalid token!");
         router.push("/verify");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, router]);
 
   return <></>;

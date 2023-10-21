@@ -29,7 +29,7 @@ export function Form({ center }: { center?: boolean }) {
       <input
         type="url"
         placeholder="Spotify Playlist Link"
-        className="h-[58px] border-[3px] border-palette-text px-[17px] py-5 text-[20px] font-medium text-palette-text text-opacity-60 md:h-[85px] xl:h-[100px] xl:w-[600px]"
+        className="h-[58px] w-full border-[3px] border-palette-text px-[17px] py-5 text-[20px] font-medium text-palette-text text-opacity-60 md:h-[85px] xl:h-[100px] xl:w-[600px]"
       />
       <button
         type="submit"
