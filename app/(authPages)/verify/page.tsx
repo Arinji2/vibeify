@@ -4,6 +4,7 @@ import { SendEmailButton } from "./buttons";
 import Pocketbase, { getTokenPayload } from "pocketbase";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import EmailText from "./emailText";
 export default async function Page({
   searchParams,
 }: {
@@ -41,9 +42,7 @@ export default async function Page({
           </h2>
         </div>
         <div className="h-full w-full shrink-0 md:w-[250px]">
-          <p className=" truncate text-left text-[20px] font-medium text-palette-primary">
-            {model.email ?? "Loading..."}
-          </p>
+          <EmailText serverText={model.email ?? "Loading..."} />
         </div>
         <div className="h-full w-fit shrink-0">
           <h2 className="border-b-2 border-black text-center text-[20px] font-semibold text-black">
