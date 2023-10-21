@@ -10,7 +10,7 @@ export default async function Page({
   searchParams: { [token: string]: string | undefined };
 }) {
   const cookie = cookies().get("pb_auth");
-  const { model } = JSON.parse(cookie!.value ?? "");
+  const { model } = JSON.parse(cookie!.value ?? {});
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   let isVerified = "null" as "null" | "true" | "false";
   if (searchParams.token) {
