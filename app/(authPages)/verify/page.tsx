@@ -3,12 +3,14 @@ import { getModel } from "@/utils/getModel";
 import { SendEmailButton } from "./buttons";
 import Pocketbase, { getTokenPayload } from "pocketbase";
 import Link from "next/link";
+import { cookies } from "next/headers";
 export default async function Page({
   searchParams,
 }: {
   searchParams: { [token: string]: string | undefined };
 }) {
-  const model = await getModel();
+  const cookie = cookies().get("pb_auth");
+  const { model } = JSON.parse(cookie!.value ?? "");
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   let isVerified = "null" as "null" | "true" | "false";
   if (searchParams.token) {
@@ -38,7 +40,7 @@ export default async function Page({
         </div>
         <div className="h-full w-full shrink-0 md:w-[250px]">
           <p className=" truncate text-center text-[20px] font-medium text-palette-primary">
-            {model!.email}
+            {model.email ?? "Loading..."}
           </p>
         </div>
         <div className="h-full w-fit shrink-0">
