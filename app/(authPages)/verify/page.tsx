@@ -41,7 +41,7 @@ export default async function Page({
           </h2>
         </div>
         <div className="h-full w-full shrink-0 md:w-[250px]">
-          <p className=" truncate text-center text-[20px] font-medium text-palette-primary">
+          <p className=" truncate text-left text-[20px] font-medium text-palette-primary">
             {model.email ?? "Loading..."}
           </p>
         </div>
