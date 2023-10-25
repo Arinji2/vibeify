@@ -5,13 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import WidthWrapper from "../(wrapper)/widthWrapper";
+import Icon from "./dashIcon";
 
 export default function Navbar({
   border,
-  icon,
+  seed,
 }: {
   border?: boolean;
-  icon: number;
+  seed?: string;
 }) {
   let path = usePathname();
   path = path.split("/")[2];
@@ -55,7 +56,7 @@ export default function Navbar({
               ></div>
             </Link>
             <Link
-              href="/playlists"
+              href="/dashboard/playlists"
               className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
             >
               <p className="text-xl font-medium text-palette-text xl:text-3xl">
@@ -83,10 +84,7 @@ export default function Navbar({
               ></div>
             </Link>
           </ul>
-          <Link
-            href="/account/icon"
-            className="hidden h-[70px] rounded-full overflow-hidden w-[70px] border-[3px] border-black bg-palette-tertiary p-[10px] md:block"
-          ></Link>
+          <Icon seed={seed} />
           <div
             className="relative z-50 flex h-[50px] w-[50px] flex-col items-center justify-center gap-1 md:hidden"
             onClick={() => {
