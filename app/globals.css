@@ -47,3 +47,6 @@ body {
 ::-webkit-scrollbar-track {
   background: #e1efdc;
 }
+input[type="file"]::file-selector-button {
+  display: none;
+}

@@ -15,7 +15,6 @@ export async function OauthAction(token: string, model: RecordModel) {
       httpOnly: true,
     });
   } catch (error: any) {
-    console.log(error);
     return {
       status: 400,
       message: error.message,

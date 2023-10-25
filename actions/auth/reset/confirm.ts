@@ -37,7 +37,6 @@ export async function ConfirmResetAction(prevState: any, formData: FormData) {
       token: parsedForm.data.token,
     };
   } catch (error: any) {
-    console.log(error.originalError.data.data);
     return {
       status: 400,
       message: "Password Reset Failed",

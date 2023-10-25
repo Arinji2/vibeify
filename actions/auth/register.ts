@@ -24,7 +24,6 @@ export async function RegisterAction(prevState: any, formData: FormData) {
   try {
     await pb.collection("users").create(form);
   } catch (error: any) {
-    console.log(error);
     return {
       status: 400,
       message: error.message,

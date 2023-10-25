@@ -11,4 +11,8 @@ export class CONSTRAINTS {
     MIN_LENGTH: 8,
     MAX_LENGTH: 25,
   };
+  static readonly PLAYLIST = {
+    MIN_LENGTH: 1,
+    MAX_LENGTH: 50,
+  };
 }

@@ -18,7 +18,6 @@ export function useToast({
 }) {
   const router = useRouter();
   useEffect(() => {
-    console.log(status, message);
     if (status === 0) return;
     if (status === 200) toast.success(message);
     if (status === 400) toast.error(message);

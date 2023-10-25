@@ -34,7 +34,6 @@ export async function LoginAction(prevState: any, formData: FormData) {
       httpOnly: true,
     });
   } catch (error: any) {
-    console.log(error);
     return {
       status: 400,
       message: error.message,

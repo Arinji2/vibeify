@@ -53,7 +53,6 @@ export function SendEmailButton({
           toast.success("Verification Email Sent");
         } catch (e) {
           toast.error("Something went wrong");
-          console.log(e);
         } finally {
           setPending(false);
         }

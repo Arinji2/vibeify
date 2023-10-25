@@ -15,8 +15,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    console.log(verified);
-
     if (!verified || verified === null) {
       const url = request.nextUrl.clone();
       url.pathname = "/verify";
