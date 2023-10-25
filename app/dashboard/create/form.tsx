@@ -64,12 +64,12 @@ function SpotifyLink() {
           placeholder="https://open.spotify.com/playlist/..../..../..."
           type="text"
           name="spotifyLink"
-          className="w-full px-2 py-3 text-base h-[40px] max-w-[450px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
+          className="w-full px-2 py-3 text-base h-[40px] max-w-[450px] border-[3px] z-30 focus:outline-none border-black bg-palette-background text-palette-text"
         />
         <div className="w-fit h-fit relative">
           <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-          <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
-            <p className="whitespace-nowrap text-sm">
+          <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
+            <p className="whitespace-nowrap text-sm ">
               Spotify Link to Public Playlist.
             </p>
           </div>
@@ -92,12 +92,12 @@ function PrivateName() {
           placeholder="My Playlist 1"
           type="text"
           name="privateName"
-          className="w-full px-2 py-3 text-base h-[40px] max-w-[450px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
+          className="w-full px-2 py-3 text-base h-[40px] max-w-[450px] border-[3px] z-30 focus:outline-none border-black bg-palette-background text-palette-text"
         />
         <div className="w-fit h-fit relative">
           <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-          <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
-            <p className="whitespace-nowrap text-sm">
+          <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
+            <p className="whitespace-nowrap text-sm ">
               Private Name to Identify Playlist.
             </p>
           </div>
@@ -119,7 +119,7 @@ function DisplayName() {
         placeholder="My Public Playlist 1"
         type="text"
         name="displayName"
-        className="w-full px-2 py-3 text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
+        className="w-full z-30 px-2 py-3 text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
       />
       <div className="w-fit md:w-[184px] xl:w-[135px] h-[40px] flex flex-row items-center gap-2 justify-start ">
         <p className="text-black text-[10px] font-semibold shrink-0">
@@ -144,8 +144,8 @@ function DisplayName() {
         </div>
         <div className="w-fit h-fit relative pl-5 md:hidden block">
           <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-          <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
-            <p className="whitespace-nowrap text-sm">
+          <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
+            <p className="whitespace-nowrap text-sm ">
               Public Name for your playlist.
             </p>
           </div>
@@ -153,8 +153,8 @@ function DisplayName() {
       </div>
       <div className="w-fit h-fit relative md:block hidden">
         <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-        <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
-          <p className="whitespace-nowrap text-sm">
+        <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
+          <p className="whitespace-nowrap text-sm ">
             Public Name for your playlist.
           </p>
         </div>
@@ -178,7 +178,7 @@ function DisplayLink() {
           <input
             type="text"
             name="displayLink"
-            className="w-full bg-palette-background text-palette-text focus:outline-none"
+            className="w-full z-30 bg-palette-background text-palette-text focus:outline-none"
           />
         </div>
         <div className="w-fit md:w-[184px] xl:w-[135px] h-[40px] flex flex-row items-center gap-2 justify-start ">
@@ -204,8 +204,8 @@ function DisplayLink() {
           </div>
           <div className="w-fit h-fit relative pl-5 md:hidden block">
             <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-            <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
-              <p className="whitespace-nowrap text-sm">
+            <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
+              <p className="whitespace-nowrap text-sm ">
                 Public Link for your playlist.
               </p>
             </div>
@@ -213,8 +213,8 @@ function DisplayLink() {
         </div>
         <div className="w-fit h-fit relative md:block hidden">
           <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-          <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
-            <p className="whitespace-nowrap text-sm">
+          <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
+            <p className="whitespace-nowrap text-sm ">
               Public Link for your playlist.
             </p>
           </div>
@@ -266,7 +266,7 @@ function DisplayPicture() {
           }
         }}
         name="displayPicture"
-        className="w-full py-2 px-2 flex flex-col items-center justify-center text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
+        className="w-full z-30 py-2 px-2 flex flex-col items-center justify-center text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] border-[3px] focus:outline-none border-black bg-palette-background text-palette-text"
       />
       <div className="w-fit md:w-[184px] xl:w-[135px] h-[40px] flex flex-row items-center gap-2 justify-start ">
         <p className="text-black text-[10px] font-semibold shrink-0">
@@ -291,8 +291,8 @@ function DisplayPicture() {
         </div>
         <div className="w-fit h-fit relative pl-5 md:hidden block">
           <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-          <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
-            <p className="whitespace-nowrap text-sm">
+          <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 -right-20 xl:left-0 rounded-sm bg-black px-3">
+            <p className="whitespace-nowrap text-sm ">
               Public Picture for your playlist.
             </p>
           </div>
@@ -300,8 +300,8 @@ function DisplayPicture() {
       </div>
       <div className="w-fit h-fit relative md:block hidden">
         <Info className="h-[25px] md:w-[35px] peer w-[25px] md:h-[35px] text-palette-text" />
-        <div className="w-fit flex flex-col opacity-0  peer-hover:opacity-100 transition-all ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
-          <p className="whitespace-nowrap text-sm">
+        <div className="w-fit flex flex-col opacity-0 z-0 peer-hover:z-50  peer-hover:opacity-100 transition-opacity ease-in-out duration-500 items-center justify-center h-fit absolute py-2 -top-14 md:-top-10 right-0 xl:left-0 rounded-sm bg-black px-3">
+          <p className="whitespace-nowrap text-sm ">
             Public Picture for your playlist.
           </p>
         </div>
