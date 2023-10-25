@@ -4,6 +4,7 @@ import { OauthAction } from "./server";
 
 export async function GoogleOauth() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  pb.authStore.clear();
 
   const { token, record: model } = await pb
     .collection("users")
@@ -16,6 +17,7 @@ export async function GoogleOauth() {
 
 export async function GithubOauth() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  pb.authStore.clear();
 
   const { token, record: model } = await pb
     .collection("users")
