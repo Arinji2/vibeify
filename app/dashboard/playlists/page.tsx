@@ -32,7 +32,7 @@ export default async function Page() {
   if (!parsedPlaylistRecords.success) throw new Error("Invalid Playlist Data");
 
   return (
-    <main className="md:min-h-excludeNav min-h-excludeMobNav bg-palette-accent w-full flex flex-col items-center justify-center py-3 md:py-0">
+    <main className="md:min-h-excludeNav min-h-excludeMobNav bg-palette-accent w-full flex flex-col items-center justify-center py-3 ">
       {parsedPlaylistRecords.data.length === 0 && (
         <div className="w-full h-fit flex flex-col items-center justify-center">
           <h1 className="text-white font-bold text-[40px] text-center md:text-[50px]">

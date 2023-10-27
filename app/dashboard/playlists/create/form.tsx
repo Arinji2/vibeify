@@ -19,7 +19,7 @@ export function Form() {
     message: prevState.message,
     status: prevState.status,
     successMessage: "Playlist Created",
-    successRoute: "/dashboard",
+    successRoute: "/dashboard/playlists",
   });
 
   return (

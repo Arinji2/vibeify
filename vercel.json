@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/playlists/syncALL",
+      "schedule": "0 0 * * 0"
+    }
+  ]
+}

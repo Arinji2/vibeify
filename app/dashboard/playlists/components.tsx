@@ -5,6 +5,7 @@ import { SyncSchema, ViewsSchema } from "@/utils/validations/playlists/schema";
 import { PlaylistType } from "@/utils/validations/playlists/types";
 import Link from "next/link";
 import Pocketbase from "pocketbase";
+import SyncButton from "./client";
 
 export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -81,9 +82,7 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
         >
           <p className="text-black text-[20px] font-medium">View</p>
         </Link>
-        <button className="w-[100px] h-[35px] bg-palette-tertiary border-[3px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center ">
-          <p className="text-black text-[20px] font-medium">Sync</p>
-        </button>
+        <SyncButton id={playlist.id!} />
         <Link
           href="/"
           className="w-[100px] h-[35px] bg-palette-tertiary border-[3px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center "
