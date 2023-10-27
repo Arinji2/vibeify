@@ -1,7 +1,6 @@
 import { Loader2 } from "lucide-react";
 
-// @ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 export function Register() {
   const { pending } = useFormStatus();
   return (

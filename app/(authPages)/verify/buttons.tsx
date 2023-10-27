@@ -30,7 +30,7 @@ export function SendEmailButton({
       }).then((res) => {
         if (res.status === 200) {
           toast.success("Email Verified");
-          router.push("/dashboard");
+          router.push("/dashboard/playlists");
         } else {
           toast.error("Something went wrong");
         }

@@ -1,8 +1,7 @@
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 
-// @ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 export function Login() {
   const { pending } = useFormStatus();
   return (

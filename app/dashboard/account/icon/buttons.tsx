@@ -4,11 +4,9 @@ import SaveAccountIconAction from "@/actions/account/icon";
 import { useToast } from "@/utils/useToast";
 import { Loader2, Repeat2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-// @ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
+import { useFormState } from "react-dom";
 
 export function RerollButton() {
   const router = useRouter();
@@ -19,7 +17,7 @@ export function RerollButton() {
         e.preventDefault();
         router.push(`/dashboard/account/icon?seed=${Math.random()}`);
       }}
-      className="px-4 py-2 shadow-button hover:shadow-buttonHover border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center"
+      className="px-4 py-2 w-[200px] shadow-button hover:shadow-buttonHover border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center"
     >
       <Repeat2 className="w-[100px] h-[100px] text-black font-medium" />
     </button>
@@ -53,7 +51,7 @@ function Button() {
   return (
     <button
       type="submit"
-      className="px-4 py-2 shadow-button hover:shadow-buttonHover border-[3px] bg-palette-success border-black  flex flex-row gap-2 items-center justify-center"
+      className="px-4 py-2 w-[200px] shadow-button hover:shadow-buttonHover border-[3px] bg-palette-success border-black  flex flex-row gap-2 items-center justify-center"
     >
       {pending && (
         <Loader2 className="h-[25px] w-[25px] animate-spin text-black" />

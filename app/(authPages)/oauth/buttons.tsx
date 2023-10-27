@@ -18,7 +18,7 @@ export function GoogleOauthButton() {
         const res = await GoogleOauth();
         if (res === 200) {
           toast.success("User logged in successfully");
-          router.push("/dashboard");
+          router.push("/dashboard/playlists");
         }
 
         setPending(false);
@@ -45,7 +45,7 @@ export function GithubOauthButton() {
         const res = await GithubOauth();
         if (res === 200) {
           toast.success("User logged in successfully");
-          router.push("/dashboard");
+          router.push("/dashboard/playlists");
         }
 
         setPending(false);

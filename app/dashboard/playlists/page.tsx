@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PlaylistSmall } from "./components";
+import { CreatePlaylist, PlaylistSmall } from "./components";
 import Pocketbase from "pocketbase";
 import { getToken } from "@/utils/getToken";
 import {
@@ -32,14 +32,14 @@ export default async function Page() {
   if (!parsedPlaylistRecords.success) throw new Error("Invalid Playlist Data");
 
   return (
-    <main className="md:min-h-excludeNav min-h-excludeMobNav bg-palette-accent w-full flex flex-col items-center justify-center">
+    <main className="md:min-h-excludeNav min-h-excludeMobNav bg-palette-accent w-full flex flex-col items-center justify-center py-3 md:py-0">
       {parsedPlaylistRecords.data.length === 0 && (
         <div className="w-full h-fit flex flex-col items-center justify-center">
           <h1 className="text-white font-bold text-[40px] text-center md:text-[50px]">
             Add your first Playlist!
           </h1>
           <Link
-            href="/dashboard/create"
+            href="/dashboard/playlists/create"
             className="w-[60px] shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] hover:scale-95 transition-all ease-in-out duration-300 will-change-transform border-[3px] border-black h-[60px] bg-palette-background rounded-full flex items-center justify-center"
           >
             <p className="text-[50px] font-bold text-palette-text">+</p>
@@ -47,6 +47,7 @@ export default async function Page() {
         </div>
       )}
       <div className="flex flex-row items-center justify-center gap-6 w-full h-full flex-wrap">
+        <CreatePlaylist />
         {parsedPlaylistRecords.data.map((playlist) => (
           <PlaylistSmall playlist={playlist} key={playlist.id} />
         ))}

@@ -2,8 +2,7 @@
 
 import { CONSTRAINTS } from "@/utils/constraints";
 import { Login, Reset } from "./buttons";
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
+import { useFormState } from "react-dom";
 
 import { LoginAction } from "@/actions/auth/login";
 import { useToast } from "@/utils/useToast";
@@ -24,7 +23,7 @@ export default function Form() {
     status: prevState.status,
     message: prevState.message,
     successMessage: "User logged in successfully",
-    successRoute: "/dashboard",
+    successRoute: "/dashboard/playlists",
   });
 
   return (

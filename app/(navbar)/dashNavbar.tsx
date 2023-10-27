@@ -28,7 +28,7 @@ export default function Navbar({
       <WidthWrapper>
         <div className="flex h-full w-full flex-row items-center justify-between">
           <Link
-            href="/"
+            href="/dashboard/playlists"
             className="relative h-[25.5px] w-[100px] xl:h-[51px] xl:w-[200px]"
           >
             <Image
@@ -39,7 +39,18 @@ export default function Navbar({
               className="object-contain"
             />
           </Link>
-          <ul className="hidden h-fit w-fit flex-row  items-center justify-center gap-8 md:flex">
+          <div className="hidden h-fit w-fit flex-row  items-center justify-center gap-8 md:flex">
+            <Link
+              href="/"
+              className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
+            >
+              <p className="text-xl font-medium text-palette-text xl:text-3xl">
+                Home
+              </p>
+              <div
+                className={`group-hover:w-full w-0 h-[3px] origin-left  bg-black transition-all duration-500 ease-in-out`}
+              ></div>
+            </Link>
             <Link
               href="/products"
               className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
@@ -83,8 +94,10 @@ export default function Navbar({
                 } h-[3px] origin-left  bg-black transition-all duration-500 ease-in-out`}
               ></div>
             </Link>
-          </ul>
-          <Icon seed={seed} />
+          </div>
+          <div className="w-fit h-fit md:block hidden">
+            <Icon seed={seed} />
+          </div>
           <div
             className="relative z-50 flex h-[50px] w-[50px] flex-col items-center justify-center gap-1 md:hidden"
             onClick={() => {
@@ -112,15 +125,16 @@ export default function Navbar({
       <div
         className={`${
           active ? "translate-x-0 " : "translate-x-full "
-        }md:hidden fixed right-0 top-0 flex h-screen w-[70%]  flex-col items-center justify-center bg-palette-accent transition-all duration-500 ease-in-out`}
+        }md:hidden fixed right-0 top-0 flex h-screen w-[70%]  border-l-[3px] border-black flex-col items-center justify-center bg-palette-accent transition-all duration-500 ease-in-out`}
       >
         <ul className="flex h-fit w-fit flex-col  items-center justify-center gap-8 md:hidden">
           <Link
-            href="/products"
+            href="/dashboard/products"
+            onClick={() => setActive(false)}
             className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
           >
             <p className="text-2xl font-bold  text-palette-background">
-              products
+              Products
             </p>
             <div
               className={`${
@@ -129,7 +143,8 @@ export default function Navbar({
             ></div>
           </Link>
           <Link
-            href="/playlists"
+            href="/dashboard/playlists"
+            onClick={() => setActive(false)}
             className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
           >
             <p className="text-2xl font-bold  text-palette-background">
@@ -142,7 +157,8 @@ export default function Navbar({
             ></div>
           </Link>
           <Link
-            href="/account"
+            href="/dashboard/account"
+            onClick={() => setActive(false)}
             className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
           >
             <p className="text-2xl font-bold  text-palette-background">
@@ -154,6 +170,8 @@ export default function Navbar({
               } h-[3px] origin-left  bg-white transition-all duration-500 ease-in-out`}
             ></div>
           </Link>
+
+          <Icon seed={seed} isMob setActive={setActive} />
         </ul>
       </div>
     </nav>

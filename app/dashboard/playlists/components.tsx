@@ -33,7 +33,7 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
   if (!parsedSyncRecords.success) throw new Error("Invalid Sync Data");
 
   return (
-    <div className="md:w-[300px] flex flex-col items-start justify-start p-4 hover:scale95 transition-all ease-in-out duration-300 will-change-transform w-full gap-4 h-[500px] border-[4px] border-black shadow-button hover:shadow-buttonHover bg-palette-background">
+    <div className="md:w-[300px] flex flex-col items-start justify-start p-4 hover:scale-95 transition-all ease-in-out duration-300 will-change-transform w-full gap-4 h-[500px] border-[4px] border-black shadow-button hover:shadow-buttonHover bg-palette-background">
       <div className="w-full h-[171px] flex flex-col items-start justify-center gap-2">
         <h1 className="line-clamp-2 text-black font-bold text-[40px] text-left">
           {playlist.name}
@@ -92,5 +92,21 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
         </Link>
       </div>
     </div>
+  );
+}
+
+export function CreatePlaylist() {
+  return (
+    <Link
+      href="/dashboard/playlists/create"
+      className="md:w-[300px]  flex flex-col items-center justify-center p-4 hover:scale-95 transition-all ease-in-out duration-300 will-change-transform w-full gap-4 h-fit md:h-[500px] border-[4px] border-black shadow-button hover:shadow-buttonHover bg-palette-secondary"
+    >
+      <h1 className="text-white font-bold text-[30px] text-center md:text-[40px]">
+        Create New Playlist!
+      </h1>
+      <div className="w-[60px] shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] hover:scale-95 transition-all ease-in-out duration-300 will-change-transform border-[3px] border-black h-[60px] bg-palette-background rounded-full flex items-center justify-center">
+        <p className="text-[50px] font-bold text-palette-text">+</p>
+      </div>
+    </Link>
   );
 }

@@ -5,8 +5,7 @@ import { CONSTRAINTS } from "@/utils/constraints";
 import { useToast } from "@/utils/useToast";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
+import { useFormState } from "react-dom";
 import { SubmitButton } from "./buttons";
 
 export default function Form({ token }: { token: string | undefined }) {

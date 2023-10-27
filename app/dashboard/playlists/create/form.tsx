@@ -4,11 +4,9 @@ import { useToast } from "@/utils/useToast";
 import { Info, Loader2, X, XCircle } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-// @ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
+import { useFormState } from "react-dom";
 export function Form() {
   const initialState = {
     message: "",
