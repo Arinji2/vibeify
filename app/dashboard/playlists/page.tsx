@@ -54,7 +54,7 @@ export default async function Page() {
       <div className="flex flex-row items-center justify-center gap-6 w-full h-full flex-wrap">
         <CreatePlaylist />
         {parsedPlaylistRecords.data.map((playlist) => (
-          <Suspense fallback={<PlaylistSmallLoading />}>
+          <Suspense fallback={<PlaylistSmallLoading />} key={playlist.id}>
             <PlaylistSmall playlist={playlist} key={playlist.id} />
           </Suspense>
         ))}
