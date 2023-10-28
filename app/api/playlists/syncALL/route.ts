@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Pocketbase from "pocketbase";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
   await pb.admins.authWithPassword(
