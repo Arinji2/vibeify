@@ -9,7 +9,6 @@ import SyncButton from "./client";
 import { Loader2 } from "lucide-react";
 
 export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const token = await getToken();
 
