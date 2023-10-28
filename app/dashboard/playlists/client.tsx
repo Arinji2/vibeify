@@ -1,11 +1,13 @@
 "use client";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function SyncButton({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   return (
     <button
       onClick={async (e) => {
@@ -24,6 +26,7 @@ export default function SyncButton({ id }: { id: string }) {
         });
         if (res.status === 200) {
           setLoading(false);
+          router.refresh();
         } else {
           setLoading(false);
           if (res.status === 401) toast.error("Invalid Data Provided");
