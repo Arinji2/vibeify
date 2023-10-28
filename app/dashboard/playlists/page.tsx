@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { CreatePlaylist, PlaylistSmall } from "./components";
+import {
+  CreatePlaylist,
+  PlaylistSmall,
+  PlaylistSmallLoading,
+} from "./components";
 import Pocketbase from "pocketbase";
 import { getToken } from "@/utils/getToken";
 import {
@@ -9,6 +13,7 @@ import {
 } from "@/utils/validations/playlists/schema";
 import getSpotify from "@/utils/getSpotify";
 import { getModel } from "@/utils/getModel";
+import { Suspense } from "react";
 
 export default async function Page() {
   const playlist = {
@@ -49,7 +54,9 @@ export default async function Page() {
       <div className="flex flex-row items-center justify-center gap-6 w-full h-full flex-wrap">
         <CreatePlaylist />
         {parsedPlaylistRecords.data.map((playlist) => (
-          <PlaylistSmall playlist={playlist} key={playlist.id} />
+          <Suspense fallback={<PlaylistSmallLoading />}>
+            <PlaylistSmall playlist={playlist} key={playlist.id} />
+          </Suspense>
         ))}
       </div>
     </main>

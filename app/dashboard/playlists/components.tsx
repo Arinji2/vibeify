@@ -6,8 +6,10 @@ import { PlaylistType } from "@/utils/validations/playlists/types";
 import Link from "next/link";
 import Pocketbase from "pocketbase";
 import SyncButton from "./client";
+import { Loader2 } from "lucide-react";
 
 export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const token = await getToken();
 
@@ -90,6 +92,13 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
           <p className="text-black text-[20px] font-medium">Delete</p>
         </Link>
       </div>
+    </div>
+  );
+}
+export async function PlaylistSmallLoading() {
+  return (
+    <div className="md:w-[300px] flex flex-col items-center justify-center p-4 hover:scale-95 transition-all ease-in-out duration-300 will-change-transform w-full gap-4 h-[500px] border-[4px] border-black shadow-button hover:shadow-buttonHover bg-palette-background">
+      <Loader2 className="animate-spin w-[120px] h-[120px] text-black " />
     </div>
   );
 }

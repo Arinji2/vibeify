@@ -25,6 +25,7 @@ export default function SyncButton({ id }: { id: string }) {
           }),
         });
         if (res.status === 200) {
+          toast.success("Playlist Synced Successfully");
           setLoading(false);
           router.refresh();
         } else {
