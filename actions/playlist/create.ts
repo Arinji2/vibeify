@@ -23,6 +23,7 @@ export async function CreatePlaylistAction(
     public: formData.get("publicPlaylist") as string,
     image: formData.get("displayPicture"),
     created_by: userData.id,
+    theme: "default",
   };
 
   let syncData = {
