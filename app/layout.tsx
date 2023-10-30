@@ -33,6 +33,7 @@ export default function RootLayout({
           draggable={false}
           pauseOnHover
           theme="colored"
+          toastClassName={"border-black border-[3px] shadow-[4px_4px_0_#000]"}
         />
         {children}
       </body>

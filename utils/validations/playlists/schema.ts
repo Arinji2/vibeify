@@ -1,5 +1,6 @@
 import { CONSTRAINTS } from "@/utils/constraints";
 import z from "zod";
+import { THEMES } from "./themes";
 export const CreatePlaylistSchema = z.object({
   spotifyLink: z.string().url(),
   privateName: z
@@ -56,6 +57,12 @@ export const PlaylistSchema = z.object({
   spotify_link: z.string().url(),
   created_by: z.string(),
   display_name: z.string(),
+  theme: z.string().refine(
+    (data) => {
+      return THEMES.includes(data);
+    },
+    { message: "Invalid theme", path: ["theme"] }
+  ),
 });
 
 export const PlaylistsSchema = z.array(PlaylistSchema);

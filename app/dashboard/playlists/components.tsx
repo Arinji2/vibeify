@@ -78,7 +78,7 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
       </div>
       <div className="w-full h-fit flex flex-row items-center justify-center gap-5 flex-wrap pt-4">
         <Link
-          href="/"
+          href={`/dashboard/playlists/${playlist.id}`}
           className="w-[100px] h-[35px] bg-palette-tertiary border-[3px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center "
         >
           <p className="text-black text-[20px] font-medium">View</p>
