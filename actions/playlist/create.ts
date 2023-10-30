@@ -20,7 +20,7 @@ export async function CreatePlaylistAction(
     name: formData.get("privateName") as string,
     link: formData.get("displayLink") as string,
     display_name: formData.get("displayName") as string,
-    public: formData.get("publicPlaylist") as string,
+    public: formData.get("publicPlaylist") === "1" ? true : false,
     image: formData.get("displayPicture"),
     created_by: userData.id,
     theme: "default",
@@ -67,6 +67,7 @@ export async function CreatePlaylistAction(
     return { message: "Private Name is required", status: 400 };
   if (!playlistFormData.spotify_link)
     return { message: "Spotify Link is required", status: 400 };
+  if (!playlistFormData.public) playlistFormData.public = false;
 
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   pb.authStore.save(token);
@@ -78,7 +79,8 @@ export async function CreatePlaylistAction(
     await pb.collection("sync").create(syncData);
     revalidatePath("/dashboard");
     return { message: "Playlist Created", status: 200 };
-  } catch (e) {
-    return { message: "Could not create", status: 400 };
+  } catch (e: any) {
+    console.log(e.data);
+    return { message: "Could not create" + Math.random(), status: 400 };
   }
 }

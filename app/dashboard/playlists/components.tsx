@@ -5,7 +5,7 @@ import { SyncSchema, ViewsSchema } from "@/utils/validations/playlists/schema";
 import { PlaylistType } from "@/utils/validations/playlists/types";
 import Link from "next/link";
 import Pocketbase from "pocketbase";
-import SyncButton from "./client";
+import SyncButton, { DeleteButton } from "./client";
 import { Loader2 } from "lucide-react";
 
 export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
@@ -84,12 +84,7 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
           <p className="text-black text-[20px] font-medium">View</p>
         </Link>
         <SyncButton id={playlist.id!} />
-        <Link
-          href="/"
-          className="w-[100px] h-[35px] bg-palette-tertiary border-[3px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center "
-        >
-          <p className="text-black text-[20px] font-medium">Delete</p>
-        </Link>
+        <DeleteButton id={playlist.id!} name={playlist.name} />
       </div>
     </div>
   );

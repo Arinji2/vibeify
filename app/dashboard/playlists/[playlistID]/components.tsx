@@ -1,8 +1,10 @@
 "use client";
+import DeletePlaylistModel from "@/app/(models)/deletePlaylistModel";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 import { toast } from "react-toastify";
 
@@ -91,5 +93,33 @@ export function SyncButton({ id }: { id: string }) {
         <p className="text-black text-xl">Sync</p>
       )}
     </button>
+  );
+}
+
+export function DeleteButton({ id, name }: { id: string; name: string }) {
+  const [isDeleting, setIsDeleting] = useState(false);
+  return (
+    <>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setIsDeleting(true);
+        }}
+        className="w-full xl:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-opacity-75 bg-palette-error text-palette-background font-semibold border-black border-[3px] shadow-button "
+      >
+        <p className="text-black text-xl">Delete</p>
+      </button>
+
+      {isDeleting &&
+        createPortal(
+          <DeletePlaylistModel
+            playlistID={id}
+            setIsOpen={setIsDeleting}
+            playlistName={name}
+            redirect
+          />,
+          document.body
+        )}
+    </>
   );
 }

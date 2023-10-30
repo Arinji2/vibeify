@@ -1,9 +1,12 @@
 "use client";
+import DeletePlaylistModel from "@/app/(models)/deletePlaylistModel";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { toast } from "react-toastify";
+import Pocketbase from "pocketbase";
 
 export default function SyncButton({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
@@ -50,5 +53,41 @@ export default function SyncButton({ id }: { id: string }) {
         {loading ? <Loader2 className="animate-spin" /> : "Sync"}
       </p>
     </button>
+  );
+}
+
+export function DeleteButton({
+  id,
+
+  name,
+}: {
+  id: string;
+
+  name: string;
+}) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  return (
+    <>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setIsDeleting(true);
+        }}
+        className="w-[100px] h-[35px] bg-palette-tertiary border-[3px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center "
+      >
+        <p className="text-black text-[20px] font-medium">Delete</p>
+      </button>
+
+      {isDeleting &&
+        createPortal(
+          <DeletePlaylistModel
+            playlistID={id}
+            setIsOpen={setIsDeleting}
+            playlistName={name}
+          />,
+          document.body
+        )}
+    </>
   );
 }

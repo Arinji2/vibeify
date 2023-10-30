@@ -45,8 +45,8 @@ export default async function Page({
   }
 
   return (
-    <main className="md:min-h-excludeNav min-h-excludeMobNav md:h-1 h-full bg-palette-accent w-full flex flex-col items-center justify-start py-3 ">
-      <div className="w-full h-full flex pt-3 md:flex-row gap-3 md:items-start flex-nowrap items-center justify-start md:justify-center flex-col">
+    <main className="md:min-h-excludeNav h-fit bg-palette-accent w-full flex flex-col items-center justify-start py-3 ">
+      <div className="w-full h-full flex pt-3 md:flex-row gap-3 md:items-center flex-nowrap items-center justify-start md:justify-center flex-col">
         <div className="md:w-[50%] h-full w-full flex flex-col md:items-start items-center justify-start gap-4">
           <h1 className="text-palette-background text-[40px] shrink-0 line-clamp-2 font-bold md:text-[60px]">
             {playlistData.name}
@@ -58,7 +58,7 @@ export default async function Page({
             <div className="bg-palette-text h-[3px] w-full"></div>
           </div>
           <div className="w-full h-full md:pl-3 flex flex-col md:items-start items-center justify-center">
-            <div className="w-[90%] md:w-full gap-y-6 h-full p-4 bg-palette-background flex flex-col xl:flex-row items-center justify-center gap-4 border-black border-[3px] shadow-button">
+            <div className="w-[90%] md:w-full gap-y-6 h-[750px] xl:h-[450px] p-4 bg-palette-background flex flex-col xl:flex-row items-center justify-center gap-4 border-black border-[3px] shadow-button">
               <Suspense
                 fallback={
                   <Loader2 className="w-[140px] text-black h-[140px] animate-spin" />
@@ -73,7 +73,7 @@ export default async function Page({
             </div>
           </div>
         </div>
-        <div className="md:w-[50%] h-full w-full flex flex-col items-center justify-end gap-4">
+        <div className="md:w-[50%] h-full w-full flex flex-col items-center justify-center gap-4">
           <div className="h-fit md:w-[50%] w-[90%] flex flex-col items-center  gap-2">
             <h1 className="text-palette-background text-[30px] line-clamp-2  font-semibold md:text-[40px]">
               Themes

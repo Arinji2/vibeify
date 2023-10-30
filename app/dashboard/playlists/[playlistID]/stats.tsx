@@ -8,7 +8,7 @@ import {
 } from "@/utils/validations/playlists/types";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
-import { SyncButton, Visibility, WeeklySync } from "./components";
+import { DeleteButton, SyncButton, Visibility, WeeklySync } from "./components";
 import Link from "next/link";
 
 export default async function Stats({
@@ -127,9 +127,7 @@ export default async function Stats({
         <button className="w-full xl:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button ">
           <p className="text-black text-xl">View</p>
         </button>
-        <button className="w-full xl:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-opacity-75 bg-palette-error text-palette-background font-semibold border-black border-[3px] shadow-button ">
-          <p className="text-black text-xl">Delete</p>
-        </button>
+        <DeleteButton id={playlistID} name={playlistData.name} />
       </div>
     </>
   );
