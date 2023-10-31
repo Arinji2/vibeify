@@ -57,12 +57,7 @@ export const PlaylistSchema = z.object({
   spotify_link: z.string().url(),
   created_by: z.string(),
   display_name: z.string(),
-  theme: z.string().refine(
-    (data) => {
-      return THEMES.includes(data);
-    },
-    { message: "Invalid theme", path: ["theme"] }
-  ),
+  theme: z.enum(THEMES),
 });
 
 export const PlaylistsSchema = z.array(PlaylistSchema);

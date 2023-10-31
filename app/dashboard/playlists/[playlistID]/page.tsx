@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Stats from "./stats";
+import Themes from "./themes";
 
 export default async function Page({
   params,
@@ -44,36 +45,7 @@ export default async function Page({
             </div>
           </div>
         </div>
-        <div className="md:w-[50%] h-full w-full flex flex-col items-center justify-center gap-4">
-          <div className="h-fit md:w-[50%] w-[90%] flex flex-col items-center  gap-2">
-            <h1 className="text-palette-background text-[30px] line-clamp-2  font-semibold md:text-[40px]">
-              Themes
-            </h1>
-            <div className="bg-palette-text h-[3px] w-full"></div>
-          </div>
-          <div className="w-[95%] h-[345px] border-[3px] border-black shadow-button flex flex-col items-center justify-center bg-palette-background relative">
-            <div className="absolute left-0 w-[50px] h-[48px]  border-black border-[3px] rounded-tr-2xl rounded-br-2xl border-l-0 flex flex-col items-center justify-center">
-              <ChevronLeft className="w-[40px] h-[40px]  text-black" />
-            </div>
-            <div className="w-full md:h-[50%] h-[55%] flex flex-col items-center justify-end">
-              <p className="text-black text-4xl font-bold">
-                {playlistData.theme.toUpperCase()}
-              </p>
-            </div>
-            <div className="w-full md:h-[50%] h-[45%] flex flex-row items-center justify-center flex-wrap gap-3 ">
-              <button className=" w-[120px] md:w-[150px] h-[50px] hover:shadow-buttonHover transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button ">
-                <p className="text-black text-base md:text-xl">View</p>
-              </button>
-              <button className=" w-[120px] md:w-[150px] h-[50px] hover:shadow-buttonHover transition-all bg-opacity-70 ease-in-out duration-300 bg-palette-success text-palette-background font-semibold border-black border-[3px] shadow-button ">
-                <p className="text-black text-base md:text-xl">Save</p>
-              </button>
-            </div>
-
-            <div className="absolute right-0 w-[50px] h-[48px]  border-black border-[3px] rounded-tl-2xl rounded-bl-2xl border-r-0 flex flex-col items-center justify-center">
-              <ChevronRight className="w-[40px] h-[40px]  text-black" />
-            </div>
-          </div>
-        </div>
+        <Themes playlistData={playlistData} />
       </div>
     </main>
   );
