@@ -1,33 +1,18 @@
+import { getToken } from "@/utils/getToken";
+import { PlaylistsSchema } from "@/utils/validations/playlists/schema";
 import Link from "next/link";
+import Pocketbase from "pocketbase";
+import { Suspense } from "react";
 import {
   CreatePlaylist,
   PlaylistSmall,
   PlaylistSmallLoading,
 } from "./components";
-import Pocketbase from "pocketbase";
-import { getToken } from "@/utils/getToken";
-import {
-  PlaylistSchema,
-  PlaylistsSchema,
-  ViewsSchema,
-} from "@/utils/validations/playlists/schema";
-import getSpotify from "@/utils/getSpotify";
-import { getModel } from "@/utils/getModel";
-import { Suspense } from "react";
 
 export default async function Page() {
-  const playlist = {
-    name: "Playlist Main Name",
-    display_name: "Display Name",
-    songs: 10,
-    views: 10,
-    synced: "10/09/23",
-    link: "/name",
-    id: 0,
-  };
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const token = await getToken();
-  const model = await getModel();
+
   pb.authStore.save(token);
 
   const playlistRecords = await pb.collection("playlists").getFullList({});

@@ -1,24 +1,9 @@
-import getSpotify from "@/utils/getSpotify";
 import { getToken } from "@/utils/getToken";
-import {
-  PlaylistSchema,
-  SyncSchema,
-  ViewsSchema,
-} from "@/utils/validations/playlists/schema";
-import {
-  PlaylistType,
-  SyncType,
-  ViewType,
-} from "@/utils/validations/playlists/types";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import Pocketbase from "pocketbase";
-import { WeeklySync, Visibility } from "./components";
-import { dateToReadable } from "@/utils/getDate";
-import Stats from "./stats";
-import { Suspense } from "react";
+import { getPlaylist } from "@/utils/getUserData";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { FirstCharUpper } from "@/utils/helpers";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import Stats from "./stats";
 
 export default async function Page({
   params,
@@ -28,21 +13,7 @@ export default async function Page({
   if (!params.playlistID) notFound();
   const token = await getToken();
 
-  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  pb.authStore.save(token);
-  let playlistData: PlaylistType;
-
-  try {
-    let playlistRecord = await pb
-      .collection("playlists")
-      .getFirstListItem(`id = "${params.playlistID}"`);
-    let parsedPlaylist = PlaylistSchema.safeParse(playlistRecord);
-    if (!parsedPlaylist.success) notFound();
-
-    playlistData = parsedPlaylist.data as PlaylistType;
-  } catch (e) {
-    notFound();
-  }
+  const playlistData = await getPlaylist(token, params.playlistID);
 
   return (
     <main className="md:min-h-excludeNav h-fit bg-palette-accent w-full flex flex-col items-center justify-start py-3 ">
@@ -65,7 +36,7 @@ export default async function Page({
                 }
               >
                 <Stats
-                  pb={pb}
+                  token={token}
                   playlistID={params.playlistID}
                   playlistData={playlistData}
                 />

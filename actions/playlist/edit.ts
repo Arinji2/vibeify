@@ -3,10 +3,12 @@
 import { getModel } from "@/utils/getModel";
 import getSpotify from "@/utils/getSpotify";
 import { getToken } from "@/utils/getToken";
-import { SyncSchema } from "@/utils/validations/playlists/schema";
-import { SongType, SyncType } from "@/utils/validations/playlists/types";
+import {
+  PlaylistSchema,
+  SyncSchema,
+} from "@/utils/validations/playlists/schema";
+import { SyncType } from "@/utils/validations/playlists/types";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
 
@@ -88,7 +90,12 @@ export async function EditPlaylistAction(
       notFound();
     }
 
-    await pb.collection("playlists").update(playlistID, playlistFormData);
+    const res = await pb
+      .collection("playlists")
+      .update(playlistID, playlistFormData);
+    const parsedRes = PlaylistSchema.safeParse(res);
+    if (!parsedRes.success)
+      return { message: "Something went wrong", status: 500 };
     await pb.collection("sync").update(prevSyncData.id!, syncData);
     if (imageUpdated) {
       await pb.collection("playlists").update(playlistID, {
@@ -99,7 +106,7 @@ export async function EditPlaylistAction(
     revalidatePath("/dashboard/playlists");
     revalidatePath(`/dashboard/playlists/${playlistID}`);
     revalidatePath(`/dashboard/playlists/${playlistID}/edit`);
-    revalidatePath(`/${playlistID}`);
+    revalidatePath(`/${parsedRes.data.link}`);
 
     return { message: "Playlist Updated", status: 200 };
   } catch (e) {

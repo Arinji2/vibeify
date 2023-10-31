@@ -10,38 +10,19 @@ import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
 import { DeleteButton, SyncButton, Visibility, WeeklySync } from "./components";
 import Link from "next/link";
+import { getSync, getViews } from "@/utils/getUserData";
 
 export default async function Stats({
-  pb,
+  token,
   playlistID,
   playlistData,
 }: {
-  pb: Pocketbase;
+  token: string;
   playlistID: string;
   playlistData: PlaylistType;
 }) {
-  let syncData: SyncType;
-  let viewData: ViewType[];
-  try {
-    let syncRecord = await pb
-      .collection("sync")
-      .getFirstListItem(`playlist = "${playlistID}"`);
-    let parsedSync = SyncSchema.safeParse(syncRecord);
-    if (!parsedSync.success) notFound();
-
-    syncData = parsedSync.data as SyncType;
-
-    let viewRecord = await pb.collection("views").getFullList({
-      sort: "-created",
-      filter: `playlist_id = "${playlistID}"`,
-    });
-    let parsedView = ViewsSchema.safeParse(viewRecord);
-    if (!parsedView.success) notFound();
-
-    viewData = parsedView.data as ViewType[];
-  } catch (e) {
-    notFound();
-  }
+  let syncData = await getSync(token, playlistID);
+  const viewData = await getViews(token, playlistID);
 
   const api = await getSpotify();
   const spotifyData = await api.playlists.getPlaylist(

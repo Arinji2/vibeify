@@ -7,20 +7,13 @@ import Link from "next/link";
 import Pocketbase from "pocketbase";
 import SyncButton, { DeleteButton } from "./client";
 import { Loader2 } from "lucide-react";
+import { getViews } from "@/utils/getUserData";
 
 export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const token = await getToken();
 
-  pb.authStore.save(token);
-  const ipRecords = await pb.collection("views").getFullList({
-    sort: "-created",
-    filter: `playlist_id = "${playlist.id}"`,
-  });
-
-  const parsedIpRecords = ViewsSchema.safeParse(ipRecords);
-
-  if (!parsedIpRecords.success) throw new Error("Invalid Ip Data");
+  const ipRecords = await getViews(token, playlist.id!);
 
   const spotify = await getSpotify();
   const spotifySongs = await spotify.playlists.getPlaylistItems(
@@ -58,7 +51,7 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
         <div className="w-full h-fit flex flex-row items-center justify-start gap-2 ">
           <p className="text-black text-[20px] font-medium shrink-0">Views:</p>
           <p className="text-palette-accent text-[20px] font-medium  truncate">
-            {parsedIpRecords.data.length}
+            {ipRecords.length}
           </p>
         </div>
         <div className="w-full h-fit flex flex-row items-center justify-start gap-2 ">
