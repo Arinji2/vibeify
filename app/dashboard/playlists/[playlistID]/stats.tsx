@@ -11,6 +11,7 @@ import Pocketbase from "pocketbase";
 import { DeleteButton, SyncButton, Visibility, WeeklySync } from "./components";
 import Link from "next/link";
 import { getSync, getViews } from "@/utils/getUserData";
+import { CheckSquare, XSquare } from "lucide-react";
 
 export default async function Stats({
   token,
@@ -88,13 +89,21 @@ export default async function Stats({
           <p className="text-palette-text font-medium truncate text-xl">
             Weekly Sync:
           </p>
-          <WeeklySync />
+          {syncData.weeklySync ? (
+            <CheckSquare className="w-[30px] h-[30px] text-palette-accent" />
+          ) : (
+            <XSquare className="w-[30px] h-[30px] text-palette-error" />
+          )}
         </div>
         <div className="w-full h-fit flex flex-row items-center justify-start gap-2">
           <p className="text-palette-text font-medium truncate text-xl">
             Public:
           </p>
-          <Visibility />
+          {playlistData.public ? (
+            <CheckSquare className="w-[30px] h-[30px] text-palette-accent" />
+          ) : (
+            <XSquare className="w-[30px] h-[30px] text-palette-error" />
+          )}
         </div>
       </div>
       <div className="w-full xl:w-[40%] h-full flex flex-col items-center justify-center gap-5">
