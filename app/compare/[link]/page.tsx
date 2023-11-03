@@ -10,15 +10,6 @@ import Pocketbase from "pocketbase";
 import Results from "./results";
 import Link from "next/link";
 
-export async function generateStaticParams() {
-  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  const links = await pb.collection("compare").getFullList();
-
-  return links.map((link) => ({
-    link: link.link,
-  }));
-}
-
 export async function generateMetadata({
   params,
 }: {
