@@ -5,6 +5,11 @@ import Compare1 from "../../../../../public/animations/compare1.json";
 import Compare2 from "../../../../../public/animations/compare2.json";
 import { Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
+import { createPortal } from "react-dom";
+import * as React from "react";
+import { useState } from "react";
+import ShareCompareModal from "@/app/(models)/shareCompareModal";
+
 export function Compare1Loading() {
   return (
     <Lottie
@@ -27,16 +32,33 @@ export function Compare2Loading() {
   );
 }
 
-export function CopyToClipboard() {
+export function Share({
+  playlistID1,
+  playlistID2,
+}: {
+  playlistID1: string;
+  playlistID2: string;
+}) {
+  const [isSharing, setIsSharing] = useState(true);
   return (
-    <button
-      onClick={() => {
-        navigator.clipboard.writeText(window.location.href);
-        toast.success("Copied Link to clipboard!");
-      }}
-      className="text-xl font-bold text-palette-text border-b-2 border-black"
-    >
-      Copy Link To Clipboard
-    </button>
+    <>
+      <button
+        onClick={() => {
+          setIsSharing(true);
+        }}
+        className="text-xl font-bold text-palette-text border-b-2 border-black"
+      >
+        Share Results
+      </button>
+      {isSharing &&
+        createPortal(
+          <ShareCompareModal
+            playlistID1={playlistID1}
+            playlistID2={playlistID2}
+            setIsOpen={setIsSharing}
+          />,
+          document.body
+        )}
+    </>
   );
 }

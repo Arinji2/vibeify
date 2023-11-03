@@ -1,11 +1,9 @@
 "use client";
 import ValidatePlaylistAction from "@/actions/compare/validatePlaylist";
-import getSpotify from "@/utils/getSpotify";
 import { PlaylistType } from "@/utils/validations/playlists/types";
 import { BadgePlus, Loader2, MousePointerSquareDashed } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import * as React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 

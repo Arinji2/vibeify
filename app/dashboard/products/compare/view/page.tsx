@@ -4,7 +4,7 @@ import { PlaylistedTrack } from "@spotify/web-api-ts-sdk";
 import { redirect } from "next/navigation";
 import Results from "./results";
 import Link from "next/link";
-import { CopyToClipboard } from "./client";
+import { Share } from "./client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -69,7 +69,10 @@ export default async function Page({
         playlist2={formattedPlaylist2}
       />
       <div className="w-fit h-fit p-5 text-center flex flex-col items-center justify-center gap-2 rounded-md bg-palette-background border-[4px] border-black shadow-button">
-        <CopyToClipboard />
+        <Share
+          playlistID1={spotifyIDS[0].split("?")[0]}
+          playlistID2={spotifyIDS[1].split("?")[0]}
+        />
         <Link
           href="/dashboard/products"
           className="text-xl font-bold text-palette-text border-b-2 border-black"
