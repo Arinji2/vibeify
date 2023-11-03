@@ -1,14 +1,11 @@
 "use client";
 
+import ShareCompareModal from "@/app/(models)/shareCompareModal";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import Lottie from "react-lottie-player";
 import Compare1 from "../../../../../public/animations/compare1.json";
 import Compare2 from "../../../../../public/animations/compare2.json";
-import { Loader2 } from "lucide-react";
-import { toast } from "react-toastify";
-import { createPortal } from "react-dom";
-import * as React from "react";
-import { useState } from "react";
-import ShareCompareModal from "@/app/(models)/shareCompareModal";
 
 export function Compare1Loading() {
   return (
@@ -39,7 +36,7 @@ export function Share({
   playlistID1: string;
   playlistID2: string;
 }) {
-  const [isSharing, setIsSharing] = useState(true);
+  const [isSharing, setIsSharing] = useState(false);
   return (
     <>
       <button
