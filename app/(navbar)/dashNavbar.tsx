@@ -52,7 +52,7 @@ export default function Navbar({
               ></div>
             </Link>
             <Link
-              href="/products"
+              href="/dashboard/products"
               className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
             >
               <p className="text-xl font-medium text-palette-text xl:text-3xl">

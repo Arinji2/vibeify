@@ -26,6 +26,7 @@ export default function DashIcon({
         src={`https://api.dicebear.com/7.x/open-peeps/svg?seed=${locSeed}`}
         alt="Avatar"
         fill
+        sizes="90px"
         draggable={false}
       />
     </Link>

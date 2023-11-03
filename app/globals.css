@@ -50,3 +50,12 @@ body {
 input[type="file"]::file-selector-button {
   display: none;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 30svh;
+}

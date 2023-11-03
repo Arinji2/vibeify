@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.0",
     "@spotify/web-api-ts-sdk": "^1.1.2",
     "lucide-react": "^0.288.0",
-    "next": "^14.0.0",
+    "next": "^14.0.1",
     "pocketbase": "^0.18.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-lottie-player": "^1.5.5",
     "react-toastify": "^9.1.3",
     "sharp": "^0.30.4",
     "zod": "^3.22.4"
