@@ -36,13 +36,18 @@ export async function generateMetadata({
   } catch (e) {
     notFound();
   }
+  let spotify, track1, track2;
 
-  const spotify = await getSpotify();
+  try {
+    spotify = await getSpotify();
 
-  const track1 = await spotify.playlists.getPlaylist(parsedData.spotifyLink1);
+    track1 = await spotify.playlists.getPlaylist(parsedData.spotifyLink1);
 
-  const track2 = await spotify.playlists.getPlaylist(parsedData.spotifyLink2);
-
+    track2 = await spotify.playlists.getPlaylist(parsedData.spotifyLink2);
+  } catch (e) {
+    console.log("Error getting spotify data");
+    notFound();
+  }
   return {
     title: "Vibeify - Compare Results",
     description: `View the results of comparing ${track1.name} and ${track2.name} on Vibeify`,
