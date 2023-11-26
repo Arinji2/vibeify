@@ -19,6 +19,7 @@ import { getPlaiceholder } from "plaiceholder";
 import Pocketbase from "pocketbase";
 import WidthWrapper from "../(wrapper)/widthWrapper";
 import TracksComponent from "./tracksComp";
+import { Metadata, ResolvingMetadata } from "next";
 
 const iBM_Plex_Mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -34,7 +35,49 @@ const cabin_Condensed = Cabin_Condensed({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+export async function generateMetadata({
+  params,
+}: {
+  params: { playlistLink: string };
+}): Promise<Metadata> {
+  // read route params
+  const playlistLink = params.playlistLink;
 
+  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  const data = await pb
+    .collection("playlists")
+    .getFirstListItem(`link = "${playlistLink}"`);
+
+  const parsedPlaylistData = PlaylistSchema.parse(data);
+
+  return {
+    title: parsedPlaylistData.display_name + " | Vibeify",
+    description: `View ${parsedPlaylistData.display_name} made by ${parsedPlaylistData.created_by} on Vibeify`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "Vibeify",
+      description: `View ${parsedPlaylistData.display_name} made by ${parsedPlaylistData.created_by} on Vibeify`,
+      images: [
+        `https://db-listify.arinji.com/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
+      ],
+    },
+
+    openGraph: {
+      images: [
+        {
+          url: `https://db-listify.arinji.com/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
+          width: 500,
+          height: 500,
+          alt: parsedPlaylistData.display_name,
+        },
+      ],
+    },
+  };
+}
 export default async function Page({
   params,
 }: {
