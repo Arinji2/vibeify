@@ -54,7 +54,7 @@ export async function generateMetadata({
 
   return {
     title: parsedPlaylistData.display_name + " | Vibeify",
-    description: `View ${parsedPlaylistData.display_name} made by ${data.expand?.created_by.username} on Vibeify`,
+    description: `View the playlist ${parsedPlaylistData.display_name} made by ${data.expand?.created_by.username} on Vibeify`,
     robots: {
       index: false,
       follow: false,
