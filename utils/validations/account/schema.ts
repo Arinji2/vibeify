@@ -6,4 +6,5 @@ export const UserSchema = z.object({
   email: z.string(),
   dicebear: z.string(),
   verified: z.boolean(),
+  premium: z.boolean(),
 });

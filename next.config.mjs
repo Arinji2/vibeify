@@ -1,3 +1,5 @@
+// @ts-check
+import withPlaiceholder from "@plaiceholder/next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,8 +11,10 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    webpackBuildWorker: true,
+  },
 
   reactStrictMode: false,
 };
-
-module.exports = nextConfig;
+export default withPlaiceholder(nextConfig);

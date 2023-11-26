@@ -91,3 +91,30 @@ export const ViewSchema = z.object({
 });
 
 export const ViewsSchema = z.array(ViewSchema);
+
+const ArtistSchema = z.object({
+  name: z.string(),
+  id: z.string(),
+  external_urls: z.object({
+    spotify: z.string().url(),
+  }),
+});
+const ImageSchema = z.object({
+  url: z.string(),
+  height: z.number(),
+  width: z.number(),
+});
+
+export const TrackSchema = z.object({
+  id: z.string().optional(),
+  name: z.string(),
+  external_urls: z.object({
+    spotify: z.string().url(),
+  }),
+  blurDataURL: z.string(),
+
+  album: z.object({
+    images: z.array(ImageSchema),
+    artists: z.array(ArtistSchema),
+  }),
+});

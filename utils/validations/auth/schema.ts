@@ -34,6 +34,8 @@ export const RegisterFormSchema = z
         CONSTRAINTS.PASSWORD.MAX_LENGTH,
         `Confirm Password must be ${CONSTRAINTS.PASSWORD.MAX_LENGTH} long`
       ),
+    premium: z.boolean(),
+    emailVisibility: z.boolean(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "Passwords do not match",

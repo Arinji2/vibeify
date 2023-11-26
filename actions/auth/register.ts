@@ -10,6 +10,8 @@ export async function RegisterAction(prevState: any, formData: FormData) {
     password: formData.get("password") as string,
     passwordConfirm: formData.get("confirm") as string,
     username: formData.get("username") as string,
+    premium: false,
+    emailVisibility: true,
   } as RegisterFormType;
 
   const parsedForm = RegisterFormSchema.safeParse(form);

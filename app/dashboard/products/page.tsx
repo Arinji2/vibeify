@@ -33,7 +33,7 @@ export default async function Products() {
           </div>
         </Link>
         <Link
-          href="/dashboard/products/convert/setup"
+          href="/dashboard/products/convert"
           className="w-[300px] rounded-[10px] hover:scale-95 scale-100 transition-all ease-in-out duration-300 border-[4px] border-black shadow-button flex flex-col items-center justify-center gap-10 h-[450px] bg-palette-background"
         >
           <Image
