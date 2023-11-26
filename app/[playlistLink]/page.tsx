@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import getSpotify from "@/utils/getSpotify";
 import { UserSchema } from "@/utils/validations/account/schema";
 import {
@@ -67,14 +68,14 @@ export default async function Page({
     spotifyPlaylist.id,
     undefined,
     undefined,
-    50,
+    15,
     0
   );
   const fetchTrackData = async (item: PlaylistedTrack) => {
     if ((item.track as Track).album.artists) {
-      const buffer = await fetch(
-        (item.track as Track).album.images[0].url
-      ).then(async (res) => Buffer.from(await res.arrayBuffer()));
+      const buffer = await fetch((item.track as Track).album.images[0].url, {
+        cache: "force-cache",
+      }).then(async (res) => Buffer.from(await res.arrayBuffer()));
 
       const { base64 } = await getPlaiceholder(buffer);
 

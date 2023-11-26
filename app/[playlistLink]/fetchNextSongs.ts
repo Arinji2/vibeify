@@ -16,15 +16,15 @@ export async function FetchNextSongsAction(
     playlistData.id,
     undefined,
     undefined,
-    50,
+    25,
     offset * 50
   );
 
   const fetchTrackData = async (item: PlaylistedTrack) => {
     if ((item.track as Track).album.artists) {
-      const buffer = await fetch(
-        (item.track as Track).album.images[0].url
-      ).then(async (res) => Buffer.from(await res.arrayBuffer()));
+      const buffer = await fetch((item.track as Track).album.images[0].url, {
+        cache: "force-cache",
+      }).then(async (res) => Buffer.from(await res.arrayBuffer()));
 
       const { base64 } = await getPlaiceholder(buffer);
 
