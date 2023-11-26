@@ -18,13 +18,16 @@ export default function TracksComponent({
 }) {
   const [tracks, setTracks] = useState<TrackType[]>(initialTracks);
   const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0,
   });
   const [atEnd, setAtEnd] = useState(false);
 
   useEffect(() => {
+    if (loading) return;
     if (inView) {
+      setLoading(true);
       setOffset((prev) => prev + 1);
       FetchNextSongsAction(offset + 1, playlistData).then((res) => {
         if (res.length === 0) {
@@ -32,6 +35,7 @@ export default function TracksComponent({
         }
 
         setTracks((prev) => [...prev, ...res]);
+        setLoading(false);
       });
     }
   }, [inView, offset, playlistData]);
