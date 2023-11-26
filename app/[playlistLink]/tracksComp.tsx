@@ -42,7 +42,7 @@ export default function TracksComponent({
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full pb-2 gap-3">
-      <section className="w-full h-full min-h-[100svh] flex flex-row items-center justify-center flex-wrap gap-7 p-4 mb-3">
+      <section className="w-full h-full min-h-[100svh] flex flex-row items-center justify-center flex-wrap gap-16 md:gap-7  p-4 mb-3">
         {tracks.map((track) => (
           <SongCard track={track} key={track.id} />
         ))}
@@ -63,7 +63,7 @@ function SongCard({ track }: { track: TrackType }) {
     <Link
       target="_blank"
       href={track.external_urls.spotify}
-      className="w-[390px] h-[600px] rounded-md flex flex-col  group items-start justify-end gap-1  bg-palette-text hover:shadow-[20px_20px_0_#43937F] shadow-[20px_20px_0_#43937F] relative overflow-hidden"
+      className="w-full md:w-[390px] h-[450px] md:h-[600px] rounded-md flex flex-col  group items-start justify-end gap-1  bg-palette-text hover:shadow-[20px_20px_0_#43937F] shadow-[20px_20px_0_#43937F] relative overflow-hidden"
     >
       <Image
         src={track.album.images[0].url}
@@ -76,10 +76,10 @@ function SongCard({ track }: { track: TrackType }) {
       />
       <div className="w-full h-full bg-black bg-opacity-70 absolute z-10 top-0 left-0"></div>
       <div className="w-full h-fit backdrop-blur-sm z-10 absolute left-0 bottom-0 p-3 pb-6 flex flex-col items-start justify-start">
-        <h4 className="text-palette-background font-bold text-[35px] z-20 text-left line-clamp-2">
+        <h4 className="text-palette-background font-bold text-[20px] md:text-[35px] z-20 text-left line-clamp-2">
           {track.name}
         </h4>
-        <p className="text-white text-opacity-60 text-[25px] z-20">
+        <p className="text-white text-opacity-60 text-[15px] md:text-[25px] z-20">
           {track.album.artists.map((artist) => artist.name).join(", ")}
         </p>
       </div>

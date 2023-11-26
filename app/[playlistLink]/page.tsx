@@ -99,9 +99,9 @@ export default async function Page({
   return (
     <section className="w-full h-fit relative bg-[url('../public/default-bg.png')] bg-repeat bg-palette-background text-center ">
       <WidthWrapper>
-        <section className="w-full h-[90svh] relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
+        <section className="w-full h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
           <h1
-            className={`text-[60px] md:text-[80px] xl:text-[120px] text-palette-primary font-bold`}
+            className={`text-[40px] md:text-[80px] xl:text-[120px] text-palette-primary font-bold line-clamp-2`}
           >
             {parsedPlaylistData.display_name}
           </h1>
@@ -109,7 +109,7 @@ export default async function Page({
             By - <span className="font-bold">{parsedUserData.username}</span>
           </h2>
 
-          <article className="absolute bottom-40 w-[80%] h-fit flex flex-row flex-wrap gap-6 items-center justify-evenly">
+          <article className="md:absolute bottom-40 w-[80%] h-fit flex flex-col md:flex-row flex-wrap gap-6 items-start md:items-center justify-evenly">
             <div className="w-fit h-full flex flex-row items-center justify-center gap-3">
               <Image
                 src="/themes/default/views.png"
@@ -147,7 +147,7 @@ export default async function Page({
               </p>
             </div>
           </article>
-          <div className="w-full h-fit p-3  absolute bottom-5 flex flex-col items-center justify-center shrink-0">
+          <div className="w-full h-fit p-3  md:absolute bottom-5 flex flex-col items-center justify-center shrink-0">
             <ChevronDownCircle className="text-3xl w-[30px] h-[30px] text-palette-secondary animate-bounce" />
           </div>
         </section>
