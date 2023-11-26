@@ -46,13 +46,15 @@ export async function generateMetadata({
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const data = await pb
     .collection("playlists")
-    .getFirstListItem(`link = "${playlistLink}"`);
+    .getFirstListItem(`link = "${playlistLink}"`, {
+      expand: "created_by",
+    });
 
   const parsedPlaylistData = PlaylistSchema.parse(data);
 
   return {
     title: parsedPlaylistData.display_name + " | Vibeify",
-    description: `View ${parsedPlaylistData.display_name} made by ${parsedPlaylistData.created_by} on Vibeify`,
+    description: `View ${parsedPlaylistData.display_name} made by ${data.expand?.created_by.username} on Vibeify`,
     robots: {
       index: false,
       follow: false,
