@@ -46,7 +46,6 @@ export async function generateMetadata({
 }: {
   params: { playlistLink: string };
 }): Promise<Metadata> {
-  // read route params
   const playlistLink = params.playlistLink;
 
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -135,9 +134,9 @@ export default async function Page({
   return (
     <section className="w-full h-fit relative bg-[url('../public/default-bg.png')] bg-repeat bg-palette-background text-center ">
       <WidthWrapper>
-        <section className="w-full mt-10 md:mt-0 h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
+        <section className="w-full p-2  mt-10 md:mt-0 h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
           <h1
-            className={`text-[40px] md:text-[80px] xl:text-[100px] text-palette-primary font-bold line-clamp-2`}
+            className={`text-[40px] md:text-[80px] xl:text-[100px] text-palette-primary font-bold w-full line-clamp-2 break-words `}
           >
             {parsedPlaylistData.display_name}
           </h1>

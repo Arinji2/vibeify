@@ -6,8 +6,26 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  //merge the pan left and pan right animations into one animation
   theme: {
     extend: {
+      keyframes: {
+        "pan-keyframe": {
+          "0%": { transform: "translate(0%, 0%)" },
+          "20%": { transform: "translate(2%, -2%)" },
+
+          "40%": { transform: "translate(-1%, -4%)" },
+
+          "60%": { transform: "translate(1%, -2%)" },
+
+          "80%": { transform: "translate(-2%, 2%)" },
+
+          "100%": { transform: "translate(0%, 0%)" },
+        },
+      },
+      animation: {
+        "image-pan": "pan-keyframe 20s linear infinite",
+      },
       height: {
         excludeNav: "calc(100svh - 130px)",
         excludeMobNav: "calc(100svh - 80px)",

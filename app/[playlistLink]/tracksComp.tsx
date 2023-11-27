@@ -68,7 +68,7 @@ function SongCard({ track }: { track: TrackType }) {
       <Image
         src={track.album.images[0].url}
         alt="Album Cover"
-        className="object-cover absolute group-hover:scale-110 transition-all ease-in-out duration-300 will-change-transform"
+        className="group-hover:animate-image-pan object-cover absolute group-hover:scale-110 transition-all ease-in-out duration-300 will-change-transform"
         fill
         sizes="(min-width: 768px) 600px, 450px"
       />
