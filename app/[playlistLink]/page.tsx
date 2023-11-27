@@ -135,9 +135,9 @@ export default async function Page({
   return (
     <section className="w-full h-fit relative bg-[url('../public/default-bg.png')] bg-repeat bg-palette-background text-center ">
       <WidthWrapper>
-        <section className="w-full h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
+        <section className="w-full mt-10 md:mt-0 h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
           <h1
-            className={`text-[40px] md:text-[80px] xl:text-[120px] text-palette-primary font-bold line-clamp-2`}
+            className={`text-[40px] md:text-[80px] xl:text-[100px] text-palette-primary font-bold line-clamp-2`}
           >
             {parsedPlaylistData.display_name}
           </h1>
