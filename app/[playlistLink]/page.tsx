@@ -33,14 +33,6 @@ const cabin_Condensed = Cabin_Condensed({
   weight: ["400", "500", "600", "700"],
 });
 
-export async function generateStaticParams() {
-  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  const data = await pb.collection("playlists").getList(1, 50);
-
-  return data.items.map((playlist) => ({
-    playlistLink: playlist.link,
-  }));
-}
 export async function generateMetadata({
   params,
 }: {
