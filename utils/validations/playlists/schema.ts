@@ -111,7 +111,6 @@ export const TrackSchema = z.object({
   external_urls: z.object({
     spotify: z.string().url(),
   }),
-  blurDataURL: z.string(),
 
   album: z.object({
     images: z.array(ImageSchema),

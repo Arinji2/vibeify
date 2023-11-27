@@ -1,25 +1,22 @@
-export const dynamic = "force-static";
 import getSpotify from "@/utils/getSpotify";
 import { UserSchema } from "@/utils/validations/account/schema";
 import {
   PlaylistSchema,
-  TrackSchema,
   ViewsSchema,
 } from "@/utils/validations/playlists/schema";
 import { TrackType } from "@/utils/validations/playlists/themes";
-import { PlaylistedTrack, Track } from "@spotify/web-api-ts-sdk";
 import { ChevronDownCircle } from "lucide-react";
+import { Metadata } from "next";
 import {
   Cabin_Condensed,
   IBM_Plex_Mono,
   Press_Start_2P,
 } from "next/font/google";
 import Image from "next/image";
-import { getPlaiceholder } from "plaiceholder";
 import Pocketbase from "pocketbase";
 import WidthWrapper from "../(wrapper)/widthWrapper";
 import TracksComponent from "./tracksComp";
-import { Metadata, ResolvingMetadata } from "next";
+import { fetchTrackData } from "./utils";
 
 const iBM_Plex_Mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -35,6 +32,15 @@ const cabin_Condensed = Cabin_Condensed({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+
+export async function generateStaticParams() {
+  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  const data = await pb.collection("playlists").getList(1, 50);
+
+  return data.items.map((playlist) => ({
+    playlistLink: playlist.link,
+  }));
+}
 export async function generateMetadata({
   params,
 }: {
@@ -97,6 +103,8 @@ export default async function Page({
     .collection("users")
     .getOne(parsedPlaylistData.created_by);
 
+  if (!userRecord.email) userRecord.email = "";
+
   const viewRecord = await pb.collection("views").getFullList({
     filter: `playlist_id = "${parsedPlaylistData.id}"`,
   });
@@ -116,23 +124,6 @@ export default async function Page({
     15,
     0
   );
-  const fetchTrackData = async (item: PlaylistedTrack) => {
-    if ((item.track as Track).album.artists) {
-      const buffer = await fetch((item.track as Track).album.images[0].url, {
-        cache: "force-cache",
-      }).then(async (res) => Buffer.from(await res.arrayBuffer()));
-
-      const { base64 } = await getPlaiceholder(buffer);
-
-      (item.track as unknown as TrackType).blurDataURL = base64;
-
-      const parsedTrack = TrackSchema.parse(item.track);
-
-      return parsedTrack as TrackType;
-    } else {
-      return null;
-    }
-  };
 
   const trackPromises = spotifyTracks.items.map(fetchTrackData);
 

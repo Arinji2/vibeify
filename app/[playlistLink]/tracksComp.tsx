@@ -70,9 +70,7 @@ function SongCard({ track }: { track: TrackType }) {
         alt="Album Cover"
         className="object-cover absolute group-hover:scale-110 transition-all ease-in-out duration-300 will-change-transform"
         fill
-        blurDataURL={track.blurDataURL}
-        placeholder="blur"
-        sizes="600px"
+        sizes="(min-width: 768px) 600px, 450px"
       />
       <div className="w-full h-full bg-black bg-opacity-70 absolute z-10 top-0 left-0"></div>
       <div className="w-full h-fit backdrop-blur-sm z-10 absolute left-0 bottom-0 p-3 pb-6 flex flex-col items-start justify-start">
