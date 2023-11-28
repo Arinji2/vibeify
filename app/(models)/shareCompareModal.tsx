@@ -52,6 +52,9 @@ export default function ShareCompareModal({
                   id1: playlistID1,
                   id2: playlistID2,
                 }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
               });
 
               if (res.status === 409) toast.error("Link already taken");

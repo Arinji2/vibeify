@@ -64,9 +64,11 @@ export async function EditPlaylistAction(
     if (syncData.displayPictureSync) {
       const formData = new FormData();
 
-      const fileData = await fetch(data.images[0].url).then((res) =>
-        res.blob()
-      );
+      const fileData = await fetch(data.images[0].url, {
+        headers: {
+          "Content-Type": "image/png",
+        },
+      }).then((res) => res.blob());
       const blob = new Blob([fileData], { type: "image/png" });
 
       formData.append("image", blob, `${data.id}.png`);

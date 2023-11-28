@@ -106,12 +106,17 @@ export async function POST(request: NextRequest) {
           {
             headers: {
               Authorization: `Bearer ${accessToken?.access_token}`,
+              ContentType: "image/png",
             },
           }
         )) as any;
         image = await image.json();
 
-        const fileData = await fetch(image[0].url).then((res) => res.blob());
+        const fileData = await fetch(image[0].url, {
+          headers: {
+            "Content-Type": "image/png",
+          },
+        }).then((res) => res.blob());
         const blob = new Blob([fileData], { type: "image/png" });
 
         formData.append("image", blob, `${Math.random()}.png`);
