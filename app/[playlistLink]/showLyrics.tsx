@@ -15,14 +15,12 @@ export type LyricsType = {
   songImage: string;
 };
 export function ShowLyrics({
-  theme,
   songName,
   artists,
   trackId,
   setLoading,
   songImage,
 }: {
-  theme: string;
   songName: string;
   artists: string[];
   trackId: string;
@@ -61,7 +59,6 @@ export function ShowLyrics({
           setShowLyrics={setShowLyrics}
           showLyrics={showLyrics}
           songName={songName}
-          theme={theme}
           artists={artists}
           songImage={songImage}
           setTrackIDState={setTrackIDState}
@@ -73,7 +70,7 @@ export function ShowLyrics({
 
 function DisplayTrack({
   lyrics,
-  theme,
+
   songName,
   showLyrics,
   setShowLyrics,
@@ -82,7 +79,7 @@ function DisplayTrack({
   setTrackIDState,
 }: {
   lyrics: string[];
-  theme: string;
+
   songName: string;
   showLyrics: boolean;
   setShowLyrics: Function;
