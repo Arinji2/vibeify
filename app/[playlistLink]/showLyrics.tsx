@@ -44,7 +44,6 @@ export function ShowLyrics({
       setLoading(false);
       if (error) toast.error("Lyrics not found");
       else {
-        console.log(lyrics);
         setLyricsState(lyrics);
         setShowLyrics(true);
       }
