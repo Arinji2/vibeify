@@ -3,7 +3,10 @@
 export const getTrackLyrics = async (trackId: string) => {
   try {
     const res = await fetch(
-      `https://spotify-lyric-api-984e7b4face0.herokuapp.com/?trackid=${trackId}&format=lrc`
+      `https://spotify-lyric-api-984e7b4face0.herokuapp.com/?trackid=${trackId}&format=lrc`,
+      {
+        cache: "force-cache",
+      }
     );
 
     const lyrics = await res.json();

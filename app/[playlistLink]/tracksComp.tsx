@@ -50,6 +50,17 @@ export default function TracksComponent({
     }
   }, [inView, offset, playlistData]);
 
+  useEffect(() => {
+    if (!loadingLyrics)
+      setShowLyricsState({
+        artists: showLyricsState.artists,
+        songName: showLyricsState.songName,
+        theme: showLyricsState.theme,
+        trackId: "",
+        songImage: showLyricsState.songImage,
+      });
+  }, [loadingLyrics]);
+
   return (
     <>
       <ShowLyrics
@@ -73,10 +84,14 @@ export default function TracksComponent({
           ))}
         </section>
         <p ref={ref} className="font-bold text-black text-2xl">
-          <Loader2
+          <Image
+            src="/themes/default/loading.svg"
+            width={40}
+            alt="Lyrics Shower"
+            height={40}
             className={`${
               atEnd && "invisible "
-            } animate-spin text-black text-4xl w-[50px] h-[50px]`}
+            }object-contain animate-spin z-20`}
           />
         </p>
       </div>
@@ -116,7 +131,13 @@ function SongCard({
         }}
       >
         {locLoading ? (
-          <Loader2 className="animate-spin text-white text-4xl w-[50px] h-[50px]" />
+          <Image
+            src="/themes/default/loading.svg"
+            width={40}
+            alt="Lyrics Shower"
+            height={40}
+            className="object-contain animate-spin z-20"
+          />
         ) : (
           <Image
             src="/themes/default/lyrics.png"
