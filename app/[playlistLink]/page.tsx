@@ -14,11 +14,7 @@ import {
 import Pocketbase from "pocketbase";
 import { DefaultPage } from "./themes/default/server";
 import { fetchTrackData } from "./utils";
-
-const iBM_Plex_Mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-});
+import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
 
 const press_Start_2P = Press_Start_2P({
   subsets: ["latin"],
@@ -121,14 +117,25 @@ export default async function Page({
     (track) => track !== null
   ) as TrackType[];
   return (
-    parsedPlaylistData.theme === "default" && (
-      <DefaultPage
-        parsedPlaylistData={parsedPlaylistData}
-        parsedUserData={parsedUserData}
-        parsedViewData={parsedViewData}
-        spotifyPlaylist={spotifyPlaylist}
-        tracks={tracks}
-      />
-    )
+    <>
+      {parsedPlaylistData.theme === "default" && (
+        <DefaultPage
+          parsedPlaylistData={parsedPlaylistData}
+          parsedUserData={parsedUserData}
+          parsedViewData={parsedViewData}
+          spotifyPlaylist={spotifyPlaylist}
+          tracks={tracks}
+        />
+      )}
+      {parsedPlaylistData.theme === "neo-brutalism" && (
+        <NeoBrutalismPage
+          parsedPlaylistData={parsedPlaylistData}
+          parsedUserData={parsedUserData}
+          parsedViewData={parsedViewData}
+          spotifyPlaylist={spotifyPlaylist}
+          tracks={tracks}
+        />
+      )}
+    </>
   );
 }

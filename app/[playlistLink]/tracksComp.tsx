@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { FetchNextSongsAction } from "./fetchNextSongs";
 import { LyricsType, ShowLyrics } from "./showLyrics";
 import { DefaultSongCard } from "./themes/default/client";
+import { NeoBrutalismSongCard } from "./themes/neo-brutalism/client";
 
 export default function TracksComponent({
   playlistData,
@@ -118,15 +119,27 @@ function SongCard({
     if (!loading) setLocLoading(loading);
   }, [loading]);
   return (
-    theme === "default" && (
-      <DefaultSongCard
-        loading={loading}
-        locLoading={locLoading}
-        setLoading={setLoading}
-        setLocLoading={setLocLoading}
-        setShowLyricsState={setShowLyricsState}
-        track={track}
-      />
-    )
+    <>
+      {theme === "default" && (
+        <DefaultSongCard
+          loading={loading}
+          locLoading={locLoading}
+          setLoading={setLoading}
+          setLocLoading={setLocLoading}
+          setShowLyricsState={setShowLyricsState}
+          track={track}
+        />
+      )}
+      {theme === "neo-brutalism" && (
+        <NeoBrutalismSongCard
+          loading={loading}
+          locLoading={locLoading}
+          setLoading={setLoading}
+          setLocLoading={setLocLoading}
+          setShowLyricsState={setShowLyricsState}
+          track={track}
+        />
+      )}
+    </>
   );
 }
