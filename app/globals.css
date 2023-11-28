@@ -59,3 +59,15 @@ html {
   scroll-behavior: smooth;
   scroll-padding: 30svh;
 }
+
+.brand-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb {
+  background: #77c089;
+}
+
+.brand-scrollbar::-webkit-scrollbar-track {
+  background: #e1efdc;
+}
