@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { TrackType } from "@/utils/validations/playlists/themes";
 import { Playlist } from "@spotify/web-api-ts-sdk";
-import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
