@@ -5,10 +5,9 @@ export const getTrackLyrics = async (trackId: string) => {
     const res = await fetch(
       `https://spotify-lyric-api-984e7b4face0.herokuapp.com/?trackid=${trackId}&format=lrc`
     );
-    console.log(res);
 
     const lyrics = await res.json();
-    console.log(lyrics);
+
     const finalLyrics = [];
     if (lyrics.error === true) finalLyrics.push("null");
     else
@@ -20,7 +19,6 @@ export const getTrackLyrics = async (trackId: string) => {
       lyrics: finalLyrics,
     } as Lyrics;
   } catch (err) {
-    console.log(err);
     return {
       lyrics: ["null"],
       error: true,
