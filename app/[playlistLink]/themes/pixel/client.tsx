@@ -65,8 +65,6 @@ export function PixelSongCard({
             {track.name}
           </h4>
           <p className="text-black  text-[15px] text-left md:text-[25px] z-20">
-            {track.album.artists.map((artist) => artist.name).join(", ")}{" "}
-            {track.album.artists.map((artist) => artist.name).join(", ")}{" "}
             {track.album.artists.map((artist) => artist.name).join(", ")}
           </p>
         </div>
