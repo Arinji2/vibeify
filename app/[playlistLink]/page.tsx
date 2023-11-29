@@ -6,20 +6,13 @@ import {
 } from "@/utils/validations/playlists/schema";
 import { TrackType } from "@/utils/validations/playlists/themes";
 import { Metadata } from "next";
-import {
-  Cabin_Condensed,
-  IBM_Plex_Mono,
-  Press_Start_2P,
-} from "next/font/google";
+import { unstable_cache } from "next/cache";
 import Pocketbase from "pocketbase";
+import { CheckViews } from "./checkViews";
 import { DefaultPage } from "./themes/default/server";
-import { fetchTrackData } from "./utils";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
 import { PixelPage } from "./themes/pixel/server";
-import { cookies, headers } from "next/headers";
-import { revalidateTag, unstable_cache } from "next/cache";
-import { useRouter } from "next/navigation";
-import { CheckViews } from "./checkViews";
+import { fetchTrackData } from "./utils";
 
 export async function generateMetadata({
   params,
