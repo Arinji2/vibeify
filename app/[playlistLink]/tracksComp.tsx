@@ -50,7 +50,7 @@ export default function TracksComponent({
         setLoading(false);
       });
     }
-  }, [inView, offset, playlistData]);
+  }, [inView, offset, playlistData, loading]);
 
   useEffect(() => {
     if (!loadingLyrics)
@@ -61,7 +61,13 @@ export default function TracksComponent({
         trackId: "",
         songImage: showLyricsState.songImage,
       });
-  }, [loadingLyrics]);
+  }, [
+    loadingLyrics,
+    showLyricsState.artists,
+    showLyricsState.songName,
+    showLyricsState.theme,
+    showLyricsState.songImage,
+  ]);
 
   return (
     <>

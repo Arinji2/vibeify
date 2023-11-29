@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "react-toastify";
 import { getTrackLyrics } from "./fetchSongLyrics";
@@ -46,6 +46,7 @@ export function ShowLyrics({
         setShowLyrics(true);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackIDState]);
 
   useEffect(() => {
