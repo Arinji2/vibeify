@@ -31,7 +31,7 @@ export function NeoBrutalismPage({
       className={`${iBM_Plex_Mono.className} w-full h-fit relative bg-repeat bg-[#FCFD96] bg-opacity-60 text-center `}
     >
       <WidthWrapper>
-        <section className="w-full p-2  mt-10 md:mt-0 h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10 gap-4">
+        <section className="w-full p-2 gap-4 md:gap-10 mt-10 md:mt-0 h-fit relative md:h-[100svh] flex flex-col items-center justify-center pb-10">
           <div className="w-full h-fit py-10 rounded-md bg-white shadow-[10px_10px_0_#000] border-[5px] border-black">
             <h1
               className={`text-[40px] md:text-[80px] xl:text-[100px] text-black font-bold w-full line-clamp-2 break-words `}
@@ -44,7 +44,7 @@ export function NeoBrutalismPage({
             </h2>
           </div>
 
-          <article className="md:absolute bottom-40 w-[80%] h-fit flex flex-col md:flex-row flex-wrap gap-6 mt-5 md:mt-0 items-center justify-evenly">
+          <article className=" w-[80%] h-fit flex flex-col md:flex-row flex-wrap gap-6 mt-5 md:mt-0 items-center justify-evenly">
             <div className="w-[150px] h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
               <Image
                 src="/themes/neo-brutalism/views.png"
