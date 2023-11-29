@@ -15,16 +15,7 @@ import Pocketbase from "pocketbase";
 import { DefaultPage } from "./themes/default/server";
 import { fetchTrackData } from "./utils";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
-
-const press_Start_2P = Press_Start_2P({
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const cabin_Condensed = Cabin_Condensed({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { PixelPage } from "./themes/pixel/server";
 
 export async function generateMetadata({
   params,
@@ -129,6 +120,15 @@ export default async function Page({
       )}
       {parsedPlaylistData.theme === "neo-brutalism" && (
         <NeoBrutalismPage
+          parsedPlaylistData={parsedPlaylistData}
+          parsedUserData={parsedUserData}
+          parsedViewData={parsedViewData}
+          spotifyPlaylist={spotifyPlaylist}
+          tracks={tracks}
+        />
+      )}
+      {parsedPlaylistData.theme === "pixel" && (
+        <PixelPage
           parsedPlaylistData={parsedPlaylistData}
           parsedUserData={parsedUserData}
           parsedViewData={parsedViewData}

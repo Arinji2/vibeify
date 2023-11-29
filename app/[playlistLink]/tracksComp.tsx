@@ -9,6 +9,7 @@ import { FetchNextSongsAction } from "./fetchNextSongs";
 import { LyricsType, ShowLyrics } from "./showLyrics";
 import { DefaultSongCard } from "./themes/default/client";
 import { NeoBrutalismSongCard } from "./themes/neo-brutalism/client";
+import { PixelSongCard } from "./themes/pixel/client";
 
 export default function TracksComponent({
   playlistData,
@@ -93,7 +94,9 @@ export default function TracksComponent({
         </section>
         <p ref={ref} className="font-bold text-black text-2xl">
           <Image
-            src={`/themes/${theme}/loading.svg`}
+            src={`/themes/${
+              theme === "pixel" ? "neo-brutalism" : theme
+            }/loading.svg`}
             width={40}
             alt="Lyrics Shower"
             height={40}
@@ -138,6 +141,16 @@ function SongCard({
       )}
       {theme === "neo-brutalism" && (
         <NeoBrutalismSongCard
+          loading={loading}
+          locLoading={locLoading}
+          setLoading={setLoading}
+          setLocLoading={setLocLoading}
+          setShowLyricsState={setShowLyricsState}
+          track={track}
+        />
+      )}
+      {theme === "pixel" && (
+        <PixelSongCard
           loading={loading}
           locLoading={locLoading}
           setLoading={setLoading}
