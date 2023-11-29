@@ -13,6 +13,8 @@ import { DefaultPage } from "./themes/default/server";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
 import { PixelPage } from "./themes/pixel/server";
 import { fetchTrackData } from "./utils";
+import WidthWrapper from "../(wrapper)/widthWrapper";
+import { TestModeComponent } from "./testMode";
 
 export async function generateMetadata({
   params,
@@ -60,8 +62,10 @@ export async function generateMetadata({
 }
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { playlistLink: string };
+  searchParams: { testMode: string | undefined };
 }) {
   const playlistLink = params.playlistLink;
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -71,6 +75,18 @@ export default async function Page({
     .getFirstListItem(`link = "${playlistLink}"`);
 
   const parsedPlaylistData = PlaylistSchema.parse(data);
+  let inTestMode = false;
+  if (searchParams.testMode) {
+    const testMode = searchParams.testMode.toLowerCase();
+    if (
+      testMode === "default" ||
+      testMode === "neo-brutalism" ||
+      testMode === "pixel"
+    ) {
+      parsedPlaylistData.theme = testMode;
+      inTestMode = true;
+    }
+  }
 
   const userRecord = await pb
     .collection("users")
@@ -117,6 +133,12 @@ export default async function Page({
 
   return (
     <>
+      {inTestMode && (
+        <TestModeComponent
+          currentTheme={parsedPlaylistData.theme}
+          link={parsedPlaylistData.link}
+        />
+      )}
       {parsedPlaylistData.theme === "default" && (
         <DefaultPage
           parsedPlaylistData={parsedPlaylistData}

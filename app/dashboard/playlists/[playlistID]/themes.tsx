@@ -3,6 +3,7 @@ import UpdateThemeAction from "@/actions/playlist/updateTheme";
 import { ThemesType } from "@/utils/validations/playlists/themes";
 import { PlaylistType } from "@/utils/validations/playlists/types";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -38,9 +39,12 @@ export default function Themes({
           <p className="text-black text-4xl font-bold">{theme.toUpperCase()}</p>
         </div>
         <div className="w-full h-[45%] flex flex-row items-center justify-center flex-wrap gap-3 ">
-          <button className=" w-[120px] md:w-[150px] h-[50px] hover:shadow-buttonHover transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button ">
+          <Link
+            href={`/${playlistData.link}?testMode=${theme}`}
+            className=" w-[120px] md:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button "
+          >
             <p className="text-black text-base md:text-xl">View</p>
-          </button>
+          </Link>
           <button
             disabled={playlistData.theme === theme}
             onClick={async (e) => {
