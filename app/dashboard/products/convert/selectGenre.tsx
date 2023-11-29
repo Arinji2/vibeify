@@ -13,32 +13,60 @@ export function SelectGenreComponent() {
         SELECT GENRES
       </h1>
 
-      <div className="w-full h-full   p-4 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1">
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <button
-            onClick={() => {
-              if (genres.includes("Pop"))
-                setGenres(genres.filter((i) => i !== "Pop"));
-              else setGenres([...genres, "Pop"]);
-            }}
-            className={`${
-              genres.includes("Pop")
-                ? "bg-palette-tertiary "
-                : "bg-palette-background "
-            }w-[200px] shrink-0 flex flex-col items-center justify-center gap-5 aspect-square border-[5px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300`}
-          >
-            <Image
-              src="/convert/pop.svg"
-              width={60}
-              height={60}
-              alt="Convert Pop Genre"
-            />
-            <p className="font-bold text-[40px] text-palette-accent">POP</p>
-          </button>
-        </div>
+      <div className="w-full h-full  gap-y-5 p-4 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 pb-[200px]">
+        <GenreButton name="Pop" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Rock" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Country" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Rap" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Jazz" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Romantic" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Funk" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Classical" genres={genres} setGenres={setGenres} />
+        <GenreButton name="Party" genres={genres} setGenres={setGenres} />
       </div>
 
       <BottomBar genres={genres} />
+    </div>
+  );
+}
+
+function GenreButton({
+  name,
+  genres,
+  setGenres,
+}: {
+  name: string;
+  genres: string[];
+  setGenres: React.Dispatch<React.SetStateAction<string[]>>;
+}) {
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <button
+        onClick={() => {
+          if (genres.includes(name))
+            setGenres(genres.filter((i) => i !== name));
+          else setGenres([...genres, name]);
+        }}
+        className={`${
+          genres.includes(name) ? "bg-[#A6FAFF] " : "bg-palette-secondary "
+        }w-[200px] shrink-0 flex flex-col items-center justify-center gap-5 aspect-square border-[5px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300`}
+      >
+        <Image
+          src={`/convert/${name.toLowerCase()}.svg`}
+          width={60}
+          height={60}
+          alt={`Convert ${name} Genre`}
+        />
+        <p
+          className={`${
+            genres.includes(name)
+              ? " text-palette-secondary "
+              : " text-[#A6FAFF] "
+          }font-bold text-[30px] `}
+        >
+          {name.toUpperCase()}
+        </p>
+      </button>
     </div>
   );
 }
