@@ -37,9 +37,6 @@ async function refreshTokenHandler(
     method: "POST",
     headers: authOptions.headers,
     body: authOptions.body,
-    next: {
-      revalidate: 1800,
-    },
   });
   return res.json();
 }
