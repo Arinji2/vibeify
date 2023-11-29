@@ -95,11 +95,11 @@ export default async function Page({
 
   const parsedUserData = UserSchema.parse(userRecord);
   const spotify = await getSpotify();
-  const spotifyPlaylist = await spotify.playlists.getPlaylist(
+  const spotifyPlaylist = await spotify!.playlists.getPlaylist(
     parsedPlaylistData.spotify_link.split("/")[4].split("?")[0]
   );
 
-  const spotifyTracks = await spotify.playlists.getPlaylistItems(
+  const spotifyTracks = await spotify!.playlists.getPlaylistItems(
     spotifyPlaylist.id,
     undefined,
     undefined,
