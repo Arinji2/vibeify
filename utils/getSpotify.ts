@@ -8,7 +8,9 @@ export default async function getSpotify() {
   );
   if (res.access_token) {
     return SpotifyApi.withAccessToken(process.env.SPOTIFY_CLIENT_ID!, res);
-  } else throw new Error("No access token");
+  } else {
+    getSpotify();
+  }
 }
 async function refreshTokenHandler(
   refresh_token: string,

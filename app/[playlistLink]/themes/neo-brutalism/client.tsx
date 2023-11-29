@@ -70,7 +70,7 @@ export function NeoBrutalismSongCard({
           />
           <div className="w-full h-full bg-black bg-opacity-70 absolute z-10 top-0 left-0"></div>
         </div>
-        <div className="w-full h-fit shrink-0 bg-[#FFF4E8]  z-10  p-3 pb-6 flex flex-col items-start justify-start">
+        <div className="w-full  h-[150px] md:h-[250px] shrink-0 bg-[#FFF4E8]  z-10  p-3 pb-6 flex flex-col items-start justify-start">
           <h4 className="text-black font-bold text-[20px] md:text-[35px] z-20 text-left line-clamp-2">
             {track.name}
           </h4>
