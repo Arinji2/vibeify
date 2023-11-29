@@ -114,9 +114,12 @@ export default async function Stats({
         >
           <p className="text-black text-xl">Edit</p>
         </Link>
-        <button className="w-full xl:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button ">
+        <Link
+          href={`/${playlistData.link}`}
+          className="w-full xl:w-[150px] h-[50px] hover:shadow-buttonHover flex flex-col items-center justify-center transition-all ease-in-out duration-300 bg-palette-tertiary text-palette-background font-semibold border-black border-[3px] shadow-button "
+        >
           <p className="text-black text-xl">View</p>
-        </button>
+        </Link>
         <DeleteButton id={playlistID} name={playlistData.name} />
       </div>
     </>
