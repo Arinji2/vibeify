@@ -16,6 +16,10 @@ import { DefaultPage } from "./themes/default/server";
 import { fetchTrackData } from "./utils";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
 import { PixelPage } from "./themes/pixel/server";
+import { cookies, headers } from "next/headers";
+import { revalidateTag, unstable_cache } from "next/cache";
+import { useRouter } from "next/navigation";
+import { CheckViews } from "./checkViews";
 
 export async function generateMetadata({
   params,
@@ -68,6 +72,7 @@ export default async function Page({
 }) {
   const playlistLink = params.playlistLink;
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+
   const data = await pb
     .collection("playlists")
     .getFirstListItem(`link = "${playlistLink}"`);
@@ -79,10 +84,19 @@ export default async function Page({
     .getOne(parsedPlaylistData.created_by);
 
   if (!userRecord.email) userRecord.email = "";
-
-  const viewRecord = await pb.collection("views").getFullList({
-    filter: `playlist_id = "${parsedPlaylistData.id}"`,
-  });
+  await CheckViews({ id: parsedPlaylistData.id! });
+  const viewRecord = await unstable_cache(
+    async () => {
+      const viewRecord = await pb.collection("views").getFullList({
+        filter: `playlist_id = "${parsedPlaylistData.id}"`,
+      });
+      return viewRecord;
+    },
+    ["cache-key"],
+    {
+      tags: ["viewsRecordPage"],
+    }
+  )();
 
   const parsedViewData = ViewsSchema.parse(viewRecord);
 
@@ -107,6 +121,7 @@ export default async function Page({
   const tracks = resolvedTracks.filter(
     (track) => track !== null
   ) as TrackType[];
+
   return (
     <>
       {parsedPlaylistData.theme === "default" && (
