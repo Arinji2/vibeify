@@ -7,9 +7,13 @@ export default async function getSpotify() {
     process.env.SPOTIFY_CLIENT_SECRET!
   );
   if (res.access_token) {
-    return SpotifyApi.withAccessToken(process.env.SPOTIFY_CLIENT_ID!, res);
+    const spotify = SpotifyApi.withAccessToken(
+      process.env.SPOTIFY_CLIENT_ID!,
+      res
+    )!;
+    return spotify;
   } else {
-    getSpotify();
+    return getSpotify();
   }
 }
 async function refreshTokenHandler(
