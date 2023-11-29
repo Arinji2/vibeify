@@ -14,8 +14,11 @@ export default async function Page() {
   const token = await getToken();
 
   pb.authStore.save(token);
+  await pb.collection("users").authRefresh();
 
-  const playlistRecords = await pb.collection("playlists").getFullList({});
+  const playlistRecords = await pb.collection("playlists").getFullList({
+    filter: `created_by = "${pb.authStore.model!.id}"`,
+  });
 
   const parsedPlaylistRecords = PlaylistsSchema.safeParse(playlistRecords);
 
