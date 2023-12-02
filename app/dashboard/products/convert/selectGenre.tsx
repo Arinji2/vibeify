@@ -1,8 +1,10 @@
 "use client";
 import WidthWrapper from "@/app/(wrapper)/widthWrapper";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
+import { genresArray } from "../genresFile";
 
 export function SelectGenreComponent() {
   const [genres, setGenres] = useState<string[]>([]);
@@ -14,15 +16,16 @@ export function SelectGenreComponent() {
       </h1>
 
       <div className="w-full h-full  gap-y-5 p-4 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 pb-[200px]">
-        <GenreButton name="Pop" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Rock" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Country" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Rap" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Jazz" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Romantic" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Funk" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Classical" genres={genres} setGenres={setGenres} />
-        <GenreButton name="Party" genres={genres} setGenres={setGenres} />
+        {genresArray.map((genre) => {
+          return (
+            <GenreButton
+              key={genre}
+              name={genre.slice(0, 1).toUpperCase() + genre.slice(1)}
+              genres={genres}
+              setGenres={setGenres}
+            />
+          );
+        })}
       </div>
 
       <BottomBar genres={genres} />
@@ -72,6 +75,7 @@ function GenreButton({
 }
 
 function BottomBar({ genres }: { genres: string[] }) {
+  const router = useRouter();
   return (
     <div className="w-full h-fit md:py-0 py-2  md:h-[100px] fixed  bottom-0 bg-palette-background border-t-[5px] border-black">
       <WidthWrapper>
@@ -94,6 +98,13 @@ function BottomBar({ genres }: { genres: string[] }) {
           </div>
           <div className="w-full h-full flex flex-col items-start md:items-end justify-center gap-2 ">
             <button
+              onClick={() => {
+                router.push(
+                  `/dashboard/products/convert/playlist?genres=${genres.join(
+                    ","
+                  )}`
+                );
+              }}
               disabled={genres.length === 0}
               className="px-4 py-2  w-fit shadow-button enabled:hover:shadow-buttonHover disabled:bg-slate-400 border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center"
             >
