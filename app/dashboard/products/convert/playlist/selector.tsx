@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import sendRequestToApi from "./sendRequestToApi";
 export default function PlaylistSelector({
   genres,
   playlists,
@@ -71,25 +72,23 @@ export default function PlaylistSelector({
               <button
                 disabled={!selectedPlaylist}
                 onClick={async () => {
+                  console.log(token, selectedPlaylist, genres);
                   setLoading(true);
-                  const res = await fetch("https://api.vibeify.xyz/addTask", {
-                    body: JSON.stringify({
-                      userToken: token,
-                      spotifyURL: selectedPlaylist?.spotify_link,
-                      genres: genres.map((genre) => genre.toLowerCase()),
-                    }),
-                    method: "POST",
-                  });
+                  try {
+                    await sendRequestToApi({
+                      token,
+                      selectedPlaylist: selectedPlaylist?.spotify_link!,
+                      genres,
+                    });
 
-                  const data = await res.json();
-                  if (res.status !== 200) {
-                    toast.error(data.message);
-                  } else {
                     toast.success(
                       "Successfully added task! Please wait for a mail to be sent."
                     );
-                    setLoading(false);
-                    router.push("/dashboard/playlists");
+                    setTimeout(() => {
+                      router.push("/dashboard/playlists");
+                    }, 1000);
+                  } catch (e: any) {
+                    toast.error(e.message);
                   }
                   setLoading(false);
                 }}
