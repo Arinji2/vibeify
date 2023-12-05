@@ -53,7 +53,7 @@ export function PixelPage({
 
               <article className=" w-[80%] h-fit  flex flex-col mt-6 md:flex-row flex-wrap gap-6  items-center justify-evenly">
                 <div
-                  className={`${press_Start_2P.className} w-[200px] h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
+                  className={`${press_Start_2P.className} w-[200px] px-2 h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
                 >
                   <Image
                     src="/themes/neo-brutalism/views.png"
@@ -67,7 +67,7 @@ export function PixelPage({
                   </p>
                 </div>
                 <div
-                  className={`${press_Start_2P.className} w-[200px] h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
+                  className={`${press_Start_2P.className} min-w-[200px] px-2 h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
                 >
                   <Image
                     src="/themes/neo-brutalism/likes.png"
@@ -81,7 +81,7 @@ export function PixelPage({
                   </p>
                 </div>
                 <div
-                  className={`${press_Start_2P.className} w-[200px] h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
+                  className={`${press_Start_2P.className} w-[200px] px-2 h-[70px] bg-white border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3`}
                 >
                   <Image
                     src="/themes/neo-brutalism/tracks.png"

@@ -45,7 +45,7 @@ export function NeoBrutalismPage({
           </div>
 
           <article className=" w-[80%] h-fit flex flex-col md:flex-row flex-wrap gap-6 mt-5 md:mt-0 items-center justify-evenly">
-            <div className="w-[150px] h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
+            <div className="w-[150px] px-2 h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
               <Image
                 src="/themes/neo-brutalism/views.png"
                 width={50}
@@ -57,7 +57,7 @@ export function NeoBrutalismPage({
                 {parsedViewData.length}
               </p>
             </div>
-            <div className="w-[150px] h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
+            <div className=" min-w-[150px] px-2 h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
               <Image
                 src="/themes/neo-brutalism/likes.png"
                 width={50}
@@ -69,7 +69,7 @@ export function NeoBrutalismPage({
                 {spotifyPlaylist.followers.total}
               </p>
             </div>
-            <div className="w-[150px] h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
+            <div className="w-[150px] px-2 h-[70px] bg-[#A6FAFF] border-[4px] border-black shadow-button rounded-md flex flex-row items-center justify-center gap-3">
               <Image
                 src="/themes/neo-brutalism/tracks.png"
                 width={50}
