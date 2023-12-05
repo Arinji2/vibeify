@@ -30,10 +30,10 @@ export async function PlaylistSmall({ playlist }: { playlist: PlaylistType }) {
   return (
     <div className="md:w-[300px] flex flex-col items-start justify-start p-4 hover:scale-95 transition-all ease-in-out duration-300 will-change-transform w-full gap-4 h-[500px] border-[4px] border-black shadow-button hover:shadow-buttonHover bg-palette-background">
       <div className="w-full h-[171px] flex flex-col items-start justify-center gap-2">
-        <h1 className="line-clamp-2 text-black font-bold text-[40px] text-left">
+        <h1 className="line-clamp-2 text-black font-bold text-[40px] text-left break-words w-full">
           {playlist.name}
         </h1>
-        <h2 className="text-black text-[20px] font-bold text-opacity-40 truncate text-left">
+        <h2 className="text-black text-[20px] font-bold text-opacity-40 truncate text-left break-words w-full">
           {playlist.display_name}
         </h2>
         <div className="w-full h-[5px] bg-palette-accent"></div>
