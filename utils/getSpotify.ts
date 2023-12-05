@@ -6,12 +6,22 @@ export default async function getSpotify() {
     process.env.SPOTIFY_CLIENT_ID!,
     process.env.SPOTIFY_CLIENT_SECRET!
   );
+
   if (res.access_token) {
     const spotify = SpotifyApi.withAccessToken(
       process.env.SPOTIFY_CLIENT_ID!,
       res
     )!;
-    return spotify;
+    const token = await spotify.getAccessToken();
+
+    const expires = token?.expires!;
+    const currentTime = Date.now();
+
+    if (currentTime > expires) {
+      return getSpotify();
+    } else {
+      return spotify;
+    }
   } else {
     return getSpotify();
   }
@@ -37,6 +47,7 @@ async function refreshTokenHandler(
     method: "POST",
     headers: authOptions.headers,
     body: authOptions.body,
+    cache: "no-cache",
   });
   return res.json();
 }
