@@ -88,9 +88,16 @@ export default async function Page({
     }
   }
 
-  const userRecord = await pb
-    .collection("users")
-    .getOne(parsedPlaylistData.created_by);
+  const userRecord = await unstable_cache(
+    async (id) => {
+      const userRecord = await pb.collection("users").getOne(id);
+      return userRecord;
+    },
+    ["cache-key"],
+    {
+      tags: ["UsernameTag"],
+    }
+  )(parsedPlaylistData.created_by);
 
   if (!userRecord.email) userRecord.email = "";
   await CheckViews({ id: parsedPlaylistData.id! });
