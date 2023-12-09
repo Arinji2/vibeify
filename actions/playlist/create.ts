@@ -76,6 +76,13 @@ export async function CreatePlaylistAction(
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   pb.authStore.save(token);
 
+  const linkRecords = await pb.collection("playlists").getFullList({
+    filter: `link = "${playlistFormData.link}"`,
+  });
+
+  if (linkRecords.length > 0)
+    return { message: "Link already exists", status: 400 };
+
   try {
     const res = await pb.collection("playlists").create(playlistFormData);
     syncData.playlist = res.id;
