@@ -3,7 +3,7 @@ import { getToken } from "@/utils/getToken";
 import Image from "next/image";
 import Link from "next/link";
 import Pocketbase from "pocketbase";
-import { DeletePlaylists, UpdateUsername } from "./portals";
+import { DeleteAccount, DeletePlaylists, UpdateUsername } from "./portals";
 
 export default async function Page() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -32,14 +32,7 @@ export default async function Page() {
           </div>
           <div className="w-full xl:h-[150px] mt-3 h-fit flex flex-col xl:flex-row items-center justify-center gap-5">
             <DeletePlaylists />
-            <Link
-              href="/dashboard/account/delete/account"
-              className="w-full px-2 text-center py-2 h-full flex flex-col items-center justify-center bg-palette-error bg-opacity-80 shadow-button border-[4px] border-black"
-            >
-              <p className="text-[35px] md:text-[40px] text-palette-background font-medium">
-                Delete <span className="font-bold inline">Account Data</span>
-              </p>
-            </Link>
+            <DeleteAccount />
           </div>
           <div className="w-full px-2 text-center h-full py-2 flex flex-row gap-5 items-center justify-center bg-palette-background shadow-button border-[4px] border-black">
             <Image
