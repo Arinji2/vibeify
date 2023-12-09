@@ -34,8 +34,8 @@ export default function ResultShower({
       <div className="h-0 w-0 absolute left-0 top-0" id="resultShower"></div>
       <ResultParent
         number={number!}
-        matchingPlaylist={playlist1Missing}
-        missingPlaylist={playlist1Matching}
+        matchingPlaylist={playlist1Matching}
+        missingPlaylist={playlist1Missing}
         playlistNumber="1"
       />
       <ResultParent
