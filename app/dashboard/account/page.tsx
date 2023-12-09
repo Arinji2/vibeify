@@ -34,7 +34,10 @@ export default async function Page() {
             <DeletePlaylists />
             <DeleteAccount />
           </div>
-          <div className="w-full px-2 text-center h-full py-2 flex flex-row gap-5 items-center justify-center bg-palette-background shadow-button border-[4px] border-black">
+          <Link
+            href="/dashboard/account/icon"
+            className="w-full px-2 text-center h-full py-2 flex flex-row gap-5 items-center justify-center bg-palette-background shadow-button border-[4px] border-black"
+          >
             <Image
               src="/dicebear-avatar.png"
               width={150}
@@ -44,7 +47,7 @@ export default async function Page() {
             <p className="text-[35px] md:text-[40px] text-black font-medium">
               View <span className="font-bold inline">Account Icon</span>
             </p>
-          </div>
+          </Link>
         </div>
       </WidthWrapper>
     </div>
