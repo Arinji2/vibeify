@@ -7,7 +7,7 @@ import {
 import { TrackType } from "@/utils/validations/playlists/themes";
 import { Metadata } from "next";
 import { unstable_cache } from "next/cache";
-import Pocketbase from "pocketbase";
+import Pocketbase, { RecordModel } from "pocketbase";
 import { CheckViews } from "./checkViews";
 import { DefaultPage } from "./themes/default/server";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
@@ -15,6 +15,8 @@ import { PixelPage } from "./themes/pixel/server";
 import { fetchTrackData } from "./utils";
 import WidthWrapper from "../(wrapper)/widthWrapper";
 import { TestModeComponent } from "./testMode";
+import Footer from "../footer";
+import { notFound, redirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -24,11 +26,16 @@ export async function generateMetadata({
   const playlistLink = params.playlistLink;
 
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  const data = await pb
-    .collection("playlists")
-    .getFirstListItem(`link = "${playlistLink}"`, {
-      expand: "created_by",
-    });
+  let data;
+  try {
+    data = await pb
+      .collection("playlists")
+      .getFirstListItem(`link = "${playlistLink}"`, {
+        expand: "created_by",
+      });
+  } catch (e) {
+    notFound();
+  }
 
   const parsedPlaylistData = PlaylistSchema.parse(data);
 
@@ -69,10 +76,14 @@ export default async function Page({
 }) {
   const playlistLink = params.playlistLink;
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-
-  const data = await pb
-    .collection("playlists")
-    .getFirstListItem(`link = "${playlistLink}"`);
+  let data;
+  try {
+    data = await pb
+      .collection("playlists")
+      .getFirstListItem(`link = "${playlistLink}"`);
+  } catch (e) {
+    notFound();
+  }
 
   const parsedPlaylistData = PlaylistSchema.parse(data);
   let inTestMode = false;
@@ -173,6 +184,9 @@ export default async function Page({
           tracks={tracks}
         />
       )}
+      <div className="w-full h-fit flex flex-col items-center justify-center">
+        <Footer full />
+      </div>
     </>
   );
 }
