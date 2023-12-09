@@ -91,3 +91,23 @@ export function DeleteButton({
     </>
   );
 }
+
+export function LocalstorageChecker() {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log("checking localstorage");
+      if (window.localStorage) {
+        const url = window.localStorage.getItem("signUpPlaylist");
+
+        if (url) {
+          router.push(`/dashboard/playlists/create?signUp=${url}`);
+          router.refresh();
+        }
+      }
+    }
+  }, []);
+
+  return <></>;
+}

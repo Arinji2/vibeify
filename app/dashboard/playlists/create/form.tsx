@@ -1,8 +1,10 @@
 "use client";
 import { CreatePlaylistAction } from "@/actions/playlist/create";
+import { REGEX } from "@/utils/regex";
 import { useToast } from "@/utils/useToast";
 import { Info, Loader2, X, XCircle } from "lucide-react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -50,6 +52,13 @@ export function Form() {
 }
 
 function SpotifyLink() {
+  const searchParams = useSearchParams();
+  const link = searchParams.get("signUp");
+  const [validLink, setValidLink] = useState(false);
+  useEffect(() => {
+    if (!link || link === null) return;
+    if (REGEX.SPOTIFY_URL.test(link)) setValidLink(true);
+  }, [link]);
   return (
     <div className="w-full h-fit flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
       <div className="w-[150px] h-fit shrink-0 flex flex-col items-start justify-center">
@@ -61,6 +70,7 @@ function SpotifyLink() {
         <input
           placeholder="https://open.spotify.com/playlist/..../..../..."
           type="text"
+          defaultValue={validLink ? link! : ""}
           name="spotifyLink"
           className="w-full px-2 py-3 text-base h-[40px] max-w-[450px] border-[3px] z-30 focus:outline-none border-black bg-palette-background text-palette-text"
         />

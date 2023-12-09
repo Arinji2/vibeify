@@ -5,7 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export default function Navbar({ border }: { border?: boolean }) {
+export default function Navbar({
+  border,
+  hasCookie,
+}: {
+  border?: boolean;
+  hasCookie?: boolean;
+}) {
   let path = usePathname();
   path = path.split("/")[1];
   let safePath = path as "faq" | "about" | "support";
@@ -30,53 +36,13 @@ export default function Navbar({ border }: { border?: boolean }) {
               className="object-contain"
             />
           </Link>
-          <ul className="hidden h-fit w-fit flex-row  items-center justify-center gap-8 md:flex">
-            <Link
-              href="/faq"
-              className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-            >
-              <p className="text-xl font-medium text-palette-text xl:text-3xl">
-                FAQ
-              </p>
-              <div
-                className={`${
-                  safePath === "faq" ? "w-full " : "w-0 group-hover:w-full "
-                } h-[3px] origin-left  bg-black transition-all duration-500 ease-in-out`}
-              ></div>
-            </Link>
-            <Link
-              href="/about"
-              className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-            >
-              <p className="text-xl font-medium text-palette-text xl:text-3xl">
-                About
-              </p>
-              <div
-                className={`${
-                  safePath === "about" ? "w-full " : "w-0 group-hover:w-full "
-                } h-[3px] origin-left  bg-black transition-all duration-500 ease-in-out`}
-              ></div>
-            </Link>
-            <Link
-              href="/support"
-              className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-            >
-              <p className="text-xl font-medium text-palette-text xl:text-3xl">
-                Support
-              </p>
-              <div
-                className={`${
-                  safePath === "support" ? "w-full " : "w-0 group-hover:w-full "
-                } h-[3px] origin-left  bg-black transition-all duration-500 ease-in-out`}
-              ></div>
-            </Link>
-          </ul>
+
           <Link
-            href="/register"
+            href={hasCookie ? "/dashboard/playlists" : "/register"}
             className="hidden h-fit w-fit border-[3px] border-black bg-palette-tertiary p-[10px] md:block"
           >
             <p className="text-xl font-medium text-palette-text xl:text-3xl">
-              Start Playing
+              {hasCookie ? "Dashboard" : "Start Playing"}
             </p>
           </Link>
           <div
@@ -106,45 +72,16 @@ export default function Navbar({ border }: { border?: boolean }) {
       <div
         className={`${
           active ? "translate-x-0 " : "translate-x-full "
-        }md:hidden fixed right-0 top-0 flex h-screen w-[70%]  flex-col items-center justify-center bg-palette-accent transition-all duration-500 ease-in-out`}
+        }md:hidden fixed right-0 top-0 flex h-screen w-[70%]  flex-col items-center justify-end bg-palette-accent transition-all duration-500 ease-in-out`}
       >
-        <ul className="flex h-fit w-fit flex-col  items-center justify-center gap-8 md:hidden">
-          <Link
-            href="/faq"
-            className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-          >
-            <p className="text-2xl font-bold  text-palette-background">FAQ</p>
-            <div
-              className={`${
-                safePath === "faq" ? "w-full " : "w-0 group-hover:w-full "
-              } h-[3px] origin-left  bg-white transition-all duration-500 ease-in-out`}
-            ></div>
-          </Link>
-          <Link
-            href="/about"
-            className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-          >
-            <p className="text-2xl font-bold  text-palette-background">About</p>
-            <div
-              className={`${
-                safePath === "about" ? "w-full " : "w-0 group-hover:w-full "
-              } h-[3px] origin-left  bg-white transition-all duration-500 ease-in-out`}
-            ></div>
-          </Link>
-          <Link
-            href="/support"
-            className="group flex h-fit w-fit flex-col items-start justify-center gap-1"
-          >
-            <p className="text-2xl font-bold  text-palette-background">
-              Support
-            </p>
-            <div
-              className={`${
-                safePath === "support" ? "w-full " : "w-0 group-hover:w-full "
-              } h-[3px] origin-left  bg-white transition-all duration-500 ease-in-out`}
-            ></div>
-          </Link>
-        </ul>
+        <Link
+          href={hasCookie ? "/dashboard/playlists" : "/register"}
+          className=" h-fit w-fit border-[3px] border-black bg-palette-tertiary p-[10px] md:hidden mb-5"
+        >
+          <p className="text-xl font-medium text-palette-text xl:text-3xl">
+            {hasCookie ? "Dashboard" : "Start Playing"}
+          </p>
+        </Link>
       </div>
     </nav>
   );

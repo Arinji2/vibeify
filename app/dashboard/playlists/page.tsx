@@ -8,6 +8,7 @@ import {
   PlaylistSmall,
   PlaylistSmallLoading,
 } from "./components";
+import { LocalstorageChecker } from "./client";
 
 export default async function Page() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -26,6 +27,7 @@ export default async function Page() {
 
   return (
     <main className="md:min-h-excludeNav min-h-excludeMobNav bg-palette-accent w-full flex flex-col items-center justify-center p-3 px-1 ">
+      <LocalstorageChecker />
       {parsedPlaylistRecords.data.length === 0 && (
         <div className="w-full h-fit flex flex-col items-center justify-center">
           <h1 className="text-white font-bold text-[40px] text-center md:text-[50px]">
