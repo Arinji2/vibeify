@@ -107,7 +107,7 @@ export function LocalstorageChecker() {
         }
       }
     }
-  }, []);
+  }, [router]);
 
   return <></>;
 }
