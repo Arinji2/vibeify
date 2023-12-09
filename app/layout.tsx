@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Listify",
+  title: "Vibeify",
   description: "Giving Love to your Spotify Playlists",
   keywords: ["arinji", "spotify", "playlists", "music"],
 };
