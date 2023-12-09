@@ -1,9 +1,9 @@
 import WidthWrapper from "@/app/(wrapper)/widthWrapper";
+import { getToken } from "@/utils/getToken";
 import Image from "next/image";
 import Link from "next/link";
-import { UpdateUsername } from "./portals";
 import Pocketbase from "pocketbase";
-import { getToken } from "@/utils/getToken";
+import { DeletePlaylists, UpdateUsername } from "./portals";
 
 export default async function Page() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -21,7 +21,8 @@ export default async function Page() {
           <div className="w-full xl:h-[150px] mt-3 h-fit flex flex-col xl:flex-row items-center justify-center gap-5">
             <UpdateUsername serverData={pb.authStore.model!.username} />
             <Link
-              href="/dashboard/account/password"
+              href="/forgot"
+              target="_blank"
               className="w-full px-2 text-center py-2 h-full flex flex-col items-center justify-center bg-palette-background shadow-button border-[4px] border-black"
             >
               <p className="text-[35px] md:text-[40px] text-black font-medium">
@@ -30,14 +31,7 @@ export default async function Page() {
             </Link>
           </div>
           <div className="w-full xl:h-[150px] mt-3 h-fit flex flex-col xl:flex-row items-center justify-center gap-5">
-            <Link
-              href="/dashboard/account/delete/playlists"
-              className="w-full px-2 text-center py-2 h-full flex flex-col items-center justify-center bg-palette-error bg-opacity-80 shadow-button border-[4px] border-black"
-            >
-              <p className="text-[35px] md:text-[40px] text-palette-background font-medium">
-                Delete <span className="font-bold inline">all Playlists</span>
-              </p>
-            </Link>
+            <DeletePlaylists />
             <Link
               href="/dashboard/account/delete/account"
               className="w-full px-2 text-center py-2 h-full flex flex-col items-center justify-center bg-palette-error bg-opacity-80 shadow-button border-[4px] border-black"
