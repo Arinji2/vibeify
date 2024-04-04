@@ -41,7 +41,6 @@ export async function POST(request: NextRequest) {
       { status: 200, headers: { "content-type": "application/json" } }
     );
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       { success: false, message: "Compare Not Shared" },
       { status: 400, headers: { "content-type": "application/json" } }

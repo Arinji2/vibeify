@@ -6,7 +6,6 @@ import * as React from "react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "react-toastify";
-import Pocketbase from "pocketbase";
 
 export default function SyncButton({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
@@ -97,7 +96,6 @@ export function LocalstorageChecker() {
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      console.log("checking localstorage");
       if (window.localStorage) {
         const url = window.localStorage.getItem("signUpPlaylist");
 

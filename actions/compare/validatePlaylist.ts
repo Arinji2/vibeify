@@ -4,13 +4,12 @@ import getSpotify from "@/utils/getSpotify";
 
 export default async function ValidatePlaylistAction(playlistLink: string) {
   const playlist_id = playlistLink.split("/")[4];
-  console.log(playlist_id.split("?")[0]);
+
   const spotify = await getSpotify();
   let data;
   try {
     data = await spotify.playlists.getPlaylist(playlist_id.split("?")[0]);
   } catch (e) {
-    console.log(e);
     return { message: "Invalid Spotify Link", status: 400 };
   }
 

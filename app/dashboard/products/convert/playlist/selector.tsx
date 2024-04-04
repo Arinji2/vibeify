@@ -4,7 +4,6 @@ import { PlaylistType } from "@/utils/validations/playlists/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import * as React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import sendRequestToApi from "./sendRequestToApi";
@@ -72,7 +71,6 @@ export default function PlaylistSelector({
               <button
                 disabled={!selectedPlaylist}
                 onClick={async () => {
-                  console.log(token, selectedPlaylist, genres);
                   setLoading(true);
                   try {
                     await sendRequestToApi({

@@ -1,12 +1,10 @@
-import { notFound, redirect } from "next/navigation";
-import { genresArray } from "../../genresFile";
-import Pocketbase from "pocketbase";
 import { getModel } from "@/utils/getModel";
-import getSpotify from "@/utils/getSpotify";
-import { PlaylistsSchema } from "@/utils/validations/playlists/schema";
-import { PlaylistType } from "@/utils/validations/playlists/types";
-import PlaylistSelector from "./selector";
 import { getToken } from "@/utils/getToken";
+import { PlaylistsSchema } from "@/utils/validations/playlists/schema";
+import { notFound, redirect } from "next/navigation";
+import Pocketbase from "pocketbase";
+import { genresArray } from "../../genresFile";
+import PlaylistSelector from "./selector";
 export default async function Page({
   searchParams,
 }: {
@@ -26,7 +24,6 @@ export default async function Page({
       if (genresArray.includes(genre)) finalGenres.push(genre);
     });
   } catch (e) {
-    console.log(e);
     redirect("/dashboard/products/convert");
   }
 

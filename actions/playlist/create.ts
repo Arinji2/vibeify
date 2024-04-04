@@ -2,7 +2,7 @@
 
 import { getModel } from "@/utils/getModel";
 import getSpotify from "@/utils/getSpotify";
-import { SongType, SyncType } from "@/utils/validations/playlists/types";
+import { SyncType } from "@/utils/validations/playlists/types";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import Pocketbase from "pocketbase";
@@ -36,6 +36,7 @@ export async function CreatePlaylistAction(
   } as SyncType;
 
   const playlist_id = playlistFormData.spotify_link.split("/")[4];
+
   const spotify = await getSpotify();
   let data;
   try {
@@ -91,7 +92,6 @@ export async function CreatePlaylistAction(
     revalidatePath("/dashboard");
     return { message: "Playlist Created", status: 200 };
   } catch (e: any) {
-    console.log(e.data);
     return { message: "Could not create" + Math.random(), status: 400 };
   }
 }

@@ -24,7 +24,6 @@ export default async function UpdateThemeAction(
 
     return { message: "Theme updated", status: 200 };
   } catch (e) {
-    console.log(e);
     return { message: "Something went wrong", status: 500 };
   }
 }

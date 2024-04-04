@@ -112,7 +112,6 @@ export async function EditPlaylistAction(
 
     return { message: "Playlist Updated", status: 200 };
   } catch (e) {
-    console.log(e);
     return {
       message: "Something went wrong",
       status: 500,

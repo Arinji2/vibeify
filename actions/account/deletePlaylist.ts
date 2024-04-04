@@ -30,7 +30,6 @@ export default async function DeletePlaylistsAction() {
       message: "Playlists deleted",
     };
   } catch (e) {
-    console.log(e);
     return {
       status: 500,
       message: "something went wrong",

@@ -1,5 +1,5 @@
 //This is causing UNDICI ERRORS, line 16 onwards.
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import Pocketbase from "pocketbase";
 
 export async function GET(req: NextRequest) {
@@ -20,7 +20,6 @@ export async function GET(req: NextRequest) {
       },
       body: JSON.stringify({ id: playlist.id, cron: true }),
     });
-    console.log(res);
   });
 
   return new Response(

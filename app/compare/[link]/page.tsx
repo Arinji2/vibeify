@@ -1,3 +1,4 @@
+import Footer from "@/app/footer";
 import getSpotify from "@/utils/getSpotify";
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
 import {
@@ -8,8 +9,6 @@ import { PlaylistedTrack } from "@spotify/web-api-ts-sdk";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
 import Results from "./results";
-import Link from "next/link";
-import Footer from "@/app/footer";
 
 export async function generateMetadata({
   params,
@@ -37,7 +36,6 @@ export async function generateMetadata({
 
     track2 = await spotify.playlists.getPlaylist(parsedData.spotifyLink2);
   } catch (e) {
-    console.log("Error getting spotify data");
     notFound();
   }
   return {
