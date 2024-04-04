@@ -1,8 +1,6 @@
 "use client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Pocketbase from "pocketbase";
-import * as React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -31,7 +29,9 @@ export default function ShareCompareModal({
           </h1>
         </div>
         <div className=" px-2 py-3 text-sm md:text-base h-[60px] md:max-w-[250px] xl:max-w-[400px] flex flex-row items-center justify-start border-[3px] focus:outline-none border-black">
-          <p className="shrink-0  text-palette-text">vibeify.xyz/compare/</p>
+          <p className="shrink-0  text-palette-text">
+            vibeify.arinji.com/compare/
+          </p>
           <input
             type="text"
             value={link}

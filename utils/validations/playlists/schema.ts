@@ -35,8 +35,8 @@ export const CreatePlaylistSchema = z.object({
       CONSTRAINTS.PLAYLIST.MAX_LENGTH,
       `Display Link must be ${CONSTRAINTS.PLAYLIST.MAX_LENGTH} long`
     )
-    .refine((data) => !data.startsWith("vibeify.xyz"), {
-      message: "Display link cannot start with vibeify.xyz",
+    .refine((data) => !data.startsWith("vibeify.arinji.com"), {
+      message: "Display link cannot start with vibeify.arinji.com",
       path: ["displayLink"],
     }),
   displayLinkSync: z.number().min(0).max(1),

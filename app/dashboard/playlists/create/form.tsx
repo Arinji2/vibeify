@@ -2,7 +2,7 @@
 import { CreatePlaylistAction } from "@/actions/playlist/create";
 import { REGEX } from "@/utils/regex";
 import { useToast } from "@/utils/useToast";
-import { Info, Loader2, X, XCircle } from "lucide-react";
+import { Info, Loader2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -182,7 +182,9 @@ function DisplayLink() {
       </div>
       <div className="w-full h-fit  flex flex-col md:flex-row items-start md:items-center justify-start gap-4 ">
         <div className=" px-2 py-3 text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] flex flex-row items-center justify-start border-[3px] focus:outline-none border-black">
-          <p className="shrink-0 text-base text-palette-text">vibeify.xyz/</p>
+          <p className="shrink-0 text-base text-palette-text">
+            vibeify.arinji.com/
+          </p>
           <input
             type="text"
             name="displayLink"

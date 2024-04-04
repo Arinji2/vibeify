@@ -1,11 +1,10 @@
 "use client";
-import { CreatePlaylistAction } from "@/actions/playlist/create";
 import { EditPlaylistAction } from "@/actions/playlist/edit";
 import { useToast } from "@/utils/useToast";
 import { PlaylistType, SyncType } from "@/utils/validations/playlists/types";
-import { Info, Loader2, X, XCircle } from "lucide-react";
+import { Info, Loader2, XCircle } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { useFormState } from "react-dom";
@@ -197,7 +196,9 @@ function DisplayLink({
       </div>
       <div className="w-full h-fit  flex flex-col md:flex-row items-start md:items-center justify-start gap-4 ">
         <div className=" px-2 py-3 text-base h-[40px] md:max-w-[250px] xl:max-w-[300px] flex flex-row items-center justify-start border-[3px] focus:outline-none border-black">
-          <p className="shrink-0 text-base text-palette-text">vibeify.xyz/</p>
+          <p className="shrink-0 text-base text-palette-text">
+            vibeify.arinji.com/
+          </p>
           <input
             type="text"
             defaultValue={playlistData.link}

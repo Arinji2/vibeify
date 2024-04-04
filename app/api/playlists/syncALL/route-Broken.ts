@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const playlists = await pb.collection("playlists").getFullList();
 
   playlists.forEach(async (playlist) => {
-    const res = await fetch(`https://vibeify.xyz/playlists/sync`, {
+    const res = await fetch(`https://vibeify.arinji.com/playlists/sync`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
