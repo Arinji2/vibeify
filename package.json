@@ -9,27 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@formkit/auto-animate": "^0.8.1",
+    "@formkit/auto-animate": "^0.8.2",
     "@plaiceholder/next": "^3.0.0",
     "@spotify/web-api-ts-sdk": "^1.2.0",
-    "lucide-react": "^0.364.0",
-    "next": "^14.1.4",
-    "pocketbase": "^0.21.1",
+    "lucide-react": "^0.436.0",
+    "next": "^14.2.6",
+    "pocketbase": "^0.21.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-intersection-observer": "^9.8.1",
-    "react-lottie-player": "^2.0.0",
+    "react-intersection-observer": "^9.13.0",
+    "react-lottie-player": "^2.1.0",
     "react-toastify": "^10.0.5",
-    "sharp": "^0.33.3",
-    "zod": "^3.22.4"
+    "sharp": "^0.33.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
+    "eslint": "^7.23.0",
+    "eslint-config-next": "14.2.6",
     "postcss": "^8",
     "tailwindcss": "^3",
     "typescript": "^5"
