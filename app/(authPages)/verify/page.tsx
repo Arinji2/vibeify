@@ -1,9 +1,8 @@
 export const dynamic = "force-dynamic";
-import { getModel } from "@/utils/getModel";
-import { SendEmailButton } from "./buttons";
-import Pocketbase, { getTokenPayload } from "pocketbase";
-import Link from "next/link";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import Pocketbase from "pocketbase";
+import { SendEmailButton } from "./buttons";
 import EmailText from "./emailText";
 export default async function Page({
   searchParams,
@@ -32,7 +31,7 @@ export default async function Page({
       </h1>
 
       <h2 className="text-center text-[20px] font-medium text-black">
-        Verify your email to start using Listify!
+        Verify your email to start using Vibeify!
       </h2>
       <div className="flex h-fit w-[90%] grow-0 flex-col items-center justify-center gap-2 p-3  md:w-[400px] md:flex-row xl:w-[550px]">
         <div className="h-full w-fit shrink-0">

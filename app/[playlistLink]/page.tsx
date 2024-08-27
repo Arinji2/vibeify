@@ -7,16 +7,15 @@ import {
 import { TrackType } from "@/utils/validations/playlists/themes";
 import { Metadata } from "next";
 import { unstable_cache } from "next/cache";
-import Pocketbase, { RecordModel } from "pocketbase";
+import { notFound } from "next/navigation";
+import Pocketbase from "pocketbase";
+import Footer from "../footer";
 import { CheckViews } from "./checkViews";
+import { TestModeComponent } from "./testMode";
 import { DefaultPage } from "./themes/default/server";
 import { NeoBrutalismPage } from "./themes/neo-brutalism/server";
 import { PixelPage } from "./themes/pixel/server";
 import { fetchTrackData } from "./utils";
-import WidthWrapper from "../(wrapper)/widthWrapper";
-import { TestModeComponent } from "./testMode";
-import Footer from "../footer";
-import { notFound, redirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -51,14 +50,14 @@ export async function generateMetadata({
       site: "Vibeify",
       description: `View ${parsedPlaylistData.display_name} made by ${parsedPlaylistData.created_by} on Vibeify`,
       images: [
-        `https://db-listify.arinji.com/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
+        `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
       ],
     },
 
     openGraph: {
       images: [
         {
-          url: `https://db-listify.arinji.com/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
+          url: `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/playlists/${parsedPlaylistData.id}/${parsedPlaylistData.image}`,
           width: 500,
           height: 500,
           alt: parsedPlaylistData.display_name,
