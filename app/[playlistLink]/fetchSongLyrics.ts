@@ -3,7 +3,7 @@
 export const getTrackLyrics = async (trackId: string) => {
   try {
     const res = await fetch(
-      `https://spotify-lyric-api-984e7b4face0.herokuapp.com/?trackid=${trackId}&format=lrc`,
+      `https://spotify-lyrics-api-tau.vercel.app?trackid=${trackId}&format=lrc`,
       {
         headers: {
           "Content-Type": "application/json",
