@@ -3,9 +3,10 @@
 import { TrackType } from "@/utils/validations/playlists/themes";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+import useImage from "@/utils/useImage";
 import { LyricsType } from "../../showLyrics";
 export function DefaultSongCard({
   track,
@@ -22,24 +23,7 @@ export function DefaultSongCard({
   setLocLoading: Dispatch<SetStateAction<boolean>>;
   locLoading: boolean;
 }) {
-  const [imageProps, setImageProps] = useState<{
-    height: number;
-    width: number;
-  }>({ height: 0, width: 0 });
-
-  const parentRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    function setDimensions() {
-      if (parentRef.current) {
-        const { height, width } = parentRef.current.getBoundingClientRect();
-        setImageProps({ height, width });
-      }
-    }
-    window.addEventListener("resize", setDimensions);
-    setDimensions();
-    return () => window.removeEventListener("resize", setDimensions);
-  }, [parentRef.current]);
+  const { imageProps, ref } = useImage<HTMLAnchorElement>();
   return (
     <div className="w-full md:w-fit h-fit relative">
       <button
@@ -75,7 +59,7 @@ export function DefaultSongCard({
         )}
       </button>
       <Link
-        ref={parentRef}
+        ref={ref}
         target="_blank"
         href={track.external_urls.spotify}
         className="w-full md:w-[390px] h-[450px] md:h-[600px] rounded-md flex flex-col   group items-start justify-end gap-1  bg-palette-text hover:shadow-[20px_20px_0_#43937F] shadow-[20px_20px_0_#43937F] relative overflow-hidden"

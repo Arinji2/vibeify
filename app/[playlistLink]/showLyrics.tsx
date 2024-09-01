@@ -1,12 +1,12 @@
 "use client";
-import * as React from "react";
-import { useCallback, useState, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { toast } from "react-toastify";
-import { getTrackLyrics } from "./fetchSongLyrics";
-import Image from "next/image";
-import WidthWrapper from "../(wrapper)/widthWrapper";
+import useImage from "@/utils/useImage";
 import { XSquare } from "lucide-react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { toast } from "react-toastify";
+import WidthWrapper from "../(wrapper)/widthWrapper";
+import { getTrackLyrics } from "./fetchSongLyrics";
 export type LyricsType = {
   theme: string;
   songName: string;
@@ -88,21 +88,25 @@ function DisplayTrack({
   songImage: string;
   setTrackIDState: Function;
 }) {
+  const { imageProps, ref } = useImage<HTMLDivElement>();
   return (
     <div
       className={`${
         showLyrics ? "translate-y-0 " : "-translate-y-full "
-      } transition-all fixed top-0 left-0 z-50 ease-in-out duration-500 w-full h-[100vh] bg-black`}
+      } transition-all fixed top-0 left-0 z-50 ease-in-out duration-500  w-full h-[100vh] bg-black`}
     >
-      <Image
-        src={songImage}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover  absolute "
-        alt="Song Image"
-        quality={100}
-      />
+      <div className="w-full h-[100svh] absolute " ref={ref}>
+        <LazyLoadImage
+          alt={"Album Cover"}
+          height={imageProps.height}
+          width={imageProps.width}
+          className=" object-center    max-w-none object-cover h-full"
+          sizes="(min-width: 768px) 600px, 450px"
+          src={songImage}
+          effect="blur"
+        />
+      </div>
+
       <div className="absolute w-full z-10 h-full bg-black bg-opacity-70 backdrop-blur-sm xl:backdrop-blur-0"></div>
 
       <div className="w-full h-full flex flex-col xl:flex-row items-center justify-end xl:justify-center gap-6">
