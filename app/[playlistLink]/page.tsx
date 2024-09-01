@@ -79,7 +79,7 @@ export default async function Page({
   try {
     data = await pb
       .collection("playlists")
-      .getFirstListItem(`link = "${playlistLink}"`);
+      .getFirstListItem(`link = "${playlistLink.toLowerCase()}"`);
   } catch (e) {
     notFound();
   }

@@ -3,9 +3,10 @@
 import { TrackType } from "@/utils/validations/playlists/themes";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { LyricsType } from "../../showLyrics";
-
 export function DefaultSongCard({
   track,
   setShowLyricsState,
@@ -21,6 +22,24 @@ export function DefaultSongCard({
   setLocLoading: Dispatch<SetStateAction<boolean>>;
   locLoading: boolean;
 }) {
+  const [imageProps, setImageProps] = useState<{
+    height: number;
+    width: number;
+  }>({ height: 0, width: 0 });
+
+  const parentRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    function setDimensions() {
+      if (parentRef.current) {
+        const { height, width } = parentRef.current.getBoundingClientRect();
+        setImageProps({ height, width });
+      }
+    }
+    window.addEventListener("resize", setDimensions);
+    setDimensions();
+    return () => window.removeEventListener("resize", setDimensions);
+  }, [parentRef.current]);
   return (
     <div className="w-full md:w-fit h-fit relative">
       <button
@@ -56,17 +75,21 @@ export function DefaultSongCard({
         )}
       </button>
       <Link
+        ref={parentRef}
         target="_blank"
         href={track.external_urls.spotify}
         className="w-full md:w-[390px] h-[450px] md:h-[600px] rounded-md flex flex-col   group items-start justify-end gap-1  bg-palette-text hover:shadow-[20px_20px_0_#43937F] shadow-[20px_20px_0_#43937F] relative overflow-hidden"
       >
-        <Image
-          src={track.album.images[0].url}
-          alt="Album Cover"
-          className="group-hover:animate-image-pan object-cover absolute group-hover:scale-110 transition-all ease-in-out duration-300 will-change-transform"
-          fill
+        <LazyLoadImage
+          alt={"Album Cover"}
+          height={imageProps.height}
+          width={imageProps.width}
+          className=" object-center   max-w-none object-cover h-full"
           sizes="(min-width: 768px) 600px, 450px"
+          src={track.album.images[0].url}
+          effect="blur"
         />
+
         <div className="w-full h-full bg-black bg-opacity-70 absolute z-10 top-0 left-0"></div>
         <div className="w-full h-fit backdrop-blur-sm z-10 absolute left-0 bottom-0 p-3 pb-6 flex flex-col items-start justify-start">
           <h4 className="text-palette-background font-bold text-[20px] md:text-[35px] z-20 text-left line-clamp-2">

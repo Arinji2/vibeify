@@ -3,7 +3,8 @@
 import { TrackType } from "@/utils/validations/playlists/themes";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { LyricsType } from "../../showLyrics";
 
 export function PixelSongCard({
@@ -21,6 +22,24 @@ export function PixelSongCard({
   setLocLoading: Dispatch<SetStateAction<boolean>>;
   locLoading: boolean;
 }) {
+  const [imageProps, setImageProps] = useState<{
+    height: number;
+    width: number;
+  }>({ height: 0, width: 0 });
+
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function setDimensions() {
+      if (parentRef.current) {
+        const { height, width } = parentRef.current.getBoundingClientRect();
+        setImageProps({ height, width });
+      }
+    }
+    window.addEventListener("resize", setDimensions);
+    setDimensions();
+    return () => window.removeEventListener("resize", setDimensions);
+  }, [parentRef.current]);
   return (
     <div className="w-full md:w-fit h-fit relative">
       <button
@@ -68,13 +87,18 @@ export function PixelSongCard({
             {track.album.artists.map((artist) => artist.name).join(", ")}
           </p>
         </div>
-        <div className="w-full h-full overflow-hidden border-black border-[5px] relative">
-          <Image
-            src={track.album.images[0].url}
-            alt="Album Cover"
-            className=" object-cover absolute group-hover:scale-110 transition-all ease-in-out duration-300 will-change-transform"
-            fill
+        <div
+          ref={parentRef}
+          className="w-full h-full overflow-hidden border-black border-[5px] relative"
+        >
+          <LazyLoadImage
+            alt={"Album Cover"}
+            height={imageProps.height}
+            width={imageProps.width}
+            className=" object-center   max-w-none object-cover h-full"
             sizes="(min-width: 768px) 600px, 450px"
+            src={track.album.images[0].url}
+            effect="blur"
           />
         </div>
       </Link>
