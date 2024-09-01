@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+
 import { LyricsType } from "../../showLyrics";
 export function DefaultSongCard({
   track,

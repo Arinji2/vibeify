@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import { unstable_cache } from "next/cache";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import Footer from "../footer";
 import { CheckViews } from "./checkViews";
 import { TestModeComponent } from "./testMode";
