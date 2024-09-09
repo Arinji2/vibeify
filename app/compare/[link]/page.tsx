@@ -1,10 +1,7 @@
 import Footer from "@/app/footer";
 import getSpotify from "@/utils/getSpotify";
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
-import {
-  ComparePlaylist,
-  PocketbaseCompareData,
-} from "@/utils/validations/products/compare/types";
+import { ComparePlaylist } from "@/utils/validations/products/compare/types";
 import { PlaylistedTrack } from "@spotify/web-api-ts-sdk";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
@@ -16,7 +13,7 @@ export async function generateMetadata({
   params: { link: string };
 }) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  let parsedData: PocketbaseCompareData;
+  let parsedData: any;
   try {
     const res = await pb
       .collection("compare")
@@ -45,7 +42,7 @@ export async function generateMetadata({
 }
 export default async function Page({ params }: { params: { link: string } }) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  let parsedData: PocketbaseCompareData;
+  let parsedData: any;
   try {
     const res = await pb
       .collection("compare")
