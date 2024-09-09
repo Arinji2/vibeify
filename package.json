@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,6 +12,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@plaiceholder/next": "^3.0.0",
     "@spotify/web-api-ts-sdk": "^1.2.0",
+    "eventsource": "^2.0.2",
     "lucide-react": "^0.439.0",
     "next": "^14.2.8",
     "pocketbase": "^0.21.5",
@@ -25,7 +26,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/eventsource": "^1.1.15",
     "@types/node": "^22",
+    "@types/prop-types": "^15.7.12",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-lazy-load-image-component": "^1.6.4",
