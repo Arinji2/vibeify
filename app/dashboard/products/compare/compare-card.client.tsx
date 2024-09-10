@@ -3,6 +3,7 @@
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
 import { CompareSchemaType } from "@/utils/validations/products/compare/types";
 import { Check, Loader2, X } from "lucide-react";
+import Link from "next/link";
 import Pocketbase from "pocketbase";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
@@ -82,9 +83,12 @@ export function CompareCardClient({
       </div>
       {compareDataState.results ? (
         <div className="w-full h-fit flex flex-row items-center justify-between gap-2 mt-auto">
-          <button className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center">
+          <Link
+            href={`/dashboard/products/compare/view/${compareDataState.id}`}
+            className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center"
+          >
             <p className="text-[15px] text-black font-medium">View</p>
-          </button>
+          </Link>
           <button className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-error border-black  flex flex-row gap-2 items-center justify-center">
             <p className="text-[15px] text-white font-medium">Delete</p>
           </button>
