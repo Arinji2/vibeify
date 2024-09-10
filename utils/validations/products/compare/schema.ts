@@ -7,23 +7,22 @@ import z from "zod";
 //   spotifyLink2: z.string(),
 // });
 
-
 export const CompareResultsSchema = z.object({
-  common: z.array(z.string()),
+  common: z
+    .null()
+    .or(z.array(z.string()))
+    .transform((val) => val || []),
   missingIn1: z.array(z.string()),
   missingIn2: z.array(z.string()),
 });
 
-
 export const CompareSchema = z.object({
-  id : z.string(),
+  id: z.string(),
   user: z.string(),
- playlist1: z.string(),
- playlist2: z.string(),
- shareLink: z.string(),
- results: CompareResultsSchema.or(z.literal(null)),
-
+  playlist1: z.string(),
+  playlist2: z.string(),
+  shareLink: z.string(),
+  results: CompareResultsSchema.or(z.literal(null)),
 });
-
 
 export const CompareListSchema = z.array(CompareSchema);

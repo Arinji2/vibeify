@@ -1,9 +1,11 @@
+export const dynamic = "force-dynamic";
 import getSpotify from "@/utils/getSpotify";
 import { getToken } from "@/utils/getToken";
 import { CompareListSchema } from "@/utils/validations/products/compare/schema";
 import { CompareSchemaType } from "@/utils/validations/products/compare/types";
 import eventsource from "eventsource";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 import Pocketbase from "pocketbase";
 import React, { Suspense } from "react";
 import { CompareCardClient } from "./compare-card.client";
@@ -28,10 +30,16 @@ export default async function Page() {
 
   if (!parsedCompareRecords.success) throw new Error("Invalid Compare Data");
   return (
-    <div className="w-full gap-14 min-h-excludeNav bg-palette-background border-[3px] border-t-0 py-3 pb-6 border-black rounded-sm flex flex-col items-center justify-center">
+    <div className="w-full gap-14 min-h-excludeMobNav md:min-h-excludeNav bg-palette-background border-[3px] border-t-0 py-3 pb-6 border-black rounded-sm flex flex-col items-center justify-center">
       <h1 className="font-bold text-5xl md:text-6xl pt-3 text-black  text-center">
         Saved Comparisons
       </h1>
+      <Link
+        href="/dashboard/products/compare/setup"
+        className="px-4 md:px-6 rounded-lg py-2 text-xs md:text-lg font-medium shadow-buttonHover border-[3px] bg-palette-accent text-white border-black  flex flex-row gap-2 items-center justify-center"
+      >
+        Start New Comparison
+      </Link>
       <div className="mt-auto w-full flex flex-wrap flex-row items-center justify-center gap-10 h-fit px-4">
         {parsedCompareRecords.data.map((compareData) => {
           const selectedColor =

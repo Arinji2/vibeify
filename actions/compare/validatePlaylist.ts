@@ -13,10 +13,10 @@ export default async function ValidatePlaylistAction(playlistLink: string) {
     return { message: "Invalid Spotify Link", status: 400 };
   }
 
-  if (data.tracks.total > 200) {
+  if (data.tracks.total > 400) {
     return {
       message:
-        "Playlist is too big, Maximum Songs for new playlists can only be 200 tracks. ",
+        "Playlist is too big, Maximum Songs for playlists can only be 400 tracks. ",
       status: 400,
     };
   }
