@@ -1,10 +1,12 @@
 "use client";
 
+import { DeleteCompareAction } from "@/actions/compare/deleteCompare";
 import ShareCompareModal from "@/app/(models)/shareCompareModal";
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
 import { CompareSchemaType } from "@/utils/validations/products/compare/types";
 import { Check, Loader2, X } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Pocketbase from "pocketbase";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
@@ -19,6 +21,7 @@ export function CompareCardClient({
   const [compareDataState, setCompareDataState] = useState(compareData);
   const [matchString, setMatchString] = useState("-");
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -61,6 +64,7 @@ export function CompareCardClient({
       ) + "%"
     );
   }, [compareDataState]);
+  const router = useRouter();
 
   return (
     <>
@@ -94,8 +98,30 @@ export function CompareCardClient({
           >
             <p className="text-[15px] text-black font-medium">View</p>
           </Link>
-          <button className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-error border-black  flex flex-row gap-2 items-center justify-center">
-            <p className="text-[15px] text-white font-medium">Delete</p>
+          <button
+            disabled={loading}
+            onClick={async () => {
+              setLoading(true);
+              const res = await DeleteCompareAction({
+                id: compareDataState.id,
+              });
+              if (res.success) {
+                router.refresh();
+                toast.success("Compare Deleted");
+                window.location.reload();
+              } else {
+                toast.error(res.message);
+              }
+
+              setLoading(false);
+            }}
+            className="px-4 md:px-6 rounded-lg py-2 md:w-[101px] md:h-[46px] h-[43px] w-[85px] border-[3px] bg-palette-error border-black  flex flex-row gap-2 items-center justify-center"
+          >
+            {loading ? (
+              <Loader2 className="animate-spin size-[15px]" />
+            ) : (
+              <p className="text-[15px] text-white font-medium">Delete</p>
+            )}
           </button>
           <button
             onClick={() => {
