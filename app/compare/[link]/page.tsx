@@ -1,101 +1,109 @@
+import WidthWrapper from "@/app/(wrapper)/widthWrapper";
+import {
+  LoaderSongSection,
+  SongSection,
+} from "@/app/dashboard/products/compare/view/[compareID]/song-section";
 import Footer from "@/app/footer";
 import getSpotify from "@/utils/getSpotify";
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
-import { ComparePlaylist } from "@/utils/validations/products/compare/types";
-import { PlaylistedTrack } from "@spotify/web-api-ts-sdk";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
-import Results from "./results";
+import { Suspense } from "react";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
-export async function generateMetadata({
+export default async function Page({
   params,
 }: {
-  params: { link: string };
+  params: { link: string | undefined };
 }) {
-  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  let parsedData: any;
+  const pocketbase = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   try {
-    const res = await pb
-      .collection("compare")
-      .getFirstListItem(`link = "${params.link}"`);
-
-    const data = CompareSchema.parse(res);
-    parsedData = data;
+    const data = await pocketbase
+      .collection("compareList")
+      .getFirstListItem(`shareLink = "${params.link}"`);
   } catch (e) {
     notFound();
   }
-  let spotify, track1, track2;
 
-  try {
-    spotify = await getSpotify();
+  const data = await pocketbase
+    .collection("compareList")
+    .getFirstListItem(`shareLink = "${params.link}"`);
 
-    track1 = await spotify.playlists.getPlaylist(parsedData.spotifyLink1);
-
-    track2 = await spotify.playlists.getPlaylist(parsedData.spotifyLink2);
-  } catch (e) {
-    notFound();
-  }
-  return {
-    title: "Vibeify - Compare Results",
-    description: `View the results of comparing ${track1.name} and ${track2.name} on Vibeify`,
-  };
-}
-export default async function Page({ params }: { params: { link: string } }) {
-  const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  let parsedData: any;
-  try {
-    const res = await pb
-      .collection("compare")
-      .getFirstListItem(`link = "${params.link}"`);
-
-    const data = CompareSchema.parse(res);
-    parsedData = data;
-  } catch (e) {
-    notFound();
-  }
+  const parsedCompareData = CompareSchema.safeParse(data);
+  if (!parsedCompareData.success) notFound();
 
   const spotify = await getSpotify();
 
-  const track1 = await spotify.playlists.getPlaylist(parsedData.spotifyLink1);
+  const playlist1 = await spotify.playlists.getPlaylist(
+    parsedCompareData.data.playlist1
+  );
 
-  const track2 = await spotify.playlists.getPlaylist(parsedData.spotifyLink2);
+  const playlist2 = await spotify.playlists.getPlaylist(
+    parsedCompareData.data.playlist2
+  );
 
-  function getImage(item: PlaylistedTrack) {
-    //@ts-expect-error
-    if (item.track.album.images[0] === undefined) return "";
-    //@ts-expect-error
-    else return item.track.album.images[0].url;
-  }
-
-  let formattedPlaylist1 = track1.tracks.items.map((item) => ({
-    id: item.track.id,
-    name: item.track.name,
-    image: getImage(item),
-    link: item.track.external_urls.spotify,
-  })) as ComparePlaylist[];
-
-  formattedPlaylist1 = formattedPlaylist1.filter((item) => item.name !== "");
-  let formattedPlaylist2 = track2.tracks.items.map((item) => ({
-    id: item.track.id,
-    name: item.track.name,
-    image: getImage(item),
-    link: item.track.external_urls.spotify,
-  })) as ComparePlaylist[];
-
-  formattedPlaylist2 = formattedPlaylist2.filter((item) => item.name !== "");
+  if (!parsedCompareData.data.results) notFound();
 
   return (
-    <section className="w-full md:min-h-excludeNav h-full bg-palette-accent flex flex-col items-center justify-center gap-4 py-2">
-      <h1 className="text-white font-bold md:text-[60px] text-[55px] text-center">
-        COMPARE RESULTS
-      </h1>
-      <Results
-        urlParams={params.link}
-        playlist1={formattedPlaylist1}
-        playlist2={formattedPlaylist2}
-      />
-
-      <Footer />
-    </section>
+    <>
+      <div className="w-full min-h-excludeNav rounded-sm bg-palette-background flex flex-col items-center justify-start py-4 gap-14 border-[3px] border-t-0  pb-6 border-black ">
+        <WidthWrapper>
+          <div className="w-full h-fit flex flex-col items-center justify-center gap-4">
+            <h1 className="text-black font-bold md:text-[40px] text-[20px] text-center line-clamp-2">
+              COMPARE RESULTS
+            </h1>
+            <div className="w-fit max-w-[80%] xl:max-w-[55%] h-fit relative ">
+              <p className="text-palette-accent font-bold md:text-[20px] text-[15px] text-center line-clamp-1">
+                Comparing {playlist1.name} and {playlist2.name}
+              </p>
+            </div>
+            <div className="w-full h-fit flex flex-col items-center justify-start gap-10">
+              <Suspense
+                fallback={
+                  <LoaderSongSection
+                    isCommon
+                    playlist={playlist1}
+                    compareData={parsedCompareData.data.results.common}
+                  />
+                }
+              >
+                <SongSection
+                  isCommon
+                  playlist={playlist1}
+                  compareData={parsedCompareData.data.results.common}
+                />
+              </Suspense>
+              <Suspense
+                fallback={
+                  <LoaderSongSection
+                    playlist={playlist1}
+                    compareData={parsedCompareData.data.results.missingIn1}
+                  />
+                }
+              >
+                <SongSection
+                  playlist={playlist1}
+                  compareData={parsedCompareData.data.results.missingIn1}
+                />
+              </Suspense>
+              <Suspense
+                fallback={
+                  <LoaderSongSection
+                    playlist={playlist2}
+                    compareData={parsedCompareData.data.results.missingIn2}
+                  />
+                }
+              >
+                <SongSection
+                  playlist={playlist2}
+                  compareData={parsedCompareData.data.results.missingIn2}
+                />
+              </Suspense>
+            </div>
+          </div>
+        </WidthWrapper>
+      </div>
+      <Footer full />
+    </>
   );
 }

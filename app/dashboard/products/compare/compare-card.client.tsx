@@ -1,5 +1,6 @@
 "use client";
 
+import ShareCompareModal from "@/app/(models)/shareCompareModal";
 import { CompareSchema } from "@/utils/validations/products/compare/schema";
 import { CompareSchemaType } from "@/utils/validations/products/compare/types";
 import { Check, Loader2, X } from "lucide-react";
@@ -17,6 +18,7 @@ export function CompareCardClient({
 }) {
   const [compareDataState, setCompareDataState] = useState(compareData);
   const [matchString, setMatchString] = useState("-");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -62,6 +64,9 @@ export function CompareCardClient({
 
   return (
     <>
+      {showModal && (
+        <ShareCompareModal id={compareData.id} setIsOpen={setShowModal} />
+      )}
       <div className="w-full h-[60px] bg-palette-background rounded-lg border-[2px] border-black flex flex-row items-center  justify-center gap-2">
         <div className="w-full h-full flex flex-row items-center justify-center gap-3">
           <p className="font-medium text-[18px] text-black">Public:</p>
@@ -92,7 +97,19 @@ export function CompareCardClient({
           <button className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-error border-black  flex flex-row gap-2 items-center justify-center">
             <p className="text-[15px] text-white font-medium">Delete</p>
           </button>
-          <button className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center">
+          <button
+            onClick={() => {
+              if (compareDataState.shareLink.length === 0) {
+                setShowModal(!showModal);
+                return;
+              }
+              let link =
+                window.location.host + "/compare/" + compareDataState.shareLink;
+              window.navigator.clipboard.writeText(link);
+              toast.success("Link copied to clipboard");
+            }}
+            className="px-4 md:px-6 rounded-lg py-2  border-[3px] bg-palette-tertiary border-black  flex flex-row gap-2 items-center justify-center"
+          >
             <p className="text-[15px] text-black font-medium">Share</p>
           </button>
         </div>

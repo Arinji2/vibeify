@@ -1,16 +1,15 @@
 "use client";
+import { ShareCompareAction } from "@/actions/compare/shareCompare";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function ShareCompareModal({
-  playlistID1,
-  playlistID2,
+  id,
   setIsOpen,
 }: {
-  playlistID1: string;
-  playlistID2: string;
+  id: string;
   setIsOpen: Function;
 }) {
   const [loading, setLoading] = useState(false);
@@ -45,26 +44,20 @@ export default function ShareCompareModal({
             disabled={link.length === 0 || loading}
             onClick={async () => {
               setLoading(true);
-              const res = await fetch("/api/compare/share", {
-                method: "POST",
-                body: JSON.stringify({
-                  link: link,
-                  id1: playlistID1,
-                  id2: playlistID2,
-                }),
-                headers: {
-                  "Content-Type": "application/json",
-                },
+              const response = await ShareCompareAction({
+                id: id,
+                link: link,
               });
-
-              if (res.status === 409) toast.error("Link already taken");
-              else if (res.status === 200) {
+              if (response.success) {
                 toast.success("Link shared successfully");
-
                 window.open(`/compare/${link}`, "_blank");
-              } else toast.error("Something went wrong");
+              } else {
+                toast.error(response.message);
+              }
+
               setLoading(false);
               setIsOpen(false);
+              setLink("");
             }}
             className="w-[180px] h-[70px] disabled:bg-slate-500 bg-palette-success  border-[4px] border-black shadow-button hover:shadow-buttonHover transition-all ease-in-out duration-300 will-change-transform hover:scale-95 flex flex-col items-center justify-center "
           >
