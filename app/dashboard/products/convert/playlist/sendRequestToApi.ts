@@ -16,7 +16,7 @@ export default async function sendRequestToApi({
     genres: lowercaseGenres,
   };
 
-  const res = await fetch("https://api.arinji.com/vibeify/addTask", {
+  const res = await fetch("https://api-vibeify.arinji.com/addTask", {
     body: JSON.stringify(body),
     method: "POST",
     headers: {
@@ -25,7 +25,5 @@ export default async function sendRequestToApi({
     cache: "no-cache",
   });
 
-  const data = await res.json();
-  if (res.status !== 200) throw new Error(data.message);
-  return data;
+  if (res.status !== 200) throw new Error(res.statusText);
 }

@@ -76,7 +76,6 @@ export async function AddToCompare({
     if (res) return { success: true, message: "Compare Deleted", status: 200 };
     return { success: false, message: "Compare Not Deleted", status: 400 };
   } catch (e) {
-    console.log(e);
     return { success: false, message: "Compare Not Deleted", status: 400 };
   }
 }

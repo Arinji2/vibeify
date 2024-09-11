@@ -31,7 +31,6 @@ export async function ShareCompareAction({
 
     return { success: true, message: "Compare Shared", status: 200 };
   } catch (e) {
-    console.log(e);
     return { success: false, message: "Compare Not Shared", status: 400 };
   }
 }

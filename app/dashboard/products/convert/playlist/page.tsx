@@ -58,7 +58,7 @@ export default async function Page({
       <h1 className="font-bold text-[30px] md:text-[50px]">
         SELECT A PLAYLIST
       </h1>
-      <div className="w-full md:h-[calc(100%-200px)] h-[calc(100%-400px)] flex flex-col items-center justify-start overflow-y-auto">
+      <div className="w-full md:h-[calc(100%-200px)] h-[calc(100%-400px)] flex flex-col items-center justify-start overflow-y-auto no-scrollbar">
         <PlaylistSelector
           token={token}
           playlists={playlistData}

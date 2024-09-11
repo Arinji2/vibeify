@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { PlaylistImage } from "../../compare/setup/playlist-card.client";
 import sendRequestToApi from "./sendRequestToApi";
 export default function PlaylistSelector({
   genres,
@@ -23,21 +24,39 @@ export default function PlaylistSelector({
   const router = useRouter();
   return (
     <>
-      <div className="w-full h-fit  flex flex-row items-center justify-evenly flex-wrap gap-6 gap-x-4 mt-7">
+      <div className="w-full h-fit  grid md:grid-cols-2 grid-cols-1 gap-4 mt-7">
         {playlists.map((playlist) => (
-          <button
+          <div
             key={playlist.id}
-            onClick={() => setSelectedPlaylist(playlist)}
-            className={`${
-              selectedPlaylist?.id === playlist.id
-                ? " bg-[#A6FAFF] "
-                : " bg-palette-background "
-            } shadow-button w-full  border-[5px] p-3 hover:shadow-buttonHover border-black flex flex-col items-start justify-center md:w-[400px] h-[100px]`}
+            className="w-full max-w-[600px] gap-4 px-4 py-4 border-[3px] bg-palette-background rounded-lg flex flex-row items-center justify-between border-black shadow-button h-[150px]"
           >
-            <p className="text-palette-text w-full truncate text-left text-[20px] font-medium">
-              {playlist.name}
-            </p>
-          </button>
+            <PlaylistImage image={playlist.image} recordID={playlist.id!} />
+            <div className="w-fit h-fit flex flex-col items-end justify-center gap-5">
+              <h2 className="text-xl md:text-3xl font-medium text-palette-text line-clamp-1">
+                {playlist.name}
+              </h2>
+              <div className="w-fit h-fit flex flex-row items-center justify-end gap-4">
+                <button
+                  onClick={() => setSelectedPlaylist(playlist)}
+                  className={`${
+                    selectedPlaylist?.id === playlist.id
+                      ? " bg-blue-500 "
+                      : " bg-gray-600 "
+                  } px-4 md:px-6 w-[73px] md:w-[95px] rounded-lg py-2 text-xs md:text-sm shadow-buttonHover border-[3px]  border-black  flex flex-row gap-2 items-center justify-center`}
+                >
+                  Select
+                </button>
+
+                <Link
+                  href={playlist.spotify_link}
+                  target="_blank"
+                  className="px-4 md:px-6 whitespace-nowrap rounded-lg py-2 text-xs md:text-sm shadow-buttonHover border-[3px] bg-palette-accent border-black  flex flex-row gap-2 items-center justify-center"
+                >
+                  View In Spotify
+                </Link>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
       <div
