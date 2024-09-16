@@ -42,7 +42,6 @@ export function Form() {
         <DisplayLink />
         <DisplayPicture />
         <div className="w-full h-fit flex flex-row items-center justify-start mt-3 gap-5">
-          <WeeklySync />
           <PublicPlaylist />
         </div>
         <SubmitButton />
@@ -320,29 +319,6 @@ function DisplayPicture() {
   );
 }
 
-function WeeklySync() {
-  const [sync, setSync] = useState(false);
-  return (
-    <div className="w-fit md:w-[184px] xl:w-[135px] h-[40px] flex flex-row items-center gap-2 justify-start ">
-      <p className="text-black text-[15px] font-medium shrink-0">
-        Weekly <br /> Sync
-      </p>
-      <input type="hidden" name="weeklySync" value={sync === true ? 1 : 0} />
-      <div
-        onClick={() => setSync(!sync)}
-        className="w-[60px] h-[30px] border-[3px] hover:cursor-pointer border-black rounded-3xl flex overflow-hidden group flex-col items-center justify-start relative"
-      >
-        <div
-          className={`${
-            sync
-              ? "bg-palette-success translate-x-[50%] "
-              : "bg-palette-error -translate-x-[50%] "
-          }bg-palette-error w-[40px] h-[25px] rounded-3xl transition-all ease-in-out duration-300   absolute`}
-        ></div>
-      </div>
-    </div>
-  );
-}
 function PublicPlaylist() {
   const [sync, setSync] = useState(false);
   return (

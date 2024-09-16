@@ -49,14 +49,6 @@ export async function POST(request: NextRequest) {
         { status: 403, headers: { "content-type": "application/json" } }
       );
 
-    if (runWeekly) {
-      if (!syncData.data.weeklySync)
-        return NextResponse.json(
-          { success: false, message: "Weekly Sync Forbidden" },
-          { status: 404, headers: { "content-type": "application/json" } }
-        );
-    }
-
     const date = new Date();
     const syncedDate = new Date(syncData.data.updated);
     const diff = Math.abs(date.getTime() - syncedDate.getTime());

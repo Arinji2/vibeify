@@ -1,17 +1,9 @@
-import { dateToReadable } from "@/utils/getDate";
 import getSpotify from "@/utils/getSpotify";
-import { SyncSchema, ViewsSchema } from "@/utils/validations/playlists/schema";
-import {
-  PlaylistType,
-  SyncType,
-  ViewType,
-} from "@/utils/validations/playlists/types";
-import { notFound } from "next/navigation";
-import Pocketbase from "pocketbase";
-import { DeleteButton, SyncButton, Visibility, WeeklySync } from "./components";
-import Link from "next/link";
-import { getSync, getViews } from "@/utils/getUserData";
+import { getViews } from "@/utils/getUserData";
+import { PlaylistType } from "@/utils/validations/playlists/types";
 import { CheckSquare, XSquare } from "lucide-react";
+import Link from "next/link";
+import { DeleteButton, SyncButton } from "./components";
 
 export default async function Stats({
   token,
@@ -22,7 +14,6 @@ export default async function Stats({
   playlistID: string;
   playlistData: PlaylistType;
 }) {
-  let syncData = await getSync(token, playlistID);
   const viewData = await getViews(token, playlistID);
 
   const api = await getSpotify();
@@ -56,14 +47,7 @@ export default async function Stats({
             {viewData.length}
           </p>
         </div>
-        <div className="w-full h-fit flex flex-row items-center justify-start gap-2">
-          <p className="text-palette-text font-medium truncate text-xl">
-            Last Synced:
-          </p>
-          <p className="text-palette-accent font-medium truncate text-xl">
-            {dateToReadable(syncData.updated)}
-          </p>
-        </div>
+
         <div className="w-full h-fit flex flex-row items-center justify-start gap-2">
           <p className="text-palette-text font-medium truncate text-xl">
             Link:
@@ -85,16 +69,7 @@ export default async function Stats({
             />
           </div>
         </div>
-        <div className="w-full h-fit flex flex-row items-center justify-start gap-2">
-          <p className="text-palette-text font-medium truncate text-xl">
-            Weekly Sync:
-          </p>
-          {syncData.weeklySync ? (
-            <CheckSquare className="w-[30px] h-[30px] text-palette-accent" />
-          ) : (
-            <XSquare className="w-[30px] h-[30px] text-palette-error" />
-          )}
-        </div>
+
         <div className="w-full h-fit flex flex-row items-center justify-start gap-2">
           <p className="text-palette-text font-medium truncate text-xl">
             Public:

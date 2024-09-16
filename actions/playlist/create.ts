@@ -31,7 +31,6 @@ export async function CreatePlaylistAction(
     displayNameSync: formData.get("displayNameSync") === "1" ? true : false,
     displayPictureSync:
       formData.get("displayPictureSync") === "1" ? true : false,
-    weeklySync: formData.get("weeklySync") === "1" ? true : false,
     playlist: "",
   } as SyncType;
 

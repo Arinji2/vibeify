@@ -2,30 +2,10 @@
 import DeletePlaylistModel from "@/app/(models)/deletePlaylistModel";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import * as React from "react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
 import { toast } from "react-toastify";
-
-export function WeeklySync() {
-  const [sync, setSync] = useState(false);
-
-  return (
-    <div
-      onClick={() => setSync(!sync)}
-      className="w-[60px] h-[25px] border-[3px] hover:cursor-pointer border-black rounded-3xl flex overflow-hidden group flex-col items-center justify-start relative"
-    >
-      <div
-        className={`${
-          sync
-            ? "bg-palette-success translate-x-[50%] "
-            : "bg-palette-error -translate-x-[50%] "
-        }bg-palette-error w-[40px] h-[20px] rounded-3xl transition-all ease-in-out duration-300   absolute`}
-      ></div>
-    </div>
-  );
-}
 
 export function Visibility() {
   const [visibilityState, setVisibilityState] = useState(false);

@@ -44,7 +44,7 @@ export const CreatePlaylistSchema = z.object({
     .any()
     .refine((files) => files?.length == 1, "File is required."),
   displayPictureSync: z.number().min(0).max(1),
-  weeklySync: z.number().min(0).max(1),
+
   publicPlaylist: z.number().min(0).max(1),
 });
 
@@ -67,7 +67,6 @@ export const SyncSchema = z.object({
   displayNameSync: z.boolean(),
   displayLinkSync: z.boolean(),
   displayPictureSync: z.boolean(),
-  weeklySync: z.boolean(),
   playlist: z.string(),
   updated: z.string(),
 });
