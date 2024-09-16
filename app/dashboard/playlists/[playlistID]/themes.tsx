@@ -36,7 +36,9 @@ export default function Themes({
           <ChevronLeft className="w-[40px] h-[40px]  text-black" />
         </button>
         <div className="w-full h-[55%] flex flex-col items-center justify-end">
-          <p className="text-black text-4xl font-bold">{theme.toUpperCase()}</p>
+          <p className="text-black text-2xl md:text-4xl font-bold">
+            {theme.toUpperCase()}
+          </p>
         </div>
         <div className="w-full h-[45%] flex flex-row items-center justify-center flex-wrap gap-3 ">
           <Link
