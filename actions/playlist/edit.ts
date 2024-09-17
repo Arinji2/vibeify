@@ -25,7 +25,7 @@ export async function EditPlaylistAction(
     let playlistFormData = {
       spotify_link: formData.get("spotifyLink") as string,
       name: formData.get("privateName") as string,
-      link: formData.get("displayLink") as string,
+      link: (formData.get("displayLink") as string).toLowerCase(),
       display_name: formData.get("displayName") as string,
       public: formData.get("publicPlaylist") === "1" ? true : false,
 
@@ -68,6 +68,7 @@ export async function EditPlaylistAction(
           "Content-Type": "image/png",
         },
       }).then((res) => res.blob());
+
       const blob = new Blob([fileData], { type: "image/png" });
 
       formData.append("image", blob, `${data.id}.png`);
@@ -76,6 +77,13 @@ export async function EditPlaylistAction(
 
     pb.authStore.save(token);
     await pb.collection("users").authRefresh();
+
+    const linkRecords = await pb.collection("playlists").getFullList({
+      filter: `link = "${playlistFormData.link}"`,
+    });
+
+    if (linkRecords.length > 0)
+      return { message: "Link already exists", status: 400 };
 
     let prevSyncData: SyncType;
 

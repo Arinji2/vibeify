@@ -4,6 +4,7 @@ import { useToast } from "@/utils/useToast";
 import { PlaylistType, SyncType } from "@/utils/validations/playlists/types";
 import { Info, Loader2, XCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -29,6 +30,7 @@ export function Form({
     successRoute: `/dashboard/playlists/${playlistData.id}`,
   });
 
+  const router = useRouter();
   return (
     <form
       action={action}
@@ -51,7 +53,18 @@ export function Form({
         <div className="w-full h-fit flex flex-row items-center justify-start mt-3 gap-5">
           <PublicPlaylist playlistData={playlistData} />
         </div>
-        <SubmitButton />
+        <div className="w-full h-fit flex flex-row items-center justify-start mt-3 gap-5">
+          <SubmitButton />
+          <button
+            type="button"
+            onClick={() => {
+              router.back();
+            }}
+            className="px-4 py-2 shadow-button hover:shadow-buttonHover border-[3px] bg-palette-primary border-black  flex flex-row gap-2 items-center justify-center"
+          >
+            <p className="text-[15px] text-black font-medium">Go Back</p>
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -201,6 +214,10 @@ function DisplayLink({
           <input
             type="text"
             defaultValue={playlistData.link}
+            onChange={(e) => {
+              e.target.value = e.target.value.toLowerCase();
+              return true;
+            }}
             name="displayLink"
             className="w-full z-30 bg-palette-background text-palette-text focus:outline-none"
           />

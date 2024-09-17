@@ -4,7 +4,7 @@ import { REGEX } from "@/utils/regex";
 import { useToast } from "@/utils/useToast";
 import { Info, Loader2, XCircle } from "lucide-react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -23,6 +23,8 @@ export function Form() {
     successMessage: "Playlist Created",
     successRoute: "/dashboard/playlists",
   });
+
+  const router = useRouter();
 
   return (
     <form
@@ -44,7 +46,18 @@ export function Form() {
         <div className="w-full h-fit flex flex-row items-center justify-start mt-3 gap-5">
           <PublicPlaylist />
         </div>
-        <SubmitButton />
+        <div className="w-full h-fit flex flex-row items-center justify-start mt-3 gap-5">
+          <SubmitButton />
+          <button
+            type="button"
+            onClick={() => {
+              router.back();
+            }}
+            className="px-4 py-2 shadow-button hover:shadow-buttonHover border-[3px] bg-palette-primary border-black  flex flex-row gap-2 items-center justify-center"
+          >
+            <p className="text-[15px] text-black font-medium">Go Back</p>
+          </button>
+        </div>
       </div>
     </form>
   );

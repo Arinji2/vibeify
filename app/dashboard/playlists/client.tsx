@@ -101,6 +101,7 @@ export function LocalstorageChecker() {
 
         if (url) {
           router.push(`/dashboard/playlists/create?signUp=${url}`);
+          window.localStorage.removeItem("signUpPlaylist");
           router.refresh();
         }
       }

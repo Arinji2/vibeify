@@ -18,7 +18,7 @@ export async function CreatePlaylistAction(
   let playlistFormData = {
     spotify_link: formData.get("spotifyLink") as string,
     name: formData.get("privateName") as string,
-    link: formData.get("displayLink") as string,
+    link: (formData.get("displayLink") as string).toLowerCase(),
     display_name: formData.get("displayName") as string,
     public: formData.get("publicPlaylist") === "1" ? true : false,
     image: formData.get("displayPicture"),
