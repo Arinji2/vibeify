@@ -14,7 +14,7 @@ export function CardImage({
   return (
     <div
       ref={ref}
-      className="w-full h-full rounded-md overflow-hidden border-[4px] border-black shadow-button"
+      className="w-full h-[250px] xl:h-full rounded-md overflow-hidden border-[4px] border-black shadow-button"
     >
       <LazyLoadImage
         alt={"Album Cover"}

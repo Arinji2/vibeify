@@ -51,6 +51,7 @@ export async function CuratedPlaylists() {
   )();
 
   const spotify = await getSpotify();
+  const allPlaylists = formattedData.flat();
 
   return (
     <section className="flex h-fit w-full flex-col  items-center justify-center bg-palette-accent py-10">
@@ -65,11 +66,11 @@ export async function CuratedPlaylists() {
               own unique theme and style.
             </p>
           </div>
-          <div className="w-full h-full flex flex-row items-center justify-start overflow-x-scroll small-scrollbar py-4 gap-10 xl:snap-x xl:snap-mandatory no">
+          <div className="xl:flex hidden w-full h-full  flex-row items-start justify-start overflow-x-scroll small-scrollbar py-4 gap-10 snap-x snap-mandatory ">
             {formattedData.map((playlists, index) => (
               <div
                 key={index}
-                className="w-fit xl:w-full shrink-0 h-fit flex flex-row items-center xl:justify-between xl:px-2 justify-start xl:flex-wrap gap-10 snap-center"
+                className="w-full  shrink-0 h-fit flex flex-row items-center justify-between px-2 xl:flex-wrap gap-10 snap-center"
               >
                 {playlists.map((item) => (
                   <PlaylistCard
@@ -80,6 +81,16 @@ export async function CuratedPlaylists() {
                   />
                 ))}
               </div>
+            ))}
+          </div>
+          <div className="xl:hidden flex w-full h-full  flex-row items-center justify-start overflow-x-scroll no-scrollbar py-4 gap-10 snap-x snap-proximity ">
+            {allPlaylists.map((item) => (
+              <PlaylistCard
+                playlist={item}
+                key={item.id}
+                pbClient={pb}
+                spotifyClient={spotify}
+              />
             ))}
           </div>
         </div>
@@ -129,7 +140,7 @@ async function PlaylistCard({
     <Link
       href={`/${playlist.link}`}
       target="_blank"
-      className="flex flex-row shrink-0 items-center justify-center p-4 gap-8 bg-palette-background border-[4px] border-black rounded-[10px] w-[560px] shadow-button h-[230px]"
+      className="flex snap-center xl:snap-align-none flex-col xl:flex-row shrink-0 items-center justify-center p-4 gap-8 bg-palette-background border-[4px] border-black rounded-[10px] w-[80%] md:w-[560px] shadow-button h-[400px] xl:h-[230px]"
     >
       <div className="w-[90%] h-full flex flex-col items-start justify-start gap-2">
         <h3 className="text-[25px] font-medium text-black line-clamp-2 text-left h-[75px]">
@@ -142,7 +153,7 @@ async function PlaylistCard({
               fill="#C1DCC9"
               strokeWidth={2}
             />
-            <p className="text-palette-text text-xl font-bold">
+            <p className="text-palette-text text-base xl:text-xl font-bold">
               {likesFormat(spotifyData.followers.total)}
             </p>
           </div>
@@ -152,7 +163,7 @@ async function PlaylistCard({
               fill="#C1DCC9"
               strokeWidth={2}
             />
-            <p className="text-palette-text text-xl font-bold">
+            <p className="text-palette-text text-base xl:text-xl font-bold">
               {viewData.length}
             </p>
           </div>{" "}
@@ -163,18 +174,18 @@ async function PlaylistCard({
               strokeWidth={2}
             />
 
-            <p className="text-palette-text text-xl font-bold">
+            <p className="text-palette-text text-base xl:text-xl font-bold">
               {spotifyData.tracks.total}
             </p>
           </div>
         </div>
-        <p className="text-palette-text text-lg">
+        <p className="text-palette-text text-base xl:text-lg">
           Theme:{" "}
           <span className="font-bold text-palette-accent">
             {readableTheme(playlist.theme)}
           </span>
         </p>
-        <p className="text-palette-text text-lg">
+        <p className="text-palette-text text-base xl:text-lg">
           By:{" "}
           <span className="font-bold">
             {typeof playlist.created_by === "object"
