@@ -1,9 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
-import { revalidateTag } from "next/cache";
-import Pocketbase from "pocketbase";
 import { ViewsSchema } from "@/utils/validations/playlists/schema";
+import { revalidateTag } from "next/cache";
+import { headers } from "next/headers";
+import Pocketbase from "pocketbase";
 
 export async function CheckViews({ id }: { id: string }) {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -22,7 +22,7 @@ export async function CheckViews({ id }: { id: string }) {
         ip: viewerIP,
         playlist_id: id,
       });
-      revalidateTag("viewsRecordPage");
+      revalidateTag(`views${id}`);
     }
   }
 }

@@ -121,7 +121,7 @@ export default async function Page({
     },
     ["cache-key"],
     {
-      tags: ["viewsRecordPage"],
+      tags: [`views${parsedPlaylistData.id}`],
     }
   )();
 
