@@ -3,7 +3,7 @@
 import { getModel } from "@/utils/getModel";
 import getSpotify from "@/utils/getSpotify";
 import { SyncType } from "@/utils/validations/playlists/types";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import Pocketbase from "pocketbase";
 
@@ -89,6 +89,7 @@ export async function CreatePlaylistAction(
 
     await pb.collection("sync").create(syncData);
     revalidatePath("/dashboard");
+    revalidateTag("CuratedPlaylists");
     return { message: "Playlist Created", status: 200 };
   } catch (e: any) {
     return { message: "Could not create" + Math.random(), status: 400 };

@@ -17,10 +17,9 @@ import { CardImage } from "./curated.client";
 
 export async function CuratedPlaylists() {
   const pb = new Pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  pb.autoCancellation(false);
   const formattedData: PlaylistType[][] = await unstable_cache(
     async () => {
-      pb.autoCancellation(false);
-
       const recordData = await pb.collection("playlists").getList(1, 100, {
         filter: "public = true",
         expand: "created_by",

@@ -16,7 +16,9 @@ export default function Home() {
       <Showcase />
       <Compare />
       <Convert />
+
       <CuratedPlaylists />
+
       <Footer />
     </section>
   );

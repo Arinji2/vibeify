@@ -8,7 +8,7 @@ import {
   SyncSchema,
 } from "@/utils/validations/playlists/schema";
 import { SyncType } from "@/utils/validations/playlists/types";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
 import Pocketbase from "pocketbase";
 
@@ -116,6 +116,7 @@ export async function EditPlaylistAction(
     revalidatePath(`/dashboard/playlists/${playlistID}`);
     revalidatePath(`/dashboard/playlists/${playlistID}/edit`);
     revalidatePath(`/${parsedRes.data.link}`);
+    revalidateTag("CuratedPlaylists");
 
     return { message: "Playlist Updated", status: 200 };
   } catch (e) {
