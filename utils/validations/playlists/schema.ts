@@ -1,5 +1,6 @@
 import { CONSTRAINTS } from "@/utils/constraints";
 import z from "zod";
+import { UserSchema } from "../account/schema";
 import { THEMES } from "./themes";
 export const CreatePlaylistSchema = z.object({
   spotifyLink: z.string().url(),
@@ -48,18 +49,33 @@ export const CreatePlaylistSchema = z.object({
   publicPlaylist: z.number().min(0).max(1),
 });
 
-export const PlaylistSchema = z.object({
-  id: z.string().optional(),
-  name: z.string(),
-  link: z.string(),
-  public: z.boolean(),
-  image: z.string(),
-  spotify_link: z.string().url(),
-  created_by: z.string(),
-  display_name: z.string(),
-  theme: z.enum(THEMES),
-});
-
+export const PlaylistSchema = z
+  .object({
+    id: z.string().optional(),
+    name: z.string(),
+    link: z.string(),
+    public: z.boolean(),
+    image: z.string(),
+    spotify_link: z.string().url(),
+    created_by: z.union([z.string(), UserSchema]),
+    display_name: z.string(),
+    theme: z.enum(THEMES),
+    expand: z
+      .object({
+        created_by: UserSchema.optional(),
+      })
+      .optional(),
+  })
+  .transform((data) => {
+    if (data.expand?.created_by) {
+      return {
+        ...data,
+        created_by: data.expand.created_by,
+        expand: undefined,
+      };
+    }
+    return data;
+  });
 export const PlaylistsSchema = z.array(PlaylistSchema);
 
 export const SyncSchema = z.object({

@@ -1,6 +1,7 @@
 import WidthWrapper from "../(wrapper)/widthWrapper";
 import Compare from "./compare";
 import Convert from "./convert";
+import { CuratedPlaylists } from "./curated";
 import { Footer } from "./footer";
 
 import { Hero } from "./hero";
@@ -15,6 +16,7 @@ export default function Home() {
       <Showcase />
       <Compare />
       <Convert />
+      <CuratedPlaylists />
       <Footer />
     </section>
   );

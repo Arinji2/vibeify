@@ -48,13 +48,13 @@ export default function Convert() {
                 </div>
                 <div className="flex h-full w-full flex-row items-start justify-between gap-8 md:w-fit md:items-center  md:justify-center xl:flex-col">
                   <p className="text-[20px] text-black md:text-[30px]">
-                    Playlist 1
+                    Playlist 1 (Pop)
                   </p>
                   <p className=" text-[20px] text-black md:text-[30px]">
-                    Playlist 2
+                    Playlist 2 (Rock)
                   </p>
                   <p className="hidden text-[20px] text-black md:block md:text-[30px]">
-                    Playlist 3
+                    Playlist 3 (Jazz)
                   </p>
                 </div>
               </div>

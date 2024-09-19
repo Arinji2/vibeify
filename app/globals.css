@@ -50,6 +50,11 @@ body {
 input[type="file"]::file-selector-button {
   display: none;
 }
+.small-scrollbar::-webkit-scrollbar {
+  width: 5px !important;
+  height: 7px !important;
+  display: block !important;
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -58,16 +63,4 @@ input[type="file"]::file-selector-button {
 html {
   scroll-behavior: smooth;
   scroll-padding: 30svh;
-}
-
-.brand-scrollbar::-webkit-scrollbar {
-  width: 10px;
-}
-
-.brand-scrollbar::-webkit-scrollbar-thumb {
-  background: #77c089;
-}
-
-.brand-scrollbar::-webkit-scrollbar-track {
-  background: #e1efdc;
 }
