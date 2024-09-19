@@ -66,11 +66,11 @@ export async function CuratedPlaylists() {
               own unique theme and style.
             </p>
           </div>
-          <div className="w-full h-full flex flex-row items-center justify-start overflow-x-scroll  small-scrollbar py-4 gap-10 xl:snap-x xl:snap-mandatory no">
+          <div className="w-full h-full flex flex-row items-center justify-start overflow-x-scroll small-scrollbar py-4 gap-10 xl:snap-x xl:snap-mandatory no">
             {formattedData.map((playlists, index) => (
               <div
                 key={index}
-                className="w-fit xl:w-full shrink-0 h-fit flex flex-row items-center xl:justify-center justify-start xl:flex-wrap gap-10 snap-center"
+                className="w-fit xl:w-full shrink-0 h-fit flex flex-row items-center xl:justify-between xl:px-2 justify-start xl:flex-wrap gap-10 snap-center"
               >
                 {playlists.map((item) => (
                   <PlaylistCard
