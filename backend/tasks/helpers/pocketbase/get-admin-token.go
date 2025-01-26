@@ -19,7 +19,6 @@ var (
 const tokenValidity = time.Hour * 24 * 7
 
 func GetPocketbaseAdminToken() (token string) {
-
 	mu.Lock()
 	defer mu.Unlock()
 
@@ -34,7 +33,6 @@ func GetPocketbaseAdminToken() (token string) {
 
 	if identityEmail == "" || password == "" {
 		log.Fatal("Environment Variables not present to authenticate Admin")
-
 	}
 
 	body := map[string]string{
@@ -44,7 +42,6 @@ func GetPocketbaseAdminToken() (token string) {
 
 	client := api.NewApiClient()
 	result, _, err := client.SendRequestWithBody("POST", "/api/admins/auth-with-password", body, nil)
-
 	if err != nil {
 		fmt.Println("Admin Login failed:", err)
 		return
@@ -60,5 +57,4 @@ func GetPocketbaseAdminToken() (token string) {
 	expiryCache = time.Now().Add(tokenValidity)
 
 	return token
-
 }
