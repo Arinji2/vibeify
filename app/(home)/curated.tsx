@@ -47,7 +47,7 @@ export async function CuratedPlaylists() {
     [],
     {
       tags: ["CuratedPlaylists"],
-    }
+    },
   )();
 
   const spotify = await getSpotify();
@@ -121,19 +121,23 @@ async function PlaylistCard({
     ["cache-key"],
     {
       tags: [`views${playlist.id}`],
-    }
+    },
   )(playlist.id!);
   const spotifyData = await unstable_cache(
     async (link) => {
-      const spotifyPlaylist = await spotifyClient.playlists.getPlaylist(
-        link.split("/")[4]
-      );
-      return spotifyPlaylist;
+      try {
+        const spotifyPlaylist = await spotifyClient.playlists.getPlaylist(
+          link.split("/")[4],
+        );
+        return spotifyPlaylist;
+      } catch (error) {
+        return null;
+      }
     },
     ["cache-key"],
     {
       tags: [`spotify${playlist.id}`],
-    }
+    },
   )(playlist.spotify_link);
 
   return (
@@ -153,9 +157,11 @@ async function PlaylistCard({
               fill="#C1DCC9"
               strokeWidth={2}
             />
-            <p className="text-palette-text text-base xl:text-xl font-bold">
-              {likesFormat(spotifyData.followers.total)}
-            </p>
+            {spotifyData?.followers.total && (
+              <p className="text-palette-text text-base xl:text-xl font-bold">
+                {likesFormat(spotifyData.followers.total)}
+              </p>
+            )}
           </div>
           <div className="h-fit w-fit gap-2 flex flex-row items-center justify-center">
             <Eye
@@ -173,10 +179,11 @@ async function PlaylistCard({
               fill="#C1DCC9"
               strokeWidth={2}
             />
-
-            <p className="text-palette-text text-base xl:text-xl font-bold">
-              {spotifyData.tracks.total}
-            </p>
+            {spotifyData?.tracks.total && (
+              <p className="text-palette-text text-base xl:text-xl font-bold">
+                {spotifyData.tracks.total}
+              </p>
+            )}
           </div>
         </div>
         <p className="text-palette-text text-base xl:text-lg">
