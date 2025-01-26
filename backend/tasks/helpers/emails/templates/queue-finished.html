@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <div
+    style="
+      display: none;
+      overflow: hidden;
+      line-height: 1px;
+      opacity: 0;
+      max-height: 0;
+      max-width: 0;
+    "
+  >
+    Your Convert Request Has Been Completed Successfully.
+  </div>
+
+  <body
+    style="
+      padding: 10px;
+      background-color: #43937f;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Ubuntu, sans-serif;
+    "
+  >
+    <table
+      align="center"
+      width="100%"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      role="presentation"
+      style="
+        max-width: 37.5em;
+        background-color: #d9d9d9;
+        margin: 0 auto;
+        padding: 20px 0 48px;
+        margin-bottom: 64px;
+        border: 4px solid black;
+        box-shadow: 4px 4px 0 black;
+      "
+    >
+      <tbody>
+        <tr style="width: 100%">
+          <td>
+            <table
+              align="center"
+              width="100%"
+              border="0"
+              cellpadding="0"
+              cellspacing="0"
+              role="presentation"
+              style="padding: 0 48px"
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    <hr
+                      style="
+                        width: 100%;
+                        border: none;
+                        border-top: 1px solid #eaeaea;
+                        border-color: black;
+                        margin: 20px 0;
+                      "
+                    />
+                    <p
+                      style="
+                        font-size: 1.875rem;
+                        line-height: 2.25rem;
+                        margin: 16px 0;
+                        font-weight: 700;
+                        color: rgb(0, 0, 0);
+                        text-align: center;
+                      "
+                    >
+                      Your Convert Request Has Been Completed Successfully.
+                    </p>
+                    <hr
+                      style="
+                        width: 100%;
+                        border: none;
+                        border-top: 1px solid #eaeaea;
+                        border-color: black;
+                        margin: 20px 0;
+                      "
+                    />
+                    <p
+                      class="text-opacity-80"
+                      style="
+                        font-size: 1.125rem;
+                        line-height: 1.75rem;
+                        margin: 16px 0;
+                        color: rgb(0, 0, 0);
+                        text-align: left;
+                      "
+                    >
+                      Your playlists have been converted and are ready to be
+                      viewed. Please find the links listed below
+                    </p>
+                    <table
+                      align="center"
+                      width="100%"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      role="presentation"
+                      style="
+                        max-width: 37.5em;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: center;
+                      "
+                    >
+                      <tbody>
+                        {{ range .Items }}
+                        <tr style="width: 100%">
+                          <td>
+                            <p
+                              style="
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                margin: 16px 0;
+                                width: 100%;
+                                height: 100%;
+                                color: rgb(0, 0, 0);
+                                text-align: left;
+                              "
+                            >
+                              <a
+                                href="{{ .URL }}"
+                                style="color: #43937f; text-decoration: none"
+                                target="_blank"
+                                >{{ .ID }}. {{ .Name }}</a
+                              >
+                            </p>
+                          </td>
+                        </tr>
+                        {{ end }}
+                      </tbody>
+                    </table>
+                    <table
+                      align="center"
+                      width="100%"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      role="presentation"
+                      style="
+                        max-width: 37.5em;
+                        border: 4px solid black;
+                        box-shadow: 4px 4px 0 black;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: center;
+                        background-color: rgb(129, 41, 41);
+                        padding: 0.5rem;
+                      "
+                    >
+                      <tbody>
+                        <tr style="width: 100%">
+                          <td>
+                            <p
+                              style="
+                                font-size: 16px;
+                                line-height: 24px;
+                                margin: 16px 0;
+                                color: rgb(217, 217, 217);
+                                text-align: left;
+                              "
+                            >
+                              Please note, your playlists will be removed from
+                              our spotify account in 50 hours. If you wish to
+                              keep them, please save them to your account.
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table
+                      align="center"
+                      width="100%"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      role="presentation"
+                      style="
+                        max-width: 37.5em;
+                        border: 4px solid black;
+                        box-shadow: 4px 4px 0 black;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: center;
+                        background-color: rgb(129, 41, 41);
+                        padding: 0.5rem;
+                        margin-top: 0.75rem;
+                      "
+                    >
+                      <tbody>
+                        <tr style="width: 100%">
+                          <td>
+                            <p
+                              style="
+                                font-size: 16px;
+                                line-height: 24px;
+                                margin: 16px 0;
+                                color: rgb(217, 217, 217);
+                                text-align: left;
+                              "
+                            >
+                              Please note, you have used {{ .Uses }} out of your
+                              {{ .Total }} Weekly Converts.
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p
+                      style="
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin: 16px 0;
+                        color: #525f7f;
+                        text-align: left;
+                      "
+                    >
+                      <a
+                        href="mailto:help@vibeify.xyz"
+                        style="color: #43937f; text-decoration: none"
+                        target="_blank"
+                        >Feel free to mail us to get support.</a
+                      >
+                    </p>
+                    <p
+                      style="
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin: 16px 0;
+                        color: #525f7f;
+                        text-align: left;
+                      "
+                    >
+                      — The Vibeify team
+                    </p>
+                    <hr
+                      style="
+                        width: 100%;
+                        border: none;
+                        border-top: 1px solid #eaeaea;
+                        border-color: black;
+                        margin: 20px 0;
+                      "
+                    />
+                    <p
+                      style="
+                        font-size: 12px;
+                        line-height: 16px;
+                        margin: 16px 0;
+                        color: #8898aa;
+                      "
+                    >
+                      Created by Arinji, with Love. © {{ .Year }} Vibeify. All
+                      reserved.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
