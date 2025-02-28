@@ -31,8 +31,19 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(CORS)
 	r.Use(SkipLoggingMiddleware)
-
-	err := godotenv.Load()
+	currentDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Current Working Directory: ", currentDir)
+	files, err := os.ReadDir(currentDir)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, file := range files {
+		fmt.Println(file.Name())
+	}
+	err = godotenv.Load()
 	if err != nil {
 		isProduction := os.Getenv("ENVIRONMENT") == "PRODUCTION"
 		if !isProduction {
