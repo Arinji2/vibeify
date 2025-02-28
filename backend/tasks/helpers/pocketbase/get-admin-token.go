@@ -39,7 +39,7 @@ func GetPocketbaseAdminToken() (token string) {
 		"identity": identityEmail,
 		"password": password,
 	}
-
+	fmt.Println(identityEmail, password)
 	client := api.NewApiClient()
 	result, _, err := client.SendRequestWithBody("POST", "/api/admins/auth-with-password", body, nil)
 	if err != nil {

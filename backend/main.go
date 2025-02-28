@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"sync"
@@ -31,18 +30,15 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(CORS)
 	r.Use(SkipLoggingMiddleware)
-	err := godotenv.Load(".env")
-	fmt.Println(os.Getenv("ENVIRONMENT"))
-	fmt.Println(os.Getenv("ADMIN_EMAIL"))
+	err := godotenv.Load()
 	if err != nil {
-		isProduction := os.Getenv("ENVIRONMENT") == "PRODUCTION"
-		if !isProduction {
-			log.Fatal("Error loading .env file")
-		} else {
-			custom_log.Logger.Warn("Using Production Environment")
-		}
-	} else {
+		fmt.Println("error loading .env file")
+	}
+	isProduction := os.Getenv("ENVIRONMENT") == "PRODUCTION"
+	if !isProduction {
 		custom_log.Logger.Warn("Using Development Environment")
+	} else {
+		custom_log.Logger.Warn("Using Production Environment")
 	}
 	allEnv := os.Environ()
 	for _, env := range allEnv {
