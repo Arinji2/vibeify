@@ -17,7 +17,7 @@ export function PlaylistImage({
   return (
     <div className="size-20 shrink-0 md:size-24 rounded-md border-[3px] border-black ">
       <LazyLoadImage
-        src={`https://db-listify.arinji.com/api/files/qblcdcbffwb2y8c/${recordID}/${image}`}
+        src={`https://db-vibeify.arinji.com/api/files/qblcdcbffwb2y8c/${recordID}/${image}`}
         alt="playlist"
         className="w-full h-full object-cover"
         effect="blur"

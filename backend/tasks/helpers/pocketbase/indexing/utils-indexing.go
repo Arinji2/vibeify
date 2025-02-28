@@ -23,7 +23,6 @@ func checkIfIndexQueued(client *api.ApiClient, adminToken string, spotifyID stri
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 	if err != nil {
 		return false, err
 	}
@@ -44,7 +43,6 @@ func checkIfIndexQueued(client *api.ApiClient, adminToken string, spotifyID stri
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 	if err != nil {
 		return false, err
 	}
@@ -148,7 +146,7 @@ func fetchSpotifyTracks(songsToIndex []types.PocketbaseSongIndexQueue) ([]types.
 		return nil, err
 	}
 
-	pocketbaseClient := api.NewApiClient("https://db-listify.arinji.com")
+	pocketbaseClient := api.NewApiClient("https://db-vibeify.arinji.com")
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 	var deletionWg sync.WaitGroup
 

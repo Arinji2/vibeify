@@ -18,7 +18,7 @@ export default async function Stats({
 
   const api = await getSpotify();
   const spotifyData = await api.playlists.getPlaylist(
-    playlistData.spotify_link.split("/")[4]
+    playlistData.spotify_link.split("/")[4],
   );
   return (
     <>
@@ -63,7 +63,7 @@ export default async function Stats({
           <div className="w-[150px] h-[80px] relative overflow-hidden">
             {/*eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              src={`https://db-listify.arinji.com/api/files/playlists/${playlistData.id}/${playlistData.image}`}
+              src={`https://db-vibeify.arinji.com/api/files/playlists/${playlistData.id}/${playlistData.image}`}
               alt={playlistData.name}
               className="  object-contain   border-[3px] border-black  max-w-full max-h-full"
             />

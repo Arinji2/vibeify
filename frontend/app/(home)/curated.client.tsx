@@ -21,7 +21,7 @@ export function CardImage({
         height={imageProps.height}
         width={imageProps.width}
         className=" object-center    max-w-none object-cover h-full"
-        src={`https://db-listify.arinji.com/api/files/playlists/${playlistID}/${playlistImage}`}
+        src={`https://db-vibeify.arinji.com/api/files/playlists/${playlistID}/${playlistImage}`}
         effect="blur"
       />
     </div>
