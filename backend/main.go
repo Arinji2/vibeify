@@ -31,19 +31,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(CORS)
 	r.Use(SkipLoggingMiddleware)
-	currentDir, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Current Working Directory: ", currentDir)
-	files, err := os.ReadDir(currentDir)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, file := range files {
-		fmt.Println(file.Name())
-	}
-	err = godotenv.Load()
+	err := godotenv.Load(".env")
 	if err != nil {
 		isProduction := os.Getenv("ENVIRONMENT") == "PRODUCTION"
 		if !isProduction {
@@ -54,7 +42,10 @@ func main() {
 	} else {
 		custom_log.Logger.Warn("Using Development Environment")
 	}
-
+	allEnv := os.Environ()
+	for _, env := range allEnv {
+		fmt.Println(env)
+	}
 	taskManager := &TaskManager{}
 	go taskManager.startTaskWorker()
 	go startCronJobs()
