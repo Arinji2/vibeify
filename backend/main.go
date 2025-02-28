@@ -32,6 +32,8 @@ func main() {
 	r.Use(CORS)
 	r.Use(SkipLoggingMiddleware)
 	err := godotenv.Load(".env")
+	fmt.Println(os.Getenv("ENVIRONMENT"))
+	fmt.Println(os.Getenv("ADMIN_EMAIL"))
 	if err != nil {
 		isProduction := os.Getenv("ENVIRONMENT") == "PRODUCTION"
 		if !isProduction {
