@@ -40,10 +40,6 @@ func main() {
 	} else {
 		custom_log.Logger.Warn("Using Production Environment")
 	}
-	allEnv := os.Environ()
-	for _, env := range allEnv {
-		fmt.Println(env)
-	}
 	taskManager := &TaskManager{}
 	go taskManager.startTaskWorker()
 	go startCronJobs()
