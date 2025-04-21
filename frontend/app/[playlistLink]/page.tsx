@@ -80,8 +80,9 @@ export default async function Page({
   try {
     data = await pb
       .collection("playlists")
-      .getFirstListItem(`link = "${playlistLink.toLowerCase()}"`);
+      .getFirstListItem(`link = "${playlistLink}"`);
   } catch (e) {
+    console.error(e);
     notFound();
   }
 
@@ -107,7 +108,7 @@ export default async function Page({
     ["cache-key"],
     {
       tags: ["UsernameTag"],
-    }
+    },
   )(parsedPlaylistData.created_by);
 
   if (!userRecord.email) userRecord.email = "";
@@ -122,7 +123,7 @@ export default async function Page({
     ["cache-key"],
     {
       tags: [`views${parsedPlaylistData.id}`],
-    }
+    },
   )();
 
   const parsedViewData = ViewsSchema.parse(viewRecord);
@@ -130,7 +131,7 @@ export default async function Page({
   const parsedUserData = UserSchema.parse(userRecord);
   const spotify = await getSpotify();
   const spotifyPlaylist = await spotify!.playlists.getPlaylist(
-    parsedPlaylistData.spotify_link.split("/")[4].split("?")[0]
+    parsedPlaylistData.spotify_link.split("/")[4].split("?")[0],
   );
 
   const spotifyTracks = await spotify!.playlists.getPlaylistItems(
@@ -138,7 +139,7 @@ export default async function Page({
     undefined,
     undefined,
     15,
-    0
+    0,
   );
 
   const trackPromises = spotifyTracks.items.map(fetchTrackData);
@@ -146,7 +147,7 @@ export default async function Page({
   const resolvedTracks = await Promise.all(trackPromises);
 
   const tracks = resolvedTracks.filter(
-    (track) => track !== null
+    (track) => track !== null,
   ) as TrackType[];
 
   return (
