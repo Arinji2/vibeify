@@ -9,7 +9,7 @@ import Pocketbase from "pocketbase";
 
 export async function CreatePlaylistAction(
   initialState: any,
-  formData: FormData
+  formData: FormData,
 ) {
   const userData = await getModel();
   const rawCookie = cookies().get("pb_auth")!.value;
@@ -84,6 +84,7 @@ export async function CreatePlaylistAction(
     return { message: "Link already exists", status: 400 };
 
   try {
+    playlistFormData.link = playlistFormData.link.toLowerCase();
     const res = await pb.collection("playlists").create(playlistFormData);
     syncData.playlist = res.id;
 
