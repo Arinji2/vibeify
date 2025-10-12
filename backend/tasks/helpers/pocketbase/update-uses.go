@@ -7,7 +7,7 @@ import (
 )
 
 func UpdateUses(id string, totalUses int) {
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := GetPocketbaseAdminToken()
 
 	client.SendRequestWithBody("PATCH", fmt.Sprintf("/api/collections/songs/records/%s", id), map[string]string{
@@ -15,5 +15,4 @@ func UpdateUses(id string, totalUses int) {
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 }

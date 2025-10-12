@@ -10,9 +10,8 @@ import (
 )
 
 func DeleteExpiredPlaylists() {
-
 	adminToken := GetPocketbaseAdminToken()
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	currentTime := time.Now()
 
 	formattedTime := currentTime.Format("2006-01-02 15:04:05")
@@ -28,13 +27,11 @@ func DeleteExpiredPlaylists() {
 
 	if error != nil {
 		fmt.Println(error)
-
 	}
 
 	totalItems, ok := res["totalItems"].(float64)
 	if !ok {
 		fmt.Println("Error getting total items")
-
 	}
 
 	if totalItems == 0 {
@@ -46,7 +43,6 @@ func DeleteExpiredPlaylists() {
 	items, ok := res["items"].([]interface{})
 	if !ok {
 		fmt.Println("Error getting items")
-
 	}
 
 	pool := make(chan struct{}, 5)
@@ -73,11 +69,9 @@ func DeleteExpiredPlaylists() {
 				fmt.Println(error)
 				return
 			}
-
 		}(item)
 	}
 
 	cleanupWg.Wait()
 	close(pool)
-
 }

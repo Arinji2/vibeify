@@ -25,7 +25,7 @@ func PerformSongIndexing() {
 		indexingWg.Done()
 		atomic.StoreInt32(&indexingRunning, 0)
 	}()
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 
 	songsToIndex, error := getSongsToIndex(client, adminToken)
@@ -64,9 +64,7 @@ func IsIndexingSongs() bool {
 }
 
 func PerformPlaylistIndexing(playlist types.IndexablePlaylist) {
-
 	tracks, _, _ := spotify_helpers.GetSpotifyPlaylist(playlist.Link, nil, "")
 
 	go QueueSongIndexing(tracks, "0")
-
 }

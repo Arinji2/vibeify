@@ -14,7 +14,7 @@ import (
 	"github.com/Arinji2/vibeify-backend/types"
 )
 
-func checkIfIndexQueued(client *api.ApiClient, adminToken string, spotifyID string) (bool, error) {
+func checkIfIndexQueued(client *api.APIClient, adminToken string, spotifyID string) (bool, error) {
 	res, _, err := client.SendRequestWithQuery("GET", "/api/collections/songsToIndex/records", map[string]string{
 		"page":    "1",
 		"perPage": "1",
@@ -59,7 +59,7 @@ func checkIfIndexQueued(client *api.ApiClient, adminToken string, spotifyID stri
 	return false, nil
 }
 
-func sendSongToIndex(client *api.ApiClient, adminToken string, spotifyID string, priority string) error {
+func sendSongToIndex(client *api.APIClient, adminToken string, spotifyID string, priority string) error {
 	exists, error := checkIfIndexQueued(client, adminToken, spotifyID)
 	if error != nil {
 		return error
@@ -81,7 +81,7 @@ func sendSongToIndex(client *api.ApiClient, adminToken string, spotifyID string,
 	return err
 }
 
-func getSongsToIndex(client *api.ApiClient, adminToken string) ([]types.PocketbaseSongIndexQueue, error) {
+func getSongsToIndex(client *api.APIClient, adminToken string) ([]types.PocketbaseSongIndexQueue, error) {
 	songsList, _, err := client.SendRequestWithQuery("GET", "/api/collections/songsToIndex/records", map[string]string{
 		"page":    "1",
 		"perPage": "10",
@@ -112,7 +112,7 @@ func getSongsToIndex(client *api.ApiClient, adminToken string) ([]types.Pocketba
 }
 
 func fetchSpotifyTracks(songsToIndex []types.PocketbaseSongIndexQueue) ([]types.SpotifyTrack, error) {
-	spotifyClient := api.NewApiClient("https://api.spotify.com")
+	spotifyClient := api.NewAPIClient("https://api.spotify.com")
 	spotifyToken := spotify_helpers.GetSpotifyToken()
 	spotifyIDS := make([]string, len(songsToIndex))
 
@@ -146,7 +146,7 @@ func fetchSpotifyTracks(songsToIndex []types.PocketbaseSongIndexQueue) ([]types.
 		return nil, err
 	}
 
-	pocketbaseClient := api.NewApiClient("https://db-vibeify.arinji.com")
+	pocketbaseClient := api.NewAPIClient("https://db-vibeify.arinji.com")
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 	var deletionWg sync.WaitGroup
 
@@ -167,7 +167,7 @@ func fetchSpotifyTracks(songsToIndex []types.PocketbaseSongIndexQueue) ([]types.
 	return spotifyTracks, nil
 }
 
-func indexSong(client *api.ApiClient, adminToken string, song types.SpotifyTrack) error {
+func indexSong(client *api.APIClient, adminToken string, song types.SpotifyTrack) error {
 	songGenres := ai_helpers.IndexGenre(song)
 	if songGenres == nil {
 		return nil
@@ -188,7 +188,7 @@ func indexSong(client *api.ApiClient, adminToken string, song types.SpotifyTrack
 	return nil
 }
 
-func deleteSongFromIndex(client *api.ApiClient, adminToken string, spotifyID string) error {
+func deleteSongFromIndex(client *api.APIClient, adminToken string, spotifyID string) error {
 	res, _, err := client.SendRequestWithQuery("GET", "/api/collections/songsToIndex/records", map[string]string{
 		"page":    "1",
 		"perPage": "1",

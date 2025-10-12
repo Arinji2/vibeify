@@ -22,7 +22,7 @@ func GetInternalGenre(tracks []types.SpotifyPlaylistItem, genres []string, genre
 	wg := sync.WaitGroup{}
 	adminToken := GetPocketbaseAdminToken()
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 
 	genreString := strings.Builder{}
 	for i, genre := range genres {
@@ -87,7 +87,6 @@ func GetInternalGenre(tracks []types.SpotifyPlaylistItem, genres []string, genre
 
 			for i, genre := range record.Genres {
 				record.Genres[i] = strings.ToLower(genre)
-
 			}
 
 			for _, genre := range genres {
@@ -107,11 +106,9 @@ func GetInternalGenre(tracks []types.SpotifyPlaylistItem, genres []string, genre
 
 			if !hasMatched {
 				updatedTracks = append(updatedTracks, track)
-
 			} else {
 				go UpdateUses(record.ID, record.TotalUses)
 			}
-
 		}(track, genres)
 
 	}
@@ -141,5 +138,4 @@ func GetInternalGenre(tracks []types.SpotifyPlaylistItem, genres []string, genre
 	}
 
 	return updatedTracks, nil
-
 }

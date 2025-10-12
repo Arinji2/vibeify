@@ -39,7 +39,7 @@ func GetPocketbaseAdminToken() (token string) {
 		"identity": identityEmail,
 		"password": password,
 	}
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	result, _, err := client.SendRequestWithBody("POST", "/api/collections/_superusers/auth-with-password", body, nil)
 	if err != nil {
 		fmt.Println("Admin Login failed:", err)

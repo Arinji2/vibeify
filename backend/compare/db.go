@@ -13,7 +13,7 @@ import (
 )
 
 func AddToDb(user types.PocketbaseUser, taskData types.CompareTaskType) bool {
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 	playlist1ID := spotify_helpers.CleanupID(taskData.Playlist1)
 	playlist2ID := spotify_helpers.CleanupID(taskData.Playlist2)
@@ -25,7 +25,6 @@ func AddToDb(user types.PocketbaseUser, taskData types.CompareTaskType) bool {
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 	if err != nil {
 		fmt.Println("Error: Adding to DB")
 		return false
@@ -36,7 +35,7 @@ func AddToDb(user types.PocketbaseUser, taskData types.CompareTaskType) bool {
 }
 
 func GetDbData(user types.PocketbaseUser) (*types.PocketbaseCompareRecord, error) {
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 	res, _, err := client.SendRequestWithQuery("GET", "/api/collections/compareList/records", map[string]string{
 		"page":    "1",
@@ -45,7 +44,6 @@ func GetDbData(user types.PocketbaseUser) (*types.PocketbaseCompareRecord, error
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 	if err != nil {
 		fmt.Println("Error: Compare not found")
 		return nil, err
@@ -74,7 +72,7 @@ func GetDbData(user types.PocketbaseUser) (*types.PocketbaseCompareRecord, error
 }
 
 func UpdateDBWithResults(user types.PocketbaseUser, results types.PocketbaseCompareResults, recordID string) bool {
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 	jsonResults, err := json.Marshal(results)
 	if err != nil {
@@ -87,11 +85,9 @@ func UpdateDBWithResults(user types.PocketbaseUser, results types.PocketbaseComp
 	}, map[string]string{
 		"Authorization": adminToken,
 	})
-
 	if err != nil {
 		fmt.Println("Error: Updating to DB")
 		return false
 	}
 	return true
-
 }

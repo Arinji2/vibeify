@@ -11,14 +11,11 @@ import (
 )
 
 func ValidateUser(token string) (user *types.PocketbaseUser, error error) {
-
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	res, _, err := client.SendRequestWithBody("POST", "/api/collections/users/auth-refresh", nil, map[string]string{
 		"Authorization": token,
 	})
-
 	if err != nil {
-
 		return nil, user_errors.NewUserError("invalid user", err)
 	}
 	data, err := json.Marshal(res["record"])
@@ -32,7 +29,6 @@ func ValidateUser(token string) (user *types.PocketbaseUser, error error) {
 	record := types.PocketbaseUserRecord{}
 
 	err = json.Unmarshal(data, &record)
-
 	if err != nil {
 		fmt.Println("Error in parsing", err)
 
@@ -49,5 +45,4 @@ func ValidateUser(token string) (user *types.PocketbaseUser, error error) {
 	}
 
 	return &pocketbaseUser, nil
-
 }

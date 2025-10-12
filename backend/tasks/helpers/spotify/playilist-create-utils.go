@@ -13,20 +13,18 @@ import (
 )
 
 func createGenrePlaylist(genreKey string, playlistName string, headers map[string]string) (errorString string, createdPlaylist types.SpotifyPlaylist) {
-
 	errorString = "Server Error"
 	userID := os.Getenv("SPOTIFY_ID")
 	dateString := time.Now().Format("2006-01-02")
 	displayGenre := strings.ToUpper(genreKey[:1]) + genreKey[1:]
 	createdPlaylistName := fmt.Sprintf("%s - %s - %s", playlistName, displayGenre, dateString)
-	client := api.NewApiClient("https://api.spotify.com")
+	client := api.NewAPIClient("https://api.spotify.com")
 
 	res, _, err := client.SendRequestWithBody("POST", fmt.Sprintf("/v1/users/%s/playlists", userID), map[string]string{
 		"name":        createdPlaylistName,
 		"public":      "true",
 		"description": fmt.Sprintf("%s playlist created by Vibeify for %s", displayGenre, playlistName),
 	}, headers)
-
 	if err != nil {
 		errorString = "Error creating playlist"
 		return
@@ -54,8 +52,7 @@ func createGenrePlaylist(genreKey string, playlistName string, headers map[strin
 }
 
 func initPlaylist(playlist types.SpotifyPlaylist, genreArrays []types.GenreArray, headers map[string]string) (errorString string) {
-
-	client := api.NewApiClient("https://api.spotify.com")
+	client := api.NewAPIClient("https://api.spotify.com")
 
 	errorString = "Server Error"
 

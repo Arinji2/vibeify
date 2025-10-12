@@ -10,7 +10,7 @@ import (
 )
 
 func CheckExistingCompares(user types.PocketbaseUser) bool {
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	res, _, err := client.SendRequestWithQuery("GET", "/api/collections/compareList/records", map[string]string{
 		"page":    "1",
 		"perPage": "500",
@@ -18,7 +18,6 @@ func CheckExistingCompares(user types.PocketbaseUser) bool {
 	}, map[string]string{
 		"Authorization": user.Token,
 	})
-
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -35,15 +34,13 @@ func CheckExistingCompares(user types.PocketbaseUser) bool {
 	}
 
 	return false
-
 }
 
 func CheckIfCompareExists(user types.PocketbaseUser, taskData types.CompareTaskType) bool {
-
 	playlist1ID := spotify_helpers.CleanupID(taskData.Playlist1)
 	playlist2ID := spotify_helpers.CleanupID(taskData.Playlist2)
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	res, _, err := client.SendRequestWithQuery("GET", "/api/collections/compareList/records", map[string]string{
 		"page":    "1",
 		"perPage": "1",
@@ -51,7 +48,6 @@ func CheckIfCompareExists(user types.PocketbaseUser, taskData types.CompareTaskT
 	}, map[string]string{
 		"Authorization": user.Token,
 	})
-
 	if err != nil {
 		fmt.Println("Error: Compare not found")
 		return false

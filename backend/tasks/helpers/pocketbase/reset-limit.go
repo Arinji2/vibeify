@@ -9,9 +9,8 @@ import (
 )
 
 func ResetLimits() {
-
 	adminToken := GetPocketbaseAdminToken()
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 
 	res, _, error := client.SendRequestWithQuery("GET", "/api/collections/convertLimit/records", map[string]string{
 		"page":    "1",
@@ -23,13 +22,11 @@ func ResetLimits() {
 
 	if error != nil {
 		fmt.Println(error)
-
 	}
 
 	totalItems, ok := res["totalItems"].(float64)
 	if !ok {
 		fmt.Println("Error getting total items")
-
 	}
 
 	if totalItems == 0 {
@@ -41,7 +38,6 @@ func ResetLimits() {
 	items, ok := res["items"].([]interface{})
 	if !ok {
 		fmt.Println("Error getting items")
-
 	}
 
 	pool := make(chan struct{}, 5)
@@ -68,11 +64,9 @@ func ResetLimits() {
 				fmt.Println(error)
 				return
 			}
-
 		}(item)
 	}
 
 	cleanupWg.Wait()
 	close(pool)
-
 }

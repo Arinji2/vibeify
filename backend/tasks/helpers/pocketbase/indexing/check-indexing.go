@@ -11,27 +11,25 @@ import (
 	"github.com/Arinji2/vibeify-backend/types"
 )
 
-var (
-	inProgress sync.Mutex
-)
+var inProgress sync.Mutex
 
 func CheckIndexing() {
 	inProgress.Lock()
 	defer inProgress.Unlock()
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 
 	res, _, error := client.SendRequestWithQuery("GET", "/api/collections/songsToIndex/records", map[string]string{
 		"page":    "1",
 		"perPage": "1",
-		"fields":  "id"}, map[string]string{
+		"fields":  "id",
+	}, map[string]string{
 		"Authorization": adminToken,
 	})
 
 	if error != nil {
 		fmt.Println("index check:", error)
-
 	}
 
 	totalItems, ok := res["totalItems"].(float64)
@@ -41,9 +39,7 @@ func CheckIndexing() {
 
 	if totalItems > 0 {
 		PerformSongIndexing()
-
 	}
-
 }
 
 func CheckPlaylistIndexing() {
@@ -55,7 +51,7 @@ func CheckPlaylistIndexing() {
 	}
 
 	jsonData := []types.IndexablePlaylist{}
-	var pool = make(chan struct{}, 2)
+	pool := make(chan struct{}, 2)
 
 	error = json.Unmarshal(jsonFile, &jsonData)
 	if error != nil {
@@ -66,7 +62,6 @@ func CheckPlaylistIndexing() {
 	isIndexing := IsIndexingSongs()
 
 	if isIndexing {
-
 		return
 	}
 
@@ -77,9 +72,7 @@ func CheckPlaylistIndexing() {
 			defer func() { <-pool }()
 
 			PerformPlaylistIndexing(playlist)
-
 		}(playlist)
 
 	}
-
 }

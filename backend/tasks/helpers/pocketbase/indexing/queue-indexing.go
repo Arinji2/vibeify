@@ -12,7 +12,7 @@ import (
 func QueueSongIndexing(tracks []types.SpotifyPlaylistItem, priorityIndex string) {
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	var wg sync.WaitGroup
 	pool := make(chan struct{}, 10)
 	defer close(pool)

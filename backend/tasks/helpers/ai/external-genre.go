@@ -14,14 +14,13 @@ import (
 )
 
 func GetExternalGenre(remainingTracks []types.SpotifyPlaylistItem, genres []string, genreArrays types.GenreArrays, updatedPrompt ...string) {
-
 	accessKey := os.Getenv("ACCESS_KEY")
 
-	client := api.NewApiClient("https://ai.arinji.com")
+	client := api.NewAPIClient("https://ai.arinji.com")
 
 	var wg sync.WaitGroup
 	var mu sync.Mutex
-	var pool = make(chan struct{}, 10)
+	pool := make(chan struct{}, 10)
 
 	for _, track := range remainingTracks {
 		wg.Add(1)
@@ -65,7 +64,7 @@ func GetExternalGenre(remainingTracks []types.SpotifyPlaylistItem, genres []stri
 				if err != nil || status != 200 {
 					retries++
 					if status == 500 {
-						//this is when the AI API is overloaded, we wait here
+						// this is when the AI API is overloaded, we wait here
 						time.Sleep(time.Second * 30)
 					}
 					continue
@@ -103,10 +102,8 @@ func GetExternalGenre(remainingTracks []types.SpotifyPlaylistItem, genres []stri
 				})
 				mu.Unlock()
 			}
-
 		}(track)
 	}
 
 	wg.Wait()
-
 }

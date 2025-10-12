@@ -12,7 +12,7 @@ import (
 )
 
 func CheckLimit(user *types.PocketbaseUser) (used int, usesID string, err error) {
-	client := api.NewApiClient("https://db-vibeify.arinji.com")
+	client := api.NewAPIClient("https://db-vibeify.arinji.com")
 	total := 0
 	used = 0
 	if user.Record.Premium {

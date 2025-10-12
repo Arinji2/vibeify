@@ -35,19 +35,17 @@ func GetSpotifyPlaylist(url string, user *types.PocketbaseUser, fields string) (
 
 	token := GetSpotifyToken()
 
-	client := api.NewApiClient("https://api.spotify.com/v1")
+	client := api.NewAPIClient("https://api.spotify.com/v1")
 	res, status, err := client.SendRequestWithQuery("GET", fmt.Sprintf("/playlists/%s", playlistID), map[string]string{
 		"fields": fields,
 	}, map[string]string{
 		"Authorization": fmt.Sprintf("Bearer %s", token),
 	})
-
 	if err != nil {
 		return nil, "", user_errors.NewUserError("", fmt.Errorf("error sending request: %v", err))
 	}
 
 	if status == 400 {
-
 		return nil, "", user_errors.NewUserError("Playlist not found or Playlist is private", err)
 	}
 
@@ -58,7 +56,6 @@ func GetSpotifyPlaylist(url string, user *types.PocketbaseUser, fields string) (
 			fmt.Println("Retrying Spotify Authentication")
 			return GetSpotifyPlaylist(url, user, fields)
 		} else {
-
 			return nil, "", user_errors.NewUserError("", errors.New("spotify token expired"))
 		}
 	}
@@ -66,7 +63,6 @@ func GetSpotifyPlaylist(url string, user *types.PocketbaseUser, fields string) (
 	var Playlist types.SpotifyPlaylist
 	jsonData, err := json.Marshal(res)
 	if err != nil {
-
 		return nil, "", user_errors.NewUserError("", (fmt.Errorf("error marshalling response: %v", err)))
 	}
 
@@ -90,7 +86,6 @@ func GetSpotifyPlaylist(url string, user *types.PocketbaseUser, fields string) (
 	}
 
 	localTracks, err := GetPaginatedTracks(Playlist, token, playlistID, !isSystemCalled)
-
 	if err != nil {
 		return nil, "", err
 	}
@@ -106,7 +101,7 @@ func GetSpotifyPlaylist(url string, user *types.PocketbaseUser, fields string) (
 
 func GetPaginatedTracks(Playlist types.SpotifyPlaylist, token string, playlistID string, userErrors bool) (tracks []types.SpotifyPlaylistItem, err error) {
 	localPlaylist := Playlist
-	client := api.NewApiClient("https://api.spotify.com/v1")
+	client := api.NewAPIClient("https://api.spotify.com/v1")
 
 	for {
 		if (localPlaylist.Tracks.Offset + localPlaylist.Tracks.Limit) >= localPlaylist.Tracks.Total {

@@ -14,7 +14,7 @@ import (
 func CleanupIndexing() {
 	adminToken := pocketbase_helpers.GetPocketbaseAdminToken()
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 	res, _, error := client.SendRequestWithQuery("GET", "/api/collections/songs/records", map[string]string{
 		"page":    "1",
 		"perPage": "1",
@@ -86,7 +86,6 @@ func CleanupIndexing() {
 				fmt.Println(error)
 				return
 			}
-
 		}(item)
 	}
 }

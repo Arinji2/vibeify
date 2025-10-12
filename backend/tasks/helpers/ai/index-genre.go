@@ -16,7 +16,6 @@ var GENRES = []string{
 }
 
 func IndexGenre(track types.SpotifyTrack) (trackGenres []string) {
-
 	artistPromptString := strings.Builder{}
 
 	for _, artist := range track.Artists {
@@ -32,7 +31,7 @@ Your task is to determine the matching genres for the song "%s" based on the ass
 From the following genre list, please select multiple genres that best match those of the provided artists: %s. Be sure to respond with the selected genres separated by commas, and refrain from including any additional information.`,
 		track.Name, artistString, strings.Join(GENRES, ", "))
 
-	client := api.NewApiClient("https://ai.arinji.com")
+	client := api.NewAPIClient("https://ai.arinji.com")
 	headers := map[string]string{
 		"Content-Type":  "application/json",
 		"Authorization": os.Getenv("ACCESS_KEY"),

@@ -1,3 +1,4 @@
+// Package api provides a simple HTTP client for interacting with the PocketBase API.
 package api
 
 import (
@@ -14,12 +15,12 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-type ApiClient struct {
+type APIClient struct {
 	BaseURL string
 	Client  HTTPClient
 }
 
-func NewApiClient(baseURL ...string) *ApiClient {
+func NewAPIClient(baseURL ...string) *APIClient {
 	var url string
 	if len(baseURL) > 0 {
 		url = baseURL[0]
@@ -28,29 +29,28 @@ func NewApiClient(baseURL ...string) *ApiClient {
 	}
 
 	if url == "" {
-
 		url = os.Getenv("PB_LINK")
 	}
 
-	return &ApiClient{
+	return &APIClient{
 		BaseURL: url,
 		Client:  &http.Client{},
 	}
 }
 
-func (c *ApiClient) doRequest(req *http.Request, headers map[string]string) (map[string]interface{}, int, error) {
+func (c *APIClient) doRequest(req *http.Request, headers map[string]string) (map[string]any, int, error) {
 	req.Header.Set("Content-Type", "application/json")
 	for key, val := range headers {
 		req.Header.Set(key, val)
 	}
 
-	var result map[string]interface{}
+	var result map[string]any
 	var resp *http.Response
 	var err error
 	const maxRetries = 3
-	var retryDelay = 100 * time.Millisecond
+	retryDelay := 100 * time.Millisecond
 
-	for i := 0; i < maxRetries; i++ {
+	for range maxRetries {
 		resp, err = c.Client.Do(req)
 		if err != nil {
 			return nil, 0, fmt.Errorf("error sending request: %w", err)
@@ -89,7 +89,7 @@ func (c *ApiClient) doRequest(req *http.Request, headers map[string]string) (map
 	return nil, http.StatusTooManyRequests, fmt.Errorf("maximum retry attempts reached")
 }
 
-func (c *ApiClient) SendRequestWithBody(method, path string, body interface{}, headers map[string]string) (result map[string]interface{}, status int, err error) {
+func (c *APIClient) SendRequestWithBody(method, path string, body any, headers map[string]string) (result map[string]any, status int, err error) {
 	address := fmt.Sprintf("%s%s", c.BaseURL, path)
 
 	jsonBody, err := json.Marshal(body)
@@ -120,7 +120,7 @@ func (c *ApiClient) SendRequestWithBody(method, path string, body interface{}, h
 	return
 }
 
-func (c *ApiClient) SendRequestWithQuery(method, path string, query map[string]string, headers map[string]string) (result map[string]interface{}, status int, err error) {
+func (c *APIClient) SendRequestWithQuery(method, path string, query map[string]string, headers map[string]string) (result map[string]any, status int, err error) {
 	queryParams := url.Values{}
 	for key, value := range query {
 		queryParams.Add(key, value)

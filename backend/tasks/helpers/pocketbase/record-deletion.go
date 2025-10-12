@@ -11,10 +11,9 @@ import (
 )
 
 func RecordPlaylistForDeletion(user *types.PocketbaseUser, playlists []types.SpotifyPlaylist) error {
-
 	adminToken := GetPocketbaseAdminToken()
 
-	client := api.NewApiClient()
+	client := api.NewAPIClient()
 
 	var dateToBeDeleted string
 	if user.Record.Premium {
@@ -40,12 +39,10 @@ func RecordPlaylistForDeletion(user *types.PocketbaseUser, playlists []types.Spo
 			}, map[string]string{
 				"Authorization": adminToken,
 			})
-
 			if err != nil {
 				errorChan <- user_errors.NewUserError("", err)
 				return
 			}
-
 		}(playlist)
 	}
 
